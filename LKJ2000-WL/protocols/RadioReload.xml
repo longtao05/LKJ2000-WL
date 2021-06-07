@@ -1,0 +1,49 @@
+<protocol name="RadioReloadProtocol" maxPacketSize="2147483647">
+	<header>10 02</header>
+	<tail>10 03</tail>
+	<escape type="replace">
+		<orignal>10</orignal>
+		<escaped>10 00</escaped>
+	</escape>	
+	<packets>
+		<!--活动性检测-->
+		<packet path="ActiDetectionInfo.json" />
+		<packet path="ActiDetectionInfoReply.json" />
+		<!--升级信息-->
+		<packet path="UpgradeRequestInfo.json" />
+		<packet path="UpgradeInfoSend.json" />
+		<packet path="UpgradeInfoReply.json" />
+		<!--升级操作信息-->
+		<packet path="UpgradeOperationInfo.json" />
+		<packet path="UpgradeOperationInfoReply.json" />
+		<!--版本确认信息-->
+		<packet path="VersionConfirmInfo.json" />
+		<packet path="VersionConfirmInfoReply.json" />
+		<!--升级计划-->
+		<packet path="UpgradePlanCancelled.json" />
+		<packet path="UpgradePlanCancelledReply.json" />
+	</packets>
+</protocol>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
