@@ -1,0 +1,58 @@
+1.github项目提示
+echo "# LKJ2000-WL" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/18392517817/LKJ2000-WL.git
+git push -u origin main
+
+
+git remote add origin https://github.com/18392517817/LKJ2000-WL.git
+git branch -M main
+git push -u origin main
+
+
+2.git 命令补全
+一共分两步，就可以做到在终端里用git按tab键自动不全命令了:
+第一步：
+首先下载自动补齐脚本，在终端输入使用curl命令如下，然后回车，就开始下载了。
+curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
+第二步：
+编辑~/.bash_profile 文件，在最后增加如下代码。如果没有该文件，就新建一个。
+在终端里输入：vi ~/.bash_profile
+然后粘贴下面的代码到文件的最后面：
+
+if [ -f ~/.git-completion.bash ]; then
+    source ~/.git-completion.bash
+fi
+
+
+
+Git 的基本命令
+
+现在我们有了本地和远程的版本库，让我们来试着用用Git的基本命令：
+
+git pull：从其他的版本库（既可以是远程的也可以是本地的）将代码更新到本地，例如：'git pull origin master'就是将origin这个版本库的代码更新到本地的master主枝，该功能类似于SVN的update
+
+git add：是将当前更改或者新增的文件加入到Git的索引中，加入到Git的索引中就表示记入了版本历史中，这也是提交之前所需要执行的一步，例如'git add app/model/user.rb'就会增加app/model/user.rb文件到Git的索引中，该功能类似于SVN的add
+
+git rm：从当前的工作空间中和索引中删除文件，例如'git rm app/model/user.rb'，该功能类似于SVN的rm、del
+
+git commit：提交当前工作空间的修改内容，类似于SVN的commit命令，例如'git commit -m story #3, add user model'，提交的时候必须用-m来输入一条提交信息，该功能类似于SVN的commit
+
+git push：将本地commit的代码更新到远程版本库中，例如'git push origin'就会将本地的代码更新到名为orgin的远程版本库中
+
+git log：查看历史日志，该功能类似于SVN的log
+
+git revert：还原一个版本的修改，必须提供一个具体的Git版本号，例如'git revert bbaf6fb5060b4875b18ff9ff637ce118256d6f20'，Git的版本号都是生成的一个哈希值
+
+ 
+
+上面的命令几乎都是每个版本控制工具所公有的，下面就开始尝试一下Git独有的一些命令：
+
+git branch：对分支的增、删、查等操作，例如'git branch new_branch'会从当前的工作版本创建一个叫做new_branch的新分支，'git branch -D new_branch'就会强制删除叫做new_branch的分支，'git branch'就会列出本地所有的分支
+
+git checkout：Git的checkout有两个作用，其一是在不同的branch之间进行切换，例如'git checkout new_branch'就会切换到new_branch的分支上去；另一个功能是还原代码的作用，例如'git checkout app/model/user.rb'就会将user.rb文件从上一个已提交的版本中更新回来，未提交的内容全部会回滚
+
+git rebase：用下面两幅图解释会比较清楚一些，rebase命令执行后，实际上是将分支点从C移到了G，这样分支也就具有了从C到G的功能
