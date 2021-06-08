@@ -11,7 +11,7 @@ import time
 from CRC import *
 from Comm import *
 from Package import *
-from SNWLTypeDef import _SN_VersionInfoPackage ,_SN_ActiDetectionInfo ,_SN_UpgradeRequestInfo,_SN_UpgradeOperationInfo ,_SN_WLActiDetectionInfo,_SN_VersionConfirmInfo,_SN_UpgradePlanCancelledReply
+from SNWLTypeDef import _SN_VersionInfoPackage ,_SN_ActiDetectionInfo ,_SN_UpgradeRequestInfo,_SN_UpgradeOperationInfo ,_SN_WLActiDetectionInfo,_SN_VersionConfirmInfo,_SN_UpgradePlanCancelledReply,_SN_HostEventInfo
 
 '''
 1002 1111 1111 0110  005a 0001 0000 0000
@@ -86,9 +86,13 @@ def SN_VersionInfoPackage(data_Effbytes):
     byteNum = 2
     item.CommProVer = struct.unpack('<H',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
     byteOffset = byteOffset + byteNum
+    byteNum = 1
+    item.ManCode = struct.unpack('<B',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
+    byteOffset = byteOffset + byteNum
+    byteNum = 1
+    item.DeviceType = struct.unpack('<B',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
+    byteOffset = byteOffset + byteNum
     byteNum = 2
-    print(item.CommProVer,byteOffset)
-
     item.Crc = struct.unpack('<H',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
     return item
 
@@ -104,9 +108,9 @@ def SN_ActiDetectionInfo(data_Effbytes):
 
     item = _SN_VersionInfoPackage()
     byteOffset = 12
-    byteNum = 1
-    item.IdNum = struct.unpack('<B',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
-    byteOffset = byteOffset + byteNum
+    '''byteNum = 1
+                item.IdNum = struct.unpack('<B',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
+                byteOffset = byteOffset + byteNum'''
     byteNum = 1
     item.ChangeConInfo = struct.unpack('<B',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
     byteOffset = byteOffset + byteNum
@@ -119,9 +123,7 @@ def SN_ActiDetectionInfo(data_Effbytes):
     byteNum = 1
     item.LKJDeviceStatus = struct.unpack('<B',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
     byteOffset = byteOffset + byteNum
-    byteNum = 1
-    item.Resrve1 = struct.unpack('<B',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
-    byteOffset = byteOffset + byteNum
+
     byteNum = 2
     item.Speed = struct.unpack('<H',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
     byteOffset = byteOffset + byteNum
@@ -175,6 +177,9 @@ def SN_ActiDetectionInfo(data_Effbytes):
     item.JHFG2Pressure = struct.unpack('<H',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
     byteOffset = byteOffset + byteNum
     byteNum = 2
+    item.Resrve1 = struct.unpack('<H',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
+    byteOffset = byteOffset + byteNum
+    byteNum = 2
     item.KIMData = struct.unpack('<H',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
     byteOffset = byteOffset + byteNum
     byteNum = 4
@@ -193,6 +198,10 @@ def SN_UpgradeRequestInfo(data_Effbytes):
 
     item = _SN_UpgradeRequestInfo()
     byteOffset = 12
+    byteNum = 2
+    item.MessgaeRece = struct.unpack('<H',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
+    byteOffset = byteOffset + byteNum
+    '''
     byteNum = 1
     item.DataType = struct.unpack('<B',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
     byteOffset = byteOffset + byteNum
@@ -205,6 +214,7 @@ def SN_UpgradeRequestInfo(data_Effbytes):
     byteNum = 4
     item.TrainNum = struct.unpack('<I',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
     byteOffset = byteOffset + byteNum
+    '''
     byteNum = 2
     item.Crc = struct.unpack('<H',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
     return item
@@ -228,7 +238,7 @@ def SN_UpgradeOperationInfo(data_Effbytes):
     item.DataType = struct.unpack('<B',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
     byteOffset = byteOffset + byteNum
     byteNum = 1
-    item.IdNum = struct.unpack('<B',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
+    item.Resrve2 = struct.unpack('<B',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
     byteOffset = byteOffset + byteNum
     byteNum = 2
     item.Resrve1 = struct.unpack('<H',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
@@ -297,9 +307,7 @@ def SN_WLActiDetectionInfo(data_Effbytes):
 
     item = _SN_WLActiDetectionInfo()
     byteOffset = 12
-    byteNum = 1
-    item.IdNum = struct.unpack('<B',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
-    byteOffset = byteOffset + byteNum
+
     byteNum = 1
     item.LKJDeviceStatus = struct.unpack('<B',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
     byteOffset = byteOffset + byteNum
@@ -308,6 +316,9 @@ def SN_WLActiDetectionInfo(data_Effbytes):
     byteOffset = byteOffset + byteNum
     byteNum = 1
     item.ChangeStatusInfo = struct.unpack('<B',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
+    byteOffset = byteOffset + byteNum
+    byteNum = 1
+    item.Resrve1 = struct.unpack('<B',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
     byteOffset = byteOffset + byteNum
     byteNum = 2
     item.ChangeSpeed = struct.unpack('<H',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
@@ -334,7 +345,7 @@ def SN_VersionConfirmInfo(data_Effbytes):
     item.UpgraddeDataType = struct.unpack('<B',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
     byteOffset = byteOffset + byteNum
     byteNum = 1
-    item.IdNum = struct.unpack('<B',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
+    item.Resrve11 = struct.unpack('<B',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
     byteOffset = byteOffset + byteNum
     byteNum = 1
     item.Resrve1 = struct.unpack('<B',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
@@ -381,7 +392,7 @@ def SN_VersionConfirmInfo(data_Effbytes):
         i+=1
         byteOffset+=1
     byteNum = 2
-    item.Resrve1 = struct.unpack('<H',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
+    item.Resrve2 = struct.unpack('<H',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
 
     byteOffset = byteOffset + byteNum
     byteNum = 2
@@ -401,11 +412,15 @@ def SN_UpgradePlanCancelledReply(data_Effbytes):
     byteNum = 1
     item.CancelDataType = struct.unpack('<B',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
     byteOffset = byteOffset + byteNum
-    byteNum = 1
+    '''byteNum = 1
     item.IdNum = struct.unpack('<B',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
     byteOffset = byteOffset + byteNum
     byteNum = 1
     item.IdNumReply = struct.unpack('<B',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
+    byteOffset = byteOffset + byteNum'''
+    byteNum = 2
+    item.Resrve11 = struct.unpack('<H',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
+
     byteOffset = byteOffset + byteNum
     byteNum = 1
     item.Resrve1 = struct.unpack('<B',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
@@ -425,6 +440,17 @@ def SN_UpgradePlanCancelledReply(data_Effbytes):
     byteOffset = byteOffset + byteNum
     byteNum = 2
     item.CancelRelust = struct.unpack('<H',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
+    byteOffset = byteOffset + byteNum
+    byteNum = 2
+    item.Crc = struct.unpack('<H',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
+    return item
+
+def SN_HostEventInfo(data_Effbytes):
+
+    item = _SN_HostEventInfo()
+    byteOffset = 12
+    byteNum = 2
+    item.EventType = struct.unpack('<H',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
     byteOffset = byteOffset + byteNum
     byteNum = 2
     item.Crc = struct.unpack('<H',data_Effbytes[byteOffset:byteOffset+byteNum])[0]

@@ -45,7 +45,7 @@ def SN_businesstype_handle(mSerial,datatype,data_Effbytes):
         #升级信息发送
         send_data = SN_UpgradeInfoSend(datatype,item)
         mSerial.send_data(send_data)
-    elif(0x1004 == datatype.PacketType):
+    elif(0x1005 == datatype.PacketType):
         print("包类型：",'%#x'%datatype.PacketType)
         item = _SN_UpgradeOperationInfo()
         #升级操作信息请求
@@ -58,13 +58,7 @@ def SN_businesstype_handle(mSerial,datatype,data_Effbytes):
         time.sleep(0.4)
         send_data = SN_StartUpgradeOperationInfo(datatype,item)
         mSerial.send_data(send_data)
-
-    elif(0x1005 == datatype.PacketType):
-        print("包类型：",'%#x'%datatype.PacketType)
-        item = _SN_StartUpgradeOperationInfoReply()
-        #升级操作信息请求
-        #item = SN_StartUpgradeOperationInfoReply(data_Effbytes)
-    elif(0x1006 == datatype.PacketType):
+    elif(0x1007 == datatype.PacketType):
         print("包类型：",'%#x'%datatype.PacketType)
          #收到活动性检测发送，准备发送应答
         item = _SN_WLActiDetectionInfo()
@@ -73,19 +67,20 @@ def SN_businesstype_handle(mSerial,datatype,data_Effbytes):
         #回复活动性检测帧
         send_data = SN_WLActiDetectionInfoReply(datatype,item)
         mSerial.send_data(send_data)
-
-
-    elif(0x1007 == datatype.PacketType):
+    elif(0x1008 == datatype.PacketType):
         print("包类型：",'%#x'%datatype.PacketType)
         item = _SN_VersionConfirmInfo()
         item = SN_VersionConfirmInfo(data_Effbytes)
         send_data = SN_VersionConfirmInfoReply(datatype,item)
         mSerial.send_data(send_data)
-    elif(0x1008 == datatype.PacketType):
+    elif(0x1009 == datatype.PacketType):
         print("包类型：",'%#x'%datatype.PacketType)
         item = _SN_UpgradePlanCancelledReply()
         item = SN_UpgradePlanCancelledReply(data_Effbytes)
-        #不回复
+    elif(0x100A == datatype.PacketType):
+        print("包类型：",'%#x'%datatype.PacketType)
+        item = _SN_HostEventInfo()
+        item = SN_HostEventInfo(data_Effbytes)
     else:
         print("未识别的包类型：",'%#x'%datatype.PacketType)
 
