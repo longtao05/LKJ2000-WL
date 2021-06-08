@@ -8,23 +8,23 @@ import struct
  #信息长度：2 源通信地址：1 目的通信地址：1 业务类型：1 命令：1 数据：n CRC16:2
 class _SN_DataType(Structure):
   _pack_=1
-  _fields_ = [("Resrve",c_ushort),#预留 字节对齐
-              ("PacketType",c_ushort),
-              ("TimeStamp",c_uint),
-              ("InfoLen",c_ushort),
-              ("PacketNum",c_ushort),
+  _fields_ = [("TimeStamp",c_uint),#时间戳
+              ("PacketType",c_ushort),#包类型
+              ("InfoLen",c_ushort),#数据域长度
+              ("PacketNum",c_ushort),#包序号
+              ("Resrve",c_ushort),#预留 字节对齐
               ("Crc",c_ushort)]
 
 
 
-#版本信息报
+#版本信息包
 class _SN_VersionInfoPackage(Structure):
   _pack_=1
-  _fields_ = [("Resrve",c_ushort),#预留 字节对齐
-              ("PacketType",c_ushort),
-              ("TimeStamp",c_uint),
-              ("InfoLen",c_ushort),#90
-              ("PacketNum",c_ushort),
+  _fields_ = [("TimeStamp",c_uint),#时间戳
+              ("PacketType",c_ushort),#包类型
+              ("InfoLen",c_ushort),#数据域长度
+              ("PacketNum",c_ushort),#包序号
+              ("Resrve",c_ushort),#预留 字节对齐
               ("LKJVersion",c_uint),
               ("DMI1Ver",c_uint),
               ("DMI2Ver",c_uint),
@@ -47,14 +47,14 @@ class _SN_VersionInfoPackage(Structure):
               ("Crc",c_ushort)]
 
 
-#版本信息报
+#版本信息包
 class _SN_VersionInfoPackageReply(Structure):
   _pack_=1
-  _fields_ = [("Resrve",c_ushort),#预留 字节对齐
-              ("PacketType",c_ushort),
-              ("TimeStamp",c_uint),
-              ("InfoLen",c_ushort),#14
-              ("PacketNum",c_ushort),
+  _fields_ = [("TimeStamp",c_uint),#时间戳
+              ("PacketType",c_ushort),#包类型
+              ("InfoLen",c_ushort),#数据域长度
+              ("PacketNum",c_ushort),#包序号
+              ("Resrve",c_ushort),#预留 字节对齐
               ("CommProVer",c_ushort),
               ("Crc",c_ushort)]
 
@@ -62,11 +62,11 @@ class _SN_VersionInfoPackageReply(Structure):
 #活动性检测帧
 class _SN_ActiDetectionInfo(Structure):
   _pack_=1
-  _fields_ = [("Resrve",c_ushort),#预留 字节对齐
-              ("PacketType",c_ushort),
-              ("TimeStamp",c_uint),
-              ("InfoLen",c_ushort),#14
-              ("PacketNum",c_ushort),
+  _fields_ = [("TimeStamp",c_uint),#时间戳
+              ("PacketType",c_ushort),#包类型
+              ("InfoLen",c_ushort),#数据域长度
+              ("PacketNum",c_ushort),#包序号
+              ("Resrve",c_ushort),#预留 字节对齐
               ("IdNum",c_ubyte),
               ("ChangeConInfo",c_ubyte),#换装条件信息
               ("ChangeStatusInfo",c_ubyte),#换装状态信息
@@ -96,11 +96,11 @@ class _SN_ActiDetectionInfo(Structure):
 #活动性检测应答
 class _SN_ActiDetectionInfoReply(Structure):
   _pack_=1
-  _fields_ = [("Resrve",c_ushort),#预留 字节对齐
-              ("PacketType",c_ushort),
-              ("TimeStamp",c_uint),
-              ("InfoLen",c_ushort),#14
-              ("PacketNum",c_ushort),
+  _fields_ = [("TimeStamp",c_uint),#时间戳
+              ("PacketType",c_ushort),#包类型
+              ("InfoLen",c_ushort),#数据域长度
+              ("PacketNum",c_ushort),#包序号
+              ("Resrve",c_ushort),#预留 字节对齐
               ("IdNum",c_ubyte),
               ("IdNumReply",c_ubyte),
               ("Resrve1",c_ushort),#预留 字节对齐
@@ -116,11 +116,11 @@ class _SN_ActiDetectionInfoReply(Structure):
 #升级信息请求
 class _SN_UpgradeRequestInfo(Structure):
   _pack_=1
-  _fields_ = [("Resrve",c_ushort),#预留 字节对齐
-              ("PacketType",c_ushort),
-              ("TimeStamp",c_uint),
-              ("InfoLen",c_ushort),#14
-              ("PacketNum",c_ushort),
+  _fields_ = [("TimeStamp",c_uint),#时间戳
+              ("PacketType",c_ushort),#包类型
+              ("InfoLen",c_ushort),#数据域长度
+              ("PacketNum",c_ushort),#包序号
+              ("Resrve",c_ushort),#预留 字节对齐
               ("DataType",c_ubyte),
               ("IdNum",c_ubyte),
               ("Resrve1",c_ushort),#预留 字节对齐
@@ -130,11 +130,11 @@ class _SN_UpgradeRequestInfo(Structure):
 #升级信息发送
 class _SN_UpgradeInfoSend(Structure):
   _pack_=1
-  _fields_ = [("Resrve",c_ushort),#预留 字节对齐
-              ("PacketType",c_ushort),
-              ("TimeStamp",c_uint),
-              ("InfoLen",c_ushort),#14
-              ("PacketNum",c_ushort),
+  _fields_ = [("TimeStamp",c_uint),#时间戳
+              ("PacketType",c_ushort),#包类型
+              ("InfoLen",c_ushort),#数据域长度
+              ("PacketNum",c_ushort),#包序号
+              ("Resrve",c_ushort),#预留 字节对齐
               ("DataType",c_ubyte),
               ("IdNum",c_ubyte),
               ("IdNumReply",c_ubyte),
@@ -162,11 +162,11 @@ class _SN_UpgradeInfoSend(Structure):
 #升级操作信息发送
 class _SN_UpgradeOperationInfo(Structure):
   _pack_=1
-  _fields_ = [("Resrve",c_ushort),#预留 字节对齐
-              ("PacketType",c_ushort),
-              ("TimeStamp",c_uint),
-              ("InfoLen",c_ushort),#70
-              ("PacketNum",c_ushort),
+  _fields_ = [("TimeStamp",c_uint),#时间戳
+              ("PacketType",c_ushort),#包类型
+              ("InfoLen",c_ushort),#数据域长度
+              ("PacketNum",c_ushort),#包序号
+              ("Resrve",c_ushort),#预留 字节对齐
               ("DataType",c_ubyte),
               ("IdNum",c_ubyte),
               ("Resrve1",c_ushort),#预留 字节对齐
@@ -183,11 +183,11 @@ class _SN_UpgradeOperationInfo(Structure):
 #升级操作信息应答
 class _SN_UpgradeOperationInfoReply(Structure):
   _pack_=1
-  _fields_ = [("Resrve",c_ushort),#预留 字节对齐
-              ("PacketType",c_ushort),
-              ("TimeStamp",c_uint),
-              ("InfoLen",c_ushort),#14
-              ("PacketNum",c_ushort),
+  _fields_ = [("TimeStamp",c_uint),#时间戳
+              ("PacketType",c_ushort),#包类型
+              ("InfoLen",c_ushort),#数据域长度
+              ("PacketNum",c_ushort),#包序号
+              ("Resrve",c_ushort),#预留 字节对齐
               ("DataType",c_ubyte),
               ("IdNum",c_ubyte),
               ("IdNumReply",c_ubyte),
@@ -204,11 +204,11 @@ class _SN_UpgradeOperationInfoReply(Structure):
 #启动升级信息
 class _SN_StartUpgradeOperationInfo(Structure):
   _pack_=1
-  _fields_ = [("Resrve",c_ushort),#预留 字节对齐
-              ("PacketType",c_ushort),
-              ("TimeStamp",c_uint),
-              ("InfoLen",c_ushort),#94
-              ("PacketNum",c_ushort),
+  _fields_ = [("TimeStamp",c_uint),#时间戳
+              ("PacketType",c_ushort),#包类型
+              ("InfoLen",c_ushort),#数据域长度
+              ("PacketNum",c_ushort),#包序号
+              ("Resrve",c_ushort),#预留 字节对齐
               ("UpdateResult",c_ushort),
               ("WLFileFlag",c_ushort),
               ("ParamVerInfo",c_wchar_p),#16
@@ -224,11 +224,11 @@ class _SN_StartUpgradeOperationInfo(Structure):
 #启动升级信息回复
 class _SN_StartUpgradeOperationInfoReply(Structure):
   _pack_=1
-  _fields_ = [("Resrve",c_ushort),#预留 字节对齐
-              ("PacketType",c_ushort),
-              ("TimeStamp",c_uint),
-              ("InfoLen",c_ushort),#14
-              ("PacketNum",c_ushort),
+  _fields_ = [("TimeStamp",c_uint),#时间戳
+              ("PacketType",c_ushort),#包类型
+              ("InfoLen",c_ushort),#数据域长度
+              ("PacketNum",c_ushort),#包序号
+              ("Resrve",c_ushort),#预留 字节对齐
               ("MessgaeRece",c_ushort),
               ("Crc",c_ushort)
              ]
@@ -237,11 +237,11 @@ class _SN_StartUpgradeOperationInfoReply(Structure):
 #换装阶段活动性检测帧
 class _SN_WLActiDetectionInfo(Structure):
   _pack_=1
-  _fields_ = [("Resrve",c_ushort),#预留 字节对齐
-              ("PacketType",c_ushort),
-              ("TimeStamp",c_uint),
-              ("InfoLen",c_ushort),#14
-              ("PacketNum",c_ushort),
+  _fields_ = [("TimeStamp",c_uint),#时间戳
+              ("PacketType",c_ushort),#包类型
+              ("InfoLen",c_ushort),#数据域长度
+              ("PacketNum",c_ushort),#包序号
+              ("Resrve",c_ushort),#预留 字节对齐
               ("IdNum",c_ubyte),
               ("LKJDeviceStatus",c_ubyte),#LKJ设备状态
               ("LKJWUStatus",c_ubyte),#LKJ与无线扩展单元匹配状态
@@ -252,11 +252,11 @@ class _SN_WLActiDetectionInfo(Structure):
 #换装阶段活动性检测应答
 class _SN_WLActiDetectionInfoReply(Structure):
   _pack_=1
-  _fields_ = [("Resrve",c_ushort),#预留 字节对齐
-              ("PacketType",c_ushort),
-              ("TimeStamp",c_uint),
-              ("InfoLen",c_ushort),#14
-              ("PacketNum",c_ushort),
+  _fields_ = [("TimeStamp",c_uint),#时间戳
+              ("PacketType",c_ushort),#包类型
+              ("InfoLen",c_ushort),#数据域长度
+              ("PacketNum",c_ushort),#包序号
+              ("Resrve",c_ushort),#预留 字节对齐
               ("IdNum",c_ubyte),
               ("IdNumReply",c_ubyte),
               ("Resrve1",c_ushort),#预留 字节对齐
@@ -271,11 +271,11 @@ class _SN_WLActiDetectionInfoReply(Structure):
 #版本确认信息发送
 class _SN_VersionConfirmInfo(Structure):
   _pack_=1
-  _fields_ = [("Resrve",c_ushort),#预留 字节对齐
-              ("PacketType",c_ushort),
-              ("TimeStamp",c_uint),
-              ("InfoLen",c_ushort),#102
-              ("PacketNum",c_ushort),
+  _fields_ = [("TimeStamp",c_uint),#时间戳
+              ("PacketType",c_ushort),#包类型
+              ("InfoLen",c_ushort),#数据域长度
+              ("PacketNum",c_ushort),#包序号
+              ("Resrve",c_ushort),#预留 字节对齐
               ("UpgraddeDataType",c_ubyte),
               ("IdNum",c_ubyte),
               ("Resrve1",c_ushort),#预留 字节对齐
@@ -296,11 +296,11 @@ class _SN_VersionConfirmInfo(Structure):
 #版本确认信息应答
 class _SN_VersionConfirmInfoReply(Structure):
   _pack_=1
-  _fields_ = [("Resrve",c_ushort),#预留 字节对齐
-              ("PacketType",c_ushort),
-              ("TimeStamp",c_uint),
-              ("InfoLen",c_ushort),#66
-              ("PacketNum",c_ushort),
+  _fields_ = [("TimeStamp",c_uint),#时间戳
+              ("PacketType",c_ushort),#包类型
+              ("InfoLen",c_ushort),#数据域长度
+              ("PacketNum",c_ushort),#包序号
+              ("Resrve",c_ushort),#预留 字节对齐
               ("UpgraddeDataType",c_ubyte),
               ("IdNum",c_ubyte),
               ("IdNumReply",c_ubyte),
@@ -321,11 +321,11 @@ class _SN_VersionConfirmInfoReply(Structure):
 #升级计划取消包
 class _SN_UpgradePlanCancelled(Structure):
   _pack_=1
-  _fields_ = [("Resrve",c_ushort),#预留 字节对齐
-              ("PacketType",c_ushort),
-              ("TimeStamp",c_uint),
-              ("InfoLen",c_ushort),#58
-              ("PacketNum",c_ushort),
+  _fields_ = [("TimeStamp",c_uint),#时间戳
+              ("PacketType",c_ushort),#包类型
+              ("InfoLen",c_ushort),#数据域长度
+              ("PacketNum",c_ushort),#包序号
+              ("Resrve",c_ushort),#预留 字节对齐
               ("DataType",c_ubyte),
               ("IdNum",c_ubyte),
               ("IdNumReply",c_ubyte),
@@ -340,11 +340,11 @@ class _SN_UpgradePlanCancelled(Structure):
 #升级计划取消包应答
 class _SN_UpgradePlanCancelledReply(Structure):
   _pack_=1
-  _fields_ = [("Resrve",c_ushort),#预留 字节对齐
-              ("PacketType",c_ushort),
-              ("TimeStamp",c_uint),
-              ("InfoLen",c_ushort),#58
-              ("PacketNum",c_ushort),
+  _fields_ = [("TimeStamp",c_uint),#时间戳
+              ("PacketType",c_ushort),#包类型
+              ("InfoLen",c_ushort),#数据域长度
+              ("PacketNum",c_ushort),#包序号
+              ("Resrve",c_ushort),#预留 字节对齐
               ("CancelDataType",c_ubyte),
               ("IdNum",c_ubyte),
               ("IdNumReply",c_ubyte),

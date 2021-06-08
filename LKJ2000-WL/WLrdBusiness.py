@@ -29,7 +29,7 @@ class SerialPort:
     def send_data(self,data):
         #self.port.write(bytes.fromhex(data))
         self.port.write(data)
-        #print("发送数据：",binascii.b2a_hex(data))
+        print("发送数据：",binascii.b2a_hex(data))
 
 
     def read_data(self):
@@ -44,7 +44,7 @@ class SerialPort:
                 print(str(datetime.now()),':',binascii.b2a_hex(rec_str))
 '''
 
-serialPort = 'COM5'  # 串口
+serialPort = 'COM3'  # 串口
 baudRate = 115200  # 波特率C
 is_exit=False
 data_bytes=bytearray()
@@ -105,10 +105,10 @@ def SNprotocolAnalysis():
 
                 elif(data_bytes[i]==0x10 and data_bytes[i+1]==0x03):
 
-                    '''print("33333333333333")
+                    print("33333333333333")
                     print("串口数据：",str(datetime.now()),':',binascii.b2a_hex(data_bytes))
                     print("有效数据：",str(datetime.now()),':',binascii.b2a_hex(data_Effbytes))
-                    print("44444444444444")'''
+                    print("44444444444444")
                     #一包有效数据完整，进行数据处理
                     send_data = SN_data_handle(mSerial,data_Effbytes)
                     #mSerial.send_data(send_data)

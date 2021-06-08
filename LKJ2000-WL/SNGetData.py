@@ -14,7 +14,7 @@ from Package import *
 from SNWLTypeDef import _SN_VersionInfoPackage ,_SN_ActiDetectionInfo ,_SN_UpgradeRequestInfo,_SN_UpgradeOperationInfo ,_SN_WLActiDetectionInfo,_SN_VersionConfirmInfo,_SN_UpgradePlanCancelledReply
 
 '''
-1002 0000 0110 0011 1111 115a 0001 0000
+1002 1111 1111 0110  005a 0001 0000 0000
 b0f0 2103 0121 0333 0300 2020 2020 0460
 0120 0000 2000 0153 0546 9934 0547 0997
 1000 0037 7300 2695 0000 0048 0000 0000
@@ -93,7 +93,7 @@ def SN_VersionInfoPackage(data_Effbytes):
     return item
 
 '''
-1002 0000 0210 0011 1111 115a 0001 0000
+1002 11 1111 11 0210 005a 0001 00 0000 00
 b0f0 2103 0121 0333 0300 2020 2020 0460
 
 1000 0037

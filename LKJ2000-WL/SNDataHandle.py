@@ -100,11 +100,25 @@ def SN_data_handle(mSerial,data_Effbytes):
     if(data_len>=12):
 
         datatype = _SN_DataType()
-        datatype.Resrve=struct.unpack('<H',data_Effbytes[i:i+2])[0]
-        datatype.PacketType=struct.unpack('<H',data_Effbytes[i+2:i+4])[0]
-        datatype.TimeStamp=struct.unpack('<I',data_Effbytes[i+4:i+8])[0]
-        datatype.InfoLen=struct.unpack('<H',data_Effbytes[i+8:i+10])[0]
-        datatype.PacketNum=struct.unpack('<H',data_Effbytes[i+10:i+12])[0]
+
+        byteOffset = 0
+        byteNum = 4
+        datatype.TimeStamp = struct.unpack('<I',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
+        byteOffset = byteOffset + byteNum
+        byteNum = 2
+        datatype.PacketType = struct.unpack('<H',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
+        byteOffset = byteOffset + byteNum
+        byteNum = 2
+        datatype.InfoLen = struct.unpack('<H',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
+        byteOffset = byteOffset + byteNum
+        byteNum = 2
+        datatype.PacketNum = struct.unpack('<H',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
+        byteOffset = byteOffset + byteNum
+        byteNum = 2
+        datatype.Resrve = struct.unpack('<H',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
+        byteOffset = byteOffset + byteNum
+        byteNum = 2
+
         datatype.Crc = struct.unpack('<H',data_Effbytes[-2:])[0]
         #loc_str = [InfoLen,StartAddr,EndAddr,BusinessType,Order,Crc]
         #业务类型处理
