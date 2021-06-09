@@ -17,14 +17,18 @@ send_data =bytearray()
 def SN_businesstype_handle(mSerial,datatype,data_Effbytes):
     global send_data
     if(0x1001 == datatype.PacketType):
-        #活动性检测
         print("包类型：",'%#x'%datatype.PacketType)
-
         item = _SN_VersionInfoPackage()
         #版本信息包帧解析
         item = SN_VersionInfoPackage(data_Effbytes)
         #回复版本信息包
         send_data = SN_VersionInfoPackageReply(datatype,item)
+        mSerial.send_data(send_data)
+
+        #延时2秒后，发送换装通知--升级信息
+        time.sleep(2)
+        #换装通知--升级信息
+        send_data = SN_ChangeNotice_UpgradeInfo(datatype,item)
         mSerial.send_data(send_data)
 
     elif(0x1002 == datatype.PacketType):
@@ -38,13 +42,23 @@ def SN_businesstype_handle(mSerial,datatype,data_Effbytes):
         mSerial.send_data(send_data)
     elif(0x1003 == datatype.PacketType):
         print("包类型：",'%#x'%datatype.PacketType)
-         #升级信息请求
+         #换装通知应答包
         item = _SN_UpgradeRequestInfo()
-
         item = SN_UpgradeRequestInfo(data_Effbytes)
-        #升级信息发送
-        send_data = SN_UpgradeInfoSend(datatype,item)
-        mSerial.send_data(send_data)
+        print("换装应答内容：",'%#x'%item.MessgaeRece)
+        if(2==item.MessgaeRece):
+            #换装通知--换装控制信息
+            send_data = SN_ChangeNotice_ControlInfo(datatype,item)
+            mSerial.send_data(send_data)
+        elif(3==item.MessgaeRece):
+            #换装通知--启动升级
+            send_data = SN_ChangeNotice_StartUpgrade(datatype,item)
+            mSerial.send_data(send_data)
+        elif(4==item.MessgaeRece):
+            #换装通知--升级信息
+            print("已正确接收启动信息内容")
+
+
     elif(0x1005 == datatype.PacketType):
         print("包类型：",'%#x'%datatype.PacketType)
         item = _SN_UpgradeOperationInfo()
@@ -55,12 +69,12 @@ def SN_businesstype_handle(mSerial,datatype,data_Effbytes):
         mSerial.send_data(send_data)
 
         #延时1秒后，发送启动升级信息
-        time.sleep(0.4)
+        time.sleep(1)
         send_data = SN_StartUpgradeOperationInfo(datatype,item)
         mSerial.send_data(send_data)
     elif(0x1007 == datatype.PacketType):
         print("包类型：",'%#x'%datatype.PacketType)
-         #收到活动性检测发送，准备发送应答
+         #
         item = _SN_WLActiDetectionInfo()
         #活动性检测帧解析
         item = SN_WLActiDetectionInfo(data_Effbytes)
@@ -73,14 +87,24 @@ def SN_businesstype_handle(mSerial,datatype,data_Effbytes):
         item = SN_VersionConfirmInfo(data_Effbytes)
         send_data = SN_VersionConfirmInfoReply(datatype,item)
         mSerial.send_data(send_data)
+        #延时1秒后，发送升级计划取消包
+        time.sleep(1)
+        send_data = SN_StartUpgradeOperationInfo(datatype,item)
+        mSerial.send_data(send_data)
+
     elif(0x1009 == datatype.PacketType):
         print("包类型：",'%#x'%datatype.PacketType)
         item = _SN_UpgradePlanCancelledReply()
         item = SN_UpgradePlanCancelledReply(data_Effbytes)
+        print("收到升级计划取消应答包")
     elif(0x100A == datatype.PacketType):
         print("包类型：",'%#x'%datatype.PacketType)
         item = _SN_HostEventInfo()
         item = SN_HostEventInfo(data_Effbytes)
+
+        send_data = SN_HostEventInfoReply(datatype,item)
+        mSerial.send_data(send_data)
+
     else:
         print("未识别的包类型：",'%#x'%datatype.PacketType)
 

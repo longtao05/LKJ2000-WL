@@ -162,28 +162,7 @@ class _SN_UpgradeInfoSend(Structure):
               ("Crc",c_ushort)]
 
 
-#升级操作信息发送
-class _SN_UpgradeOperationInfo(Structure):
-  _pack_=1
-  _fields_ = [("TimeStamp",c_uint),#时间戳
-              ("PacketType",c_ushort),#包类型
-              ("InfoLen",c_ushort),#数据域长度
-              ("PacketNum",c_ushort),#包序号
-              ("Resrve",c_ushort),#预留 字节对齐
-              ("DataType",c_ubyte),
-              #("IdNum",c_ubyte),
-              ("Resrve2",c_ubyte),
-              ("Resrve1",c_ushort),#预留 字节对齐
-              ("OrderID",c_ubyte*32),#32字节
-              ("LocoNum",c_uint),
-              ("VoucherCode",c_uint),
-              ("DriverNum",c_uint),
-              ("OperationTime",c_ubyte*6),
-              ("OperationType",c_ubyte),
-              ("DMIOperationTer",c_ubyte),
-              ("WLFileFlag",c_ushort),
-              ("Crc",c_ushort)
-              ]
+
 
 
 #换装通知--升级信息
@@ -253,6 +232,28 @@ class _SN_ChangeNotice_StartUpgrade(Structure):
               ("Resrve2",c_ushort),
               ("Crc",c_ushort)]
 
+#升级操作信息发送
+class _SN_UpgradeOperationInfo(Structure):
+  _pack_=1
+  _fields_ = [("TimeStamp",c_uint),#时间戳
+              ("PacketType",c_ushort),#包类型
+              ("InfoLen",c_ushort),#数据域长度
+              ("PacketNum",c_ushort),#包序号
+              ("Resrve",c_ushort),#预留 字节对齐
+              ("DataType",c_ubyte),
+              #("IdNum",c_ubyte),
+              ("Resrve2",c_ubyte),
+              ("Resrve1",c_ushort),#预留 字节对齐
+              ("OrderID",c_ubyte*32),#32字节
+              ("LocoNum",c_uint),
+              ("VoucherCode",c_uint),
+              ("DriverNum",c_uint),
+              ("OperationTime",c_ubyte*6),
+              ("OperationType",c_ubyte),
+              ("DMIOperationTer",c_ubyte),
+              ("WLFileFlag",c_ushort),
+              ("Crc",c_ushort)
+              ]
 #升级操作信息应答
 class _SN_UpgradeOperationInfoReply(Structure):
   _pack_=1
