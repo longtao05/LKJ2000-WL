@@ -248,7 +248,7 @@ def SN_VersionConfirmInfoReply(datatype,m_item):
 
     return send_data
 
-def SN_UpgradePlanCancelled():
+def SN_UpgradePlanCancelled(datatype,m_item):
     item = _SN_UpgradePlanCancelled()
     item.Resrve = 0 # 预留字节
     item.PacketType = 0x2009
@@ -276,7 +276,7 @@ def SN_UpgradePlanCancelled():
     send_data = send_data_package(send_data)
     return send_data
 
-def SN_ChangeNotice_UpgradeInfo():
+def SN_ChangeNotice_UpgradeInfo(datatype,m_item):
     item = _SN_ChangeNotice_UpgradeInfo()
     item.Resrve = 0 # 预留字节
     item.PacketType = 0x2003
@@ -288,20 +288,20 @@ def SN_ChangeNotice_UpgradeInfo():
     item.TrainNum = 1
     item.DataToolVersion = 1
     item.UpgradePlanVer = 1
-    item.OrderID = '1' #32
+    #item.OrderID = '1' #32
     item.FileName = '2kdata.bin'
     item.FileLen = 1111
     item.Crc48 = '0'
-    item.WLFileFlag = 1
-    item.FileType= 1
+    item.WLFileFlag = 3
+    item.FileType= 2
     item.DataType = 1
 
-    send_tempdata = struct.pack("<I42IQ36sI6sH2BH", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.TrainNum,item.DataToolVersion,item.UpgradePlanVer,item.FileName.encode('utf-8'),item.FileLen,item.Crc48.encode('utf-8'),item.WLFileFlag,item.FileType,item.DataType)
+    send_tempdata = struct.pack("<I4H2IQ36sI6sH2B", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.TrainNum,item.DataToolVersion,item.UpgradePlanVer,item.FileName.encode('utf-8'),item.FileLen,item.Crc48.encode('utf-8'),item.WLFileFlag,item.FileType,item.DataType)
 
     send_tempdata = bytesToHexString(send_tempdata)
     item.Crc = crc16(send_tempdata)
 
-    send_data = struct.pack("<I42IQ36sI6sH2BH", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.TrainNum,item.DataToolVersion,item.UpgradePlanVer,item.FileName.encode('utf-8'),item.FileLen,item.Crc48.encode('utf-8'),item.WLFileFlag,item.FileType,item.DataType,item.Crc)
+    send_data = struct.pack("<I4H2IQ36sI6sH2BH", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.TrainNum,item.DataToolVersion,item.UpgradePlanVer,item.FileName.encode('utf-8'),item.FileLen,item.Crc48.encode('utf-8'),item.WLFileFlag,item.FileType,item.DataType,item.Crc)
     #数据组包加密
 
     send_data = send_data_package(send_data)
@@ -327,29 +327,29 @@ def SN_ChangeNotice_ControlInfo(datatype,m_item):
     item.PlanStartTime[2] = 3
     item.PlanStartTime[3] = 4
     item.PlanStartTime[4] = 5
-    item.PlanStartTime[5] = 6
+    item.PlanStartTime[5] = 21
     item.PlanEffectiveTime[0] = 1
     item.PlanEffectiveTime[1] = 2
     item.PlanEffectiveTime[2] = 3
     item.PlanEffectiveTime[3] = 4
-    item.PlanEffectiveTime[4] = 5
-    item.PlanEffectiveTime[5] = 6
+    item.PlanEffectiveTime[4] = 9
+    item.PlanEffectiveTime[5] = 21
     item.VoucherCode = 1
-    item.UpdataModeType = 1
+    item.UpdataModeType = 2 #确认更新
     item.DeviceType = 1
     item.EjectCount = 1
     item.FileWLFlag = 1
     item.ShowTime = 1
     item.Resrve1 = 0
     item.Resrve2 = 0
-    item.ChangeNoticeReason = "数据升级"
+    item.ChangeNoticeReason = "SNLKJ-2000临时计划升级数据(测试版)"
 
-    send_tempdata = struct.pack("<I4HI32s6B6BI4BI32sH", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.TrainNum,item.OrderID.encode('utf-8'),item.PlanStartTime[0],item.PlanStartTime[1],item.PlanStartTime[2],item.PlanStartTime[3],item.PlanStartTime[4],item.PlanStartTime[5],item.PlanEffectiveTime[0],item.PlanEffectiveTime[1],item.PlanEffectiveTime[2],item.PlanEffectiveTime[3],item.PlanEffectiveTime[4],item.PlanEffectiveTime[5],item.VoucherCode,item.UpdataModeType,item.DeviceType,item.EjectCount,item.Resrver1,item.ShowTime,item.ChangeNoticeReason.encode('utf-8'),item.Resrve2)
+    send_tempdata = struct.pack("<I4HI32s6B6BI4BI32sH", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.TrainNum,item.OrderID.encode('utf-8'),item.PlanStartTime[0],item.PlanStartTime[1],item.PlanStartTime[2],item.PlanStartTime[3],item.PlanStartTime[4],item.PlanStartTime[5],item.PlanEffectiveTime[0],item.PlanEffectiveTime[1],item.PlanEffectiveTime[2],item.PlanEffectiveTime[3],item.PlanEffectiveTime[4],item.PlanEffectiveTime[5],item.VoucherCode,item.UpdataModeType,item.DeviceType,item.EjectCount,item.Resrve1,item.ShowTime,item.ChangeNoticeReason.encode('utf-8'),item.Resrve2)
 
     send_tempdata = bytesToHexString(send_tempdata)
     item.Crc = crc16(send_tempdata)
 
-    send_data = struct.pack("<I4HI32s6B6BI4BI32sHH", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.TrainNum,item.OrderID.encode('utf-8'),item.PlanStartTime[0],item.PlanStartTime[1],item.PlanStartTime[2],item.PlanStartTime[3],item.PlanStartTime[4],item.PlanStartTime[5],item.PlanEffectiveTime[0],item.PlanEffectiveTime[1],item.PlanEffectiveTime[2],item.PlanEffectiveTime[3],item.PlanEffectiveTime[4],item.PlanEffectiveTime[5],item.VoucherCode,item.UpdataModeType,item.DeviceType,item.EjectCount,item.Resrver1,item.ShowTime,item.ChangeNoticeReason.encode('utf-8'),item.Resrve2,item.Crc)
+    send_data = struct.pack("<I4HI32s6B6BI4BI32sHH", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.TrainNum,item.OrderID.encode('utf-8'),item.PlanStartTime[0],item.PlanStartTime[1],item.PlanStartTime[2],item.PlanStartTime[3],item.PlanStartTime[4],item.PlanStartTime[5],item.PlanEffectiveTime[0],item.PlanEffectiveTime[1],item.PlanEffectiveTime[2],item.PlanEffectiveTime[3],item.PlanEffectiveTime[4],item.PlanEffectiveTime[5],item.VoucherCode,item.UpdataModeType,item.DeviceType,item.EjectCount,item.Resrve1,item.ShowTime,item.ChangeNoticeReason.encode('utf-8'),item.Resrve2,item.Crc)
     #数据组包加密
 
     send_data = send_data_package(send_data)
@@ -386,7 +386,7 @@ def SN_ChangeNotice_StartUpgrade(datatype,m_item):
     send_tempdata = bytesToHexString(send_tempdata)
     item.Crc = crc16(send_tempdata)
 
-    send_data = struct.pack("<I4H2H16s18sI2B5QH", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.UpdateResult,item.WLFileFlag,item.ParamVerInfo.encode('utf-8'),item.K2dataVerInfo.encode('utf-8'),item.K2dataSignaCode,item.BureauNum,item.ManCode,item.ParamCRC,item.CrcCRC,item.K2dataCRC,item.K2dataXlbLenCRC,item.K2dataZmbLenCRC,item.Resrve2,item.Crc)
+    send_data = struct.pack("<I4H2H16s18sI2B5QHH", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.UpdateResult,item.WLFileFlag,item.ParamVerInfo.encode('utf-8'),item.K2dataVerInfo.encode('utf-8'),item.K2dataSignaCode,item.BureauNum,item.ManCode,item.ParamCRC,item.CrcCRC,item.K2dataCRC,item.K2dataXlbLenCRC,item.K2dataZmbLenCRC,item.Resrve2,item.Crc)
     #数据组包加密
 
     send_data = send_data_package(send_data)
@@ -412,4 +412,3 @@ def SN_HostEventInfoReply(datatype,m_item):
 
     send_data = send_data_package(send_data)
     return send_data
-

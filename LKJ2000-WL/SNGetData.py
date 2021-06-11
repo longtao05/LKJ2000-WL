@@ -36,22 +36,27 @@ def SN_VersionInfoPackage(data_Effbytes):
     byteOffset = byteOffset + byteNum
     byteNum = 16
     i=1
-    for i in range(byteNum+1):
+    for i in range(byteNum):
         item.ParamVer[i-1] = struct.unpack('<B',data_Effbytes[byteOffset:byteOffset+1])[0]
         i+=1
         byteOffset+=1
     #byteOffset = byteOffset + byteNum
+
     byteNum = 18
     i=1
-    for i in range(byteNum+1):
+    for i in range(byteNum):
         item.k2DataVer[i-1] =struct.unpack('<B',data_Effbytes[byteOffset:byteOffset+1])[0]
         i+=1
         byteOffset+=1
 
-    byteOffset = byteOffset + 2 #预留字节
+    byteNum = 2
+    item.Resrve1 = struct.unpack('<H',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
+    byteOffset = byteOffset + byteNum
+
     byteNum = 4
     item.DMI1xlbVer = struct.unpack('<I',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
     byteOffset = byteOffset + byteNum
+
     byteNum = 4
     item.DMI1zmbVer = struct.unpack('<I',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
     byteOffset = byteOffset + byteNum
@@ -246,7 +251,7 @@ def SN_UpgradeOperationInfo(data_Effbytes):
     byteOffset = byteOffset + byteNum
     byteNum = 32
     i=1
-    for i in range(byteNum+1):
+    for i in range(byteNum):
         item.OrderID[i-1] = struct.unpack('<B',data_Effbytes[byteOffset:byteOffset+1])[0]
         i+=1
         byteOffset+=1
@@ -262,7 +267,7 @@ def SN_UpgradeOperationInfo(data_Effbytes):
     byteOffset = byteOffset + byteNum
     byteNum = 6
     i=1
-    for i in range(byteNum+1):
+    for i in range(byteNum):
         item.OperationTime[i-1] = struct.unpack('<B',data_Effbytes[byteOffset:byteOffset+1])[0]
         i+=1
         byteOffset+=1
@@ -355,14 +360,14 @@ def SN_VersionConfirmInfo(data_Effbytes):
     byteOffset = byteOffset + byteNum
     byteNum = 16
     i=1
-    for i in range(byteNum+1):
+    for i in range(byteNum):
         item.ParamVer[i-1] = struct.unpack('<B',data_Effbytes[byteOffset:byteOffset+1])[0]
         i+=1
         byteOffset+=1
     #byteOffset = byteOffset + byteNum
     byteNum = 18
     i=1
-    for i in range(byteNum+1):
+    for i in range(byteNum):
         item.k2DataVer[i-1] =struct.unpack('<B',data_Effbytes[byteOffset:byteOffset+1])[0]
         i+=1
         byteOffset+=1
@@ -374,7 +379,7 @@ def SN_VersionConfirmInfo(data_Effbytes):
     byteOffset = byteOffset + byteNum
     byteNum = 6
     i=1
-    for i in range(byteNum+1):
+    for i in range(byteNum):
         item.OperationTime[i-1] = struct.unpack('<B',data_Effbytes[byteOffset:byteOffset+1])[0]
         i+=1
         byteOffset+=1
@@ -387,7 +392,7 @@ def SN_VersionConfirmInfo(data_Effbytes):
     byteOffset = byteOffset + byteNum
     byteNum = 32
     i=1
-    for i in range(byteNum+1):
+    for i in range(byteNum):
         item.OrderID[i-1] = struct.unpack('<B',data_Effbytes[byteOffset:byteOffset+1])[0]
         i+=1
         byteOffset+=1
@@ -428,7 +433,7 @@ def SN_UpgradePlanCancelledReply(data_Effbytes):
     byteOffset = byteOffset + byteNum
     byteNum = 32
     i=1
-    for i in range(byteNum+1):
+    for i in range(byteNum):
         item.OrderID[i-1] = struct.unpack('<B',data_Effbytes[byteOffset:byteOffset+1])[0]
         i+=1
         byteOffset+=1

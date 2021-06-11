@@ -32,6 +32,7 @@ class SerialPort:
         print("发送数据：",binascii.b2a_hex(data))
 
 
+
     def read_data(self):
         global is_exit
         global data_bytes
@@ -40,11 +41,15 @@ class SerialPort:
             if count > 0:
                 rec_str = self.port.read(count)
                 data_bytes=data_bytes+rec_str
-            ''' print('当前数据接收总字节数：'+str(len(data_bytes))+' 本次接收字节数：'+str(len(rec_str)))
+                print('当前数据接收总字节数：'+str(len(data_bytes))+' 本次接收字节数：'+str(len(rec_str)))
                 print(str(datetime.now()),':',binascii.b2a_hex(rec_str))
-'''
 
-serialPort = 'COM3'  # 串口
+            else:
+                pass
+                #time.sleep(1)
+                #print("串口无数据")
+
+serialPort = 'COM6'  # 串口
 baudRate = 115200  # 波特率C
 is_exit=False
 data_bytes=bytearray()
@@ -62,7 +67,7 @@ def TKprotocolAnalysis():
         #数据头 10 02 a5
         if(data_bytes[i]==0x10 and data_bytes[i+1]==0x02 and data_bytes[i+2]==0xA5):
             i=i+3
-            while(i<data_len-1):
+            while(i<dataB_len-1):
                 #处理数据中0x10后的
                 if(data_bytes[i]==0x10 and data_bytes[i+1]==0x00 and data_bytes[i+1]!=0x03):
                     #删除0xff

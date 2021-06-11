@@ -16,6 +16,12 @@ send_data =bytearray()
 
 def SN_businesstype_handle(mSerial,datatype,data_Effbytes):
     global send_data
+
+    f = open('./log/log.txt', 'ab') # 若是'wb'就表示写二进制文件
+    f.write(b"Getdata  "+binascii.b2a_hex(datatype.PacketType.to_bytes(2,byteorder='little', signed=False))+b"  "+binascii.b2a_hex(data_Effbytes))
+    f.write(b'\r\n')
+    f.close()
+
     if(0x1001 == datatype.PacketType):
         print("包类型：",'%#x'%datatype.PacketType)
         item = _SN_VersionInfoPackage()
@@ -25,8 +31,8 @@ def SN_businesstype_handle(mSerial,datatype,data_Effbytes):
         send_data = SN_VersionInfoPackageReply(datatype,item)
         mSerial.send_data(send_data)
 
-        #延时2秒后，发送换装通知--升级信息
-        time.sleep(2)
+        #延时10毫秒后，发送换装通知--升级信息
+        time.sleep(0.01)
         #换装通知--升级信息
         send_data = SN_ChangeNotice_UpgradeInfo(datatype,item)
         mSerial.send_data(send_data)
@@ -51,9 +57,10 @@ def SN_businesstype_handle(mSerial,datatype,data_Effbytes):
             send_data = SN_ChangeNotice_ControlInfo(datatype,item)
             mSerial.send_data(send_data)
         elif(3==item.MessgaeRece):
+            pass
             #换装通知--启动升级
-            send_data = SN_ChangeNotice_StartUpgrade(datatype,item)
-            mSerial.send_data(send_data)
+            #send_data = SN_ChangeNotice_StartUpgrade(datatype,item)
+            #mSerial.send_data(send_data)
         elif(4==item.MessgaeRece):
             #换装通知--升级信息
             print("已正确接收启动信息内容")
@@ -69,8 +76,11 @@ def SN_businesstype_handle(mSerial,datatype,data_Effbytes):
         mSerial.send_data(send_data)
 
         #延时1秒后，发送启动升级信息
-        time.sleep(1)
-        send_data = SN_StartUpgradeOperationInfo(datatype,item)
+        time.sleep(0.01)
+        #send_data = SN_StartUpgradeOperationInfo(datatype,item)
+        #mSerial.send_data(send_data)
+        #换装通知--启动升级
+        send_data = SN_ChangeNotice_StartUpgrade(datatype,item)
         mSerial.send_data(send_data)
     elif(0x1007 == datatype.PacketType):
         print("包类型：",'%#x'%datatype.PacketType)
