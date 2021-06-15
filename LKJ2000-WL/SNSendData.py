@@ -145,7 +145,7 @@ def SN_UpgradeOperationInfoReply(datatype,m_item):
     send_tempdata = bytesToHexString(send_tempdata)
     item.Crc = crc16(send_tempdata)
 
-    send_data = struct.pack("<I4H32sIH4B", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.OrderID.encode('utf-8'),item.LocoNum,item.WLFileFlag,item.DMIOperationTer,item.IsCanUpgrade,item.DataType,item.Resrve2,item.Crc)
+    send_data = struct.pack("<I4H32sIH4BH", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.OrderID.encode('utf-8'),item.LocoNum,item.WLFileFlag,item.DMIOperationTer,item.IsCanUpgrade,item.DataType,item.Resrve2,item.Crc)
     #数据组包加密
 
     send_data = send_data_package(send_data)
@@ -263,15 +263,16 @@ def SN_UpgradePlanCancelled(datatype,m_item):
     item.MessgaeInfo =3
     item.OrderID = '1'
     item.Resrve2 =0
+    item.UpgrradeVer =1
 
 
 
-    send_tempdata = struct.pack("<I4HI2H32s2B", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.Resrve1,item.TrainNum,item.FileWLFlag,item.MessgaeInfo,item.OrderID.encode('utf-8') ,item.DataType,item.Resrve2)
+    send_tempdata = struct.pack("<I4HI2H32sQ2B", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.Resrve1,item.TrainNum,item.FileWLFlag,item.MessgaeInfo,item.OrderID.encode('utf-8'),item.UpgrradeVer,item.DataType,item.Resrve2)
 
     send_tempdata = bytesToHexString(send_tempdata)
     item.Crc = crc16(send_tempdata)
 
-    send_data = struct.pack("<I4HI2H32s2B", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.Resrve1,item.TrainNum,item.FileWLFlag,item.MessgaeInfo,item.OrderID.encode('utf-8') ,item.DataType,item.Resrve2,item.Crc)
+    send_data = struct.pack("<I4HI2H32sQ2BH", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.Resrve1,item.TrainNum,item.FileWLFlag,item.MessgaeInfo,item.OrderID.encode('utf-8'),item.UpgrradeVer,item.DataType,item.Resrve2,item.Crc)
     #数据组包加密
     send_data = send_data_package(send_data)
     return send_data
@@ -337,9 +338,9 @@ def SN_ChangeNotice_ControlInfo(datatype,m_item):
     item.VoucherCode = 1
     item.UpdataModeType = 2 #确认更新
     item.DeviceType = 1
-    item.EjectCount = 1
+    item.EjectCount = 0 #连续弹出次数
     item.FileWLFlag = 1
-    item.ShowTime = 1
+    item.ShowTime = 5 #显示弹出时间间隔
     item.Resrve1 = 0
     item.Resrve2 = 0
     item.ChangeNoticeReason = "SNLKJ-2000临时计划升级数据(测试版)"
@@ -407,7 +408,7 @@ def SN_HostEventInfoReply(datatype,m_item):
     send_tempdata = bytesToHexString(send_tempdata)
     item.Crc = crc16(send_tempdata)
 
-    send_data = struct.pack("<I4HH", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.ReplyEventType,item.Crc)
+    send_data = struct.pack("<I4HHH", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.ReplyEventType,item.Crc)
     #数据组包加密
 
     send_data = send_data_package(send_data)

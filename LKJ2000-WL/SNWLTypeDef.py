@@ -400,6 +400,7 @@ class _SN_UpgradePlanCancelled(Structure):
               ("FileWLFlag",c_ushort),
               ("MessgaeInfo",c_ushort),#消息内容
               ("OrderID",c_wchar_p),#32
+              ("UpgrradeVer",c_uint64),#升级计划取消版本
               ("DataType",c_ubyte),
               ("Resrve2",c_ubyte),
               ("Crc",c_ushort)
@@ -421,6 +422,8 @@ class _SN_UpgradePlanCancelledReply(Structure):
               ("TrainNum",c_uint),
               ("FileWLFlag",c_ushort),
               ("CancelRelust",c_ushort),
+              ("UpgrradeVer",c_uint64),#升级计划取消版本
+              ("Resrve2",c_ushort),
               ("Crc",c_ushort)
               ]
 

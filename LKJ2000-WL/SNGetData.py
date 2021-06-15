@@ -276,7 +276,7 @@ def SN_UpgradeOperationInfo(data_Effbytes):
     item.OperationType = struct.unpack('<B',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
     byteOffset = byteOffset + byteNum
     byteNum = 1
-    item.OperationTime = struct.unpack('<B',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
+    item.DMIOperationTer = struct.unpack('<B',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
     byteOffset = byteOffset + byteNum
     byteNum = 2
     item.WLFileFlag = struct.unpack('<H',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
@@ -446,6 +446,13 @@ def SN_UpgradePlanCancelledReply(data_Effbytes):
     byteNum = 2
     item.CancelRelust = struct.unpack('<H',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
     byteOffset = byteOffset + byteNum
+    byteNum = 8
+    item.UpgrradeVer = struct.unpack('<Q',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
+    byteOffset = byteOffset + byteNum
+    byteNum = 2
+    item.Resrve2 = struct.unpack('<H',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
+    byteOffset = byteOffset + byteNum
+
     byteNum = 2
     item.Crc = struct.unpack('<H',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
     return item

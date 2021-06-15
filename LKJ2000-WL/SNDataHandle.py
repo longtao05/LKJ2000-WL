@@ -10,7 +10,7 @@ import csv
 import time
 from SNSendData import *
 from SNGetData import *
-from SNWLTypeDef import _SN_DataType,  _SN_VersionInfoPackage , _SN_ActiDetectionInfo,_SN_UpgradeRequestInfo ,_SN_UpgradeOperationInfo,_SN_WLActiDetectionInfo,_SN_VersionConfirmInfo,_SN_UpgradePlanCancelledReply
+from SNWLTypeDef import _SN_DataType,  _SN_VersionInfoPackage , _SN_ActiDetectionInfo,_SN_UpgradeRequestInfo ,_SN_UpgradeOperationInfo,_SN_WLActiDetectionInfo,_SN_VersionConfirmInfo,_SN_UpgradePlanCancelledReply,_SN_HostEventInfo
 #10 02 18 00 01 11 10 ff 01 00 01 05 00 12 34 05 00 12 34 03 03 01 00 01 01 01 0f A8 B6 10 03
 send_data =bytearray()
 
@@ -76,12 +76,12 @@ def SN_businesstype_handle(mSerial,datatype,data_Effbytes):
         mSerial.send_data(send_data)
 
         #延时1秒后，发送启动升级信息
-        time.sleep(0.01)
+        #time.sleep(0.01)
         #send_data = SN_StartUpgradeOperationInfo(datatype,item)
         #mSerial.send_data(send_data)
         #换装通知--启动升级
-        send_data = SN_ChangeNotice_StartUpgrade(datatype,item)
-        mSerial.send_data(send_data)
+        #send_data = SN_ChangeNotice_StartUpgrade(datatype,item)
+        #mSerial.send_data(send_data)
     elif(0x1007 == datatype.PacketType):
         print("包类型：",'%#x'%datatype.PacketType)
          #
@@ -113,6 +113,11 @@ def SN_businesstype_handle(mSerial,datatype,data_Effbytes):
         item = SN_HostEventInfo(data_Effbytes)
 
         send_data = SN_HostEventInfoReply(datatype,item)
+        mSerial.send_data(send_data)
+
+        #换装通知--启动升级
+        time.sleep(0.01)
+        send_data = SN_ChangeNotice_StartUpgrade(datatype,item)
         mSerial.send_data(send_data)
 
     else:
