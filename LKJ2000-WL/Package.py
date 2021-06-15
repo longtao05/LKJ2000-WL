@@ -21,7 +21,9 @@ def send_data_package(send_data):
     global send_bytes
     data_len=len(send_data)
     f = open('./log/log.txt', 'ab') # 若是'wb'就表示写二进制文件
-    f.write(b'Senddata  '+binascii.b2a_hex(send_data))
+    #f.write(b'Senddata:'+str.encode(str(datetime.now()))+b':\n'+binascii.b2a_hex(send_data))
+    f.write('发送数据:  时间戳:'.encode('utf-8')+str.encode(str(datetime.now()))+'  包类型:'.encode('utf-8')+binascii.b2a_hex(send_data[4:6])+b"\r\n"+binascii.b2a_hex(send_data))
+
     f.write(b'\r\n')
     f.close()
 
@@ -31,7 +33,7 @@ def send_data_package(send_data):
     while(i<data_len):
         if(0x10 == send_data[i]):
             send_bytes =send_bytes + send_data[i].to_bytes(1,byteorder='little', signed=False) + b'\x00'
-            i+=1
+            #i+=1
         else:
             send_bytes =send_bytes + send_data[i].to_bytes(1,byteorder='little', signed=False)
         i+=1

@@ -7,6 +7,7 @@ import binascii
 from datetime import datetime
 import struct
 import csv
+import WLrdBusiness
 import time
 from SNSendData import *
 from SNGetData import *
@@ -16,11 +17,12 @@ send_data =bytearray()
 
 def SN_businesstype_handle(mSerial,datatype,data_Effbytes):
     global send_data
-
-    f = open('./log/log.txt', 'ab') # 若是'wb'就表示写二进制文件
-    f.write(b"Getdata  "+binascii.b2a_hex(datatype.PacketType.to_bytes(2,byteorder='little', signed=False))+b"  "+binascii.b2a_hex(data_Effbytes))
-    f.write(b'\r\n')
-    f.close()
+    LOG = True
+    if(LOG):
+        f = open('./log/log.txt', 'ab') # 若是'wb'就表示写二进制文件
+        f.write('接收数据:  时间戳:'.encode('utf-8')+str.encode(str(datetime.now()))+'  包类型:'.encode('utf-8')+binascii.b2a_hex(datatype.PacketType.to_bytes(2,byteorder='little', signed=False))+b"\r\n"+binascii.b2a_hex(data_Effbytes))
+        f.write(b'\r\n')
+        f.close()
 
     if(0x1001 == datatype.PacketType):
         print("包类型：",'%#x'%datatype.PacketType)
@@ -32,7 +34,7 @@ def SN_businesstype_handle(mSerial,datatype,data_Effbytes):
         mSerial.send_data(send_data)
 
         #延时10毫秒后，发送换装通知--升级信息
-        time.sleep(0.01)
+        time.sleep(0.2)
         #换装通知--升级信息
         send_data = SN_ChangeNotice_UpgradeInfo(datatype,item)
         mSerial.send_data(send_data)

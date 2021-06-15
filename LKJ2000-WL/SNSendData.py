@@ -39,9 +39,11 @@ def SN_ActiDetectionInfoReply(datatype,m_item):
     item = _SN_ActiDetectionInfoReply()
     item.Resrve = 0 # 预留字节
     item.PacketType = 0x2002
+    #item.TimeStamp = 0x11111011
+
     item.TimeStamp = datatype.TimeStamp
-    item.InfoLen = 30
-    item.PacketNum = m_item.TimeStamp
+    item.InfoLen = 26
+    item.PacketNum = datatype.PacketNum+1
 
     item.TrainNum = 0x4000D8
     item.ManCode = 0x04
@@ -189,7 +191,7 @@ def SN_WLActiDetectionInfoReply(datatype,m_item):
     item.PacketType = 0x2007
     item.TimeStamp = datatype.TimeStamp
     item.InfoLen = 26
-    item.PacketNum = m_item.TimeStamp
+    item.PacketNum = datatype.PacketNum
     item.TrainNum = 0x4000D8
     item.ManCode = 0x04
     item.WUPInitStatus =0
@@ -376,10 +378,10 @@ def SN_ChangeNotice_StartUpgrade(datatype,m_item):
     item.ManCode = 3
 
 
-    item.ParamCRC = 2
+    item.ParamCRC = 2 #从文件中获取
     item.CrcCRC = 2
     item.K2dataCRC = 2
-    item.K2dataXlbLenCRC = 2
+    item.K2dataXlbLenCRC = 2 #需要自己计算CRC
     item.K2dataZmbLenCRC = 2
     item.Resrve2 = 0
     send_tempdata = struct.pack("<I4H2H16s18sI2B5QH", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.UpdateResult,item.WLFileFlag,item.ParamVerInfo.encode('utf-8'),item.K2dataVerInfo.encode('utf-8'),item.K2dataSignaCode,item.BureauNum,item.ManCode,item.ParamCRC,item.CrcCRC,item.K2dataCRC,item.K2dataXlbLenCRC,item.K2dataZmbLenCRC,item.Resrve2)

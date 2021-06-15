@@ -12,6 +12,10 @@ import time
 from DataHandle import *
 from SNDataHandle import *
 
+global DEBUG
+DEBUG = True
+global LOG
+LOG = True
 class SerialPort:
     def __init__(self, port, buand):
         self.port = serial.Serial(port, buand)
@@ -30,6 +34,10 @@ class SerialPort:
         #self.port.write(bytes.fromhex(data))
         self.port.write(data)
         print("发送数据：",binascii.b2a_hex(data))
+        f = open('./log/log1.txt', 'ab') # 若是'wb'就表示写二进制文件
+        f.write(binascii.b2a_hex(data))
+        f.write(b'\r\n')
+        f.close()
 
 
 
@@ -38,6 +46,7 @@ class SerialPort:
         global data_bytes
         while not is_exit:
             count = self.port.inWaiting()
+
             if count > 0:
                 rec_str = self.port.read(count)
                 data_bytes=data_bytes+rec_str
@@ -63,6 +72,8 @@ def TKprotocolAnalysis():
     #主线程:对读取的串口数据进行处理过滤
     data_len=len(data_bytes)
     i=0
+    invalidflag = 0
+
     while(i<data_len-1):
         #数据头 10 02 a5
         if(data_bytes[i]==0x10 and data_bytes[i+1]==0x02 and data_bytes[i+2]==0xA5):
@@ -83,12 +94,17 @@ def TKprotocolAnalysis():
                     #一包有效数据完整，进行数据处理
                     send_data = data_handle(data_Effbytes)
                     mSerial.send_data(send_data)
+                    invalidflag = 1
+
                     break
                 else:
                     data_Effbytes =data_Effbytes + data_bytes[i].to_bytes(1,byteorder='little', signed=False)
                     i+=1
         else:
             i=i+1
+
+
+
     return i
 
 #按SN协议解析数据
@@ -97,6 +113,8 @@ def SNprotocolAnalysis():
     #主线程:对读取的串口数据进行处理过滤
     data_len=len(data_bytes)
     i=0
+    invalidflag = 0
+
     while(i<data_len-1):
         #数据头 10 02
         if(data_bytes[i]==0x10 and data_bytes[i+1]==0x02):
@@ -117,12 +135,21 @@ def SNprotocolAnalysis():
                     #一包有效数据完整，进行数据处理
                     send_data = SN_data_handle(mSerial,data_Effbytes)
                     #mSerial.send_data(send_data)
+                    invalidflag = 1
                     break
                 else:
                     data_Effbytes =data_Effbytes + data_bytes[i].to_bytes(1,byteorder='little', signed=False)
                     i+=1
         else:
             i=i+1
+
+    if(0 == invalidflag):
+        print('9'*9)
+        print("无效的串口数据：",str(datetime.now()),':',binascii.b2a_hex(data_bytes))
+        f = open('./log/log2.txt', 'ab') # 若是'wb'就表示写二进制文件
+        f.write(binascii.b2a_hex(data_bytes))
+        f.write(b'\r\n')
+        f.close()
     return i
 if __name__ == '__main__':
     #打开串口
