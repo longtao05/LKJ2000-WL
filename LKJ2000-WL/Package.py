@@ -19,13 +19,15 @@ send_bytes=bytearray()
 
 def send_data_package(send_data):
     global send_bytes
+    global LOG
     data_len=len(send_data)
-    f = open('./log/log.txt', 'ab') # 若是'wb'就表示写二进制文件
-    #f.write(b'Senddata:'+str.encode(str(datetime.now()))+b':\n'+binascii.b2a_hex(send_data))
-    f.write('发送数据:  时间戳:'.encode('utf-8')+str.encode(str(datetime.now()))+'  包类型:'.encode('utf-8')+binascii.b2a_hex(send_data[4:6])+b"\r\n"+binascii.b2a_hex(send_data))
+    if(1==LOG):
+        f = open('./log/log.txt', 'ab') # 若是'wb'就表示写二进制文件
+        #f.write(b'Senddata:'+str.encode(str(datetime.now()))+b':\n'+binascii.b2a_hex(send_data))
+        f.write('发送数据:  时间戳:'.encode('utf-8')+str.encode(str(datetime.now()))+'  包类型:'.encode('utf-8')+binascii.b2a_hex(send_data[4:6])+b"\r\n"+binascii.b2a_hex(send_data))
 
-    f.write(b'\r\n')
-    f.close()
+        f.write(b'\r\n')
+        f.close()
 
     i=0
     #添加头标识

@@ -5,7 +5,7 @@ import serial
 import threading
 import binascii
 from datetime import datetime
-import struct
+import Comm
 import csv
 import WLrdBusiness
 import time
@@ -15,10 +15,15 @@ from SNWLTypeDef import _SN_DataType,  _SN_VersionInfoPackage , _SN_ActiDetectio
 #10 02 18 00 01 11 10 ff 01 00 01 05 00 12 34 05 00 12 34 03 03 01 00 01 01 01 0f A8 B6 10 03
 send_data =bytearray()
 
+#测试2004包导致主机故障：张琦
+def test(mSerial):
+    #send_data = '1002da9d000004206a00290000000000000072656c6f6164207465737400326b646174612e7a6d620000e68ea5e694b6e58800000c0b051500000c1407154433221101010300000012340000000000000000000000000000000000000000000000000000000000000000000014131003'
+    send_data ='1002949d000004206a00020000000000000072656c6f6164207465737400326b646174612e7a6d620000e68ea5e694b6e58800000c0b051500000c14071544332211010103000000123400000000000000000000000000000000000000000000000000000000000000000000e68b1003'
+    mSerial.send_data(bytes.fromhex(send_data))
 def SN_businesstype_handle(mSerial,datatype,data_Effbytes):
     global send_data
-    LOG = True
-    if(LOG):
+    global LOG
+    if(1==LOG):
         f = open('./log/log.txt', 'ab') # 若是'wb'就表示写二进制文件
         f.write('接收数据:  时间戳:'.encode('utf-8')+str.encode(str(datetime.now()))+'  包类型:'.encode('utf-8')+binascii.b2a_hex(datatype.PacketType.to_bytes(2,byteorder='little', signed=False))+b"\r\n"+binascii.b2a_hex(data_Effbytes))
         f.write(b'\r\n')
@@ -56,6 +61,9 @@ def SN_businesstype_handle(mSerial,datatype,data_Effbytes):
         print("换装应答内容：",'%#x'%item.MessgaeRece)
         if(2==item.MessgaeRece):
             #换装通知--换装控制信息
+
+            #测试
+            #test(mSerial)
             send_data = SN_ChangeNotice_ControlInfo(datatype,item)
             mSerial.send_data(send_data)
         elif(3==item.MessgaeRece):
@@ -118,7 +126,7 @@ def SN_businesstype_handle(mSerial,datatype,data_Effbytes):
         mSerial.send_data(send_data)
 
         #换装通知--启动升级
-        time.sleep(0.01)
+        time.sleep(0.1)
         send_data = SN_ChangeNotice_StartUpgrade(datatype,item)
         mSerial.send_data(send_data)
 

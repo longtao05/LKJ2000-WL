@@ -4,6 +4,9 @@ import serial
 import time
 import binascii
 
+
+global LOG
+LOG = 1
 #import ctypes
 from ctypes import *
 
@@ -23,6 +26,10 @@ def hex_to_str(s):
     """
     return bytes.fromhex(s).decode()
 
+
+def int_to_binascii(data,bits):
+
+  return binascii.b2a_hex(data.to_bytes(bits,byteorder='little', signed=False))
 
 def bytesToHexString(bs):
 
