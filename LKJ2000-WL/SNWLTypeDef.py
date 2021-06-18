@@ -217,18 +217,29 @@ class _SN_ChangeNotice_StartUpgrade(Structure):
               ("Resrve",c_ushort),#预留 字节对齐
               ("UpdateResult",c_ushort),
               ("WLFileFlag",c_ushort),
-              ("ParamVerInfo",c_wchar_p),#16
+              #("ParamVerInfo",c_wchar_p),#16
+              ("ParamVerInfo",c_ubyte*16),#16
               ("K2dataVerInfo",c_wchar_p),#18
 
               ("K2dataSignaCode",c_uint),#基础数据特征码
               ("BureauNum",c_ubyte),#局号
               ("ManCode",c_ubyte),#厂家编号
 
-              ("ParamCRC",c_uint64),
-              ("CrcCRC",c_uint64),
-              ("K2dataCRC",c_uint64),
-              ("K2dataXlbLenCRC",c_uint64),
-              ("K2dataZmbLenCRC",c_uint64),
+              #("ParamCRC",c_uint64),
+              ("ParamLen",c_uint),
+              ("ParamCRC",c_uint),
+              #("CrcCRC",c_uint64),
+              ("CrcLen",c_uint),
+              ("CrcCRC",c_uint),
+              #("K2dataCRC",c_uint64),
+              ("K2dataLen",c_uint),
+              ("K2dataCRC",c_uint),
+              #("K2dataXlbLenCRC",c_uint64),
+              ("K2dataXlbLenLen",c_uint),
+              ("K2dataXlbLenCRC",c_uint),
+              #("K2dataZmbLenCRC",c_uint64),
+              ("K2dataZmbLenLen",c_uint),
+              ("K2dataZmbLenCRC",c_uint),
               ("Resrve2",c_ushort),
               ("Crc",c_ushort)]
 

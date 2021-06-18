@@ -88,9 +88,9 @@ def SN_UpgradeInfoSend(datatype,m_item):
     item.Resrve1 = 0
     item.TrainNum = 1
     item.DataToolVersion = 1
-    item.UpgradePlanVer = 1
+    item.UpgradePlanVer = 0x1506110200000000
     item.OrderID = '1' #32
-    item.FileName = '2kdata.bin'
+    item.FileName = 'param.dat'
     item.FileLen = 1111
     item.Crc48 = '0'
     item.PlanStartTime[0] = 1
@@ -98,13 +98,13 @@ def SN_UpgradeInfoSend(datatype,m_item):
     item.PlanStartTime[2] = 3
     item.PlanStartTime[3] = 4
     item.PlanStartTime[4] = 5
-    item.PlanStartTime[5] = 6
+    item.PlanStartTime[5] = 21
     item.PlanEffectiveTime[0] = 1
     item.PlanEffectiveTime[1] = 2
     item.PlanEffectiveTime[2] = 3
     item.PlanEffectiveTime[3] = 4
-    item.PlanEffectiveTime[4] = 5
-    item.PlanEffectiveTime[5] = 6
+    item.PlanEffectiveTime[4] = 9
+    item.PlanEffectiveTime[5] = 21
     item.UpdataModeType = 1
     item.VoucherCode = 1
     item.FileType = 1
@@ -290,13 +290,13 @@ def SN_ChangeNotice_UpgradeInfo(datatype,m_item):
 
     item.TrainNum = 1
     item.DataToolVersion = 1
-    item.UpgradePlanVer = 1
+    item.UpgradePlanVer = 0x1506110200000000
     #item.OrderID = '1' #32
-    item.FileName = '2kdata.bin'
+    item.FileName = 'param.dat'
     item.FileLen = 1111
     item.Crc48 = '0'
-    item.WLFileFlag = 3
-    item.FileType= 2
+    item.WLFileFlag = 2
+    item.FileType= 1
     item.DataType = 1
 
     send_tempdata = struct.pack("<I4H2IQ36sI6sH2B", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.TrainNum,item.DataToolVersion,item.UpgradePlanVer,item.FileName.encode('utf-8'),item.FileLen,item.Crc48.encode('utf-8'),item.WLFileFlag,item.FileType,item.DataType)
@@ -321,8 +321,8 @@ def SN_ChangeNotice_ControlInfo(datatype,m_item):
 
 
     item.TrainNum = 1
-    item.DataToolVersion = 1
-    item.UpgradePlanVer = 1
+    #item.DataToolVersion = 1
+    #item.UpgradePlanVer = 1
     item.OrderID = '1' #32
 
     item.PlanStartTime[0] = 1
@@ -341,7 +341,7 @@ def SN_ChangeNotice_ControlInfo(datatype,m_item):
     item.UpdataModeType = 2 #确认更新
     item.DeviceType = 1
     item.EjectCount = 0 #连续弹出次数
-    item.FileWLFlag = 1
+    #item.FileWLFlag = 1
     item.ShowTime = 5 #显示弹出时间间隔
     item.Resrve1 = 0
     item.Resrve2 = 0
@@ -369,27 +369,53 @@ def SN_ChangeNotice_StartUpgrade(datatype,m_item):
     item.PacketNum = datatype.PacketNum
 
     item.UpdateResult = 1
-    item.WLFileFlag = 1
+    item.WLFileFlag = 2
 
-    item.ParamVerInfo = '1'
+    #item.ParamVerInfo = '1'
+    #由Index.dat获取
+    #生成软件版本
+    item.ParamVerInfo[0] = 0x01
+    item.ParamVerInfo[1] = 0x02
+    item.ParamVerInfo[2] = 0x03
+    item.ParamVerInfo[3] = 0x01
+    #数据格式版本
+    item.ParamVerInfo[4] = 46
+    item.ParamVerInfo[5] = 11
+    item.ParamVerInfo[6] = 17
+    item.ParamVerInfo[7] = 9
+    item.ParamVerInfo[8] = 6
+    item.ParamVerInfo[9] = 21
+    #生成日期
+    item.ParamVerInfo[10] = 46
+    item.ParamVerInfo[11] = 11
+    item.ParamVerInfo[12] = 9
+    item.ParamVerInfo[13] = 17
+    item.ParamVerInfo[14] = 6
+    item.ParamVerInfo[15] = 21
+
     item.K2dataVerInfo = '1'
     item.K2dataSignaCode = 0
     item.BureauNum = 3
     item.ManCode = 3
 
 
-    item.ParamCRC = 2 #从文件中获取
+    item.ParamLen = 1 #从文件中获取
+    item.ParamCRC = 0x077B88ED #从文件中获取
+    item.CrcLen = 1
     item.CrcCRC = 2
+    item.K2dataLen = 1
     item.K2dataCRC = 2
+    item.K2dataXlbLenLen = 1 #
     item.K2dataXlbLenCRC = 2 #需要自己计算CRC
+    item.K2dataZmbLenLen = 2
     item.K2dataZmbLenCRC = 2
     item.Resrve2 = 0
-    send_tempdata = struct.pack("<I4H2H16s18sI2B5QH", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.UpdateResult,item.WLFileFlag,item.ParamVerInfo.encode('utf-8'),item.K2dataVerInfo.encode('utf-8'),item.K2dataSignaCode,item.BureauNum,item.ManCode,item.ParamCRC,item.CrcCRC,item.K2dataCRC,item.K2dataXlbLenCRC,item.K2dataZmbLenCRC,item.Resrve2)
+    send_tempdata = struct.pack("<I4H2H16B18sI2B10IH", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.UpdateResult,item.WLFileFlag,item.ParamVerInfo[0],item.ParamVerInfo[1],item.ParamVerInfo[2],item.ParamVerInfo[3],item.ParamVerInfo[4],item.ParamVerInfo[5],item.ParamVerInfo[6],item.ParamVerInfo[7],item.ParamVerInfo[8],item.ParamVerInfo[9],item.ParamVerInfo[10],item.ParamVerInfo[11],item.ParamVerInfo[12],item.ParamVerInfo[13],item.ParamVerInfo[14],item.ParamVerInfo[15],item.K2dataVerInfo.encode('utf-8'),item.K2dataSignaCode,item.BureauNum,item.ManCode,item.ParamLen,item.ParamCRC,item.CrcLen,item.CrcCRC,item.K2dataLen,item.K2dataCRC,item.K2dataXlbLenLen,item.K2dataXlbLenCRC,item.K2dataZmbLenLen,item.K2dataZmbLenCRC,item.Resrve2)
 
     send_tempdata = bytesToHexString(send_tempdata)
     item.Crc = crc16(send_tempdata)
 
-    send_data = struct.pack("<I4H2H16s18sI2B5QHH", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.UpdateResult,item.WLFileFlag,item.ParamVerInfo.encode('utf-8'),item.K2dataVerInfo.encode('utf-8'),item.K2dataSignaCode,item.BureauNum,item.ManCode,item.ParamCRC,item.CrcCRC,item.K2dataCRC,item.K2dataXlbLenCRC,item.K2dataZmbLenCRC,item.Resrve2,item.Crc)
+    send_data = struct.pack("<I4H2H16B18sI2B10IHH", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.UpdateResult,item.WLFileFlag,item.ParamVerInfo[0],item.ParamVerInfo[1],item.ParamVerInfo[2],item.ParamVerInfo[3],item.ParamVerInfo[4],item.ParamVerInfo[5],item.ParamVerInfo[6],item.ParamVerInfo[7],item.ParamVerInfo[8],item.ParamVerInfo[9],item.ParamVerInfo[10],item.ParamVerInfo[11],item.ParamVerInfo[12],item.ParamVerInfo[13],item.ParamVerInfo[14],item.ParamVerInfo[15],item.K2dataVerInfo.encode('utf-8'),item.K2dataSignaCode,item.BureauNum,item.ManCode,item.ParamLen,item.ParamCRC,item.CrcLen,item.CrcCRC,item.K2dataLen,item.K2dataCRC,item.K2dataXlbLenLen,item.K2dataXlbLenCRC,item.K2dataZmbLenLen,item.K2dataZmbLenCRC,item.Resrve2,item.Crc)
     #数据组包加密
 
     send_data = send_data_package(send_data)
