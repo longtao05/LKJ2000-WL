@@ -206,12 +206,12 @@ def SN_WLActiDetectionInfoReply(datatype,m_item):
     item.WLRegiConnStatus =0
 
 
-    send_tempdata = struct.pack("<I4HI2B8B", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.WUPInitStatus,item.TrainNum,item.ManCode,item.Resrve2,item.DeviceId[0],item.DeviceId[1],item.DeviceId[2],item.DeviceId[3],item.DeviceId[4],item.DeviceId[5],item.WLRegiStatus,item.WLRegiConnStatus)
+    send_tempdata = struct.pack("<I4HI2B8B", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.TrainNum,item.ManCode,item.WUPInitStatus,item.DeviceId[0],item.DeviceId[1],item.DeviceId[2],item.DeviceId[3],item.DeviceId[4],item.DeviceId[5],item.WLRegiStatus,item.WLRegiConnStatus)
 
     send_tempdata = bytesToHexString(send_tempdata)
     item.Crc = crc16(send_tempdata)
 
-    send_data = struct.pack("<I4HI2B8B", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.WUPInitStatus,item.TrainNum,item.ManCode,item.Resrve2,item.DeviceId[0],item.DeviceId[1],item.DeviceId[2],item.DeviceId[3],item.DeviceId[4],item.DeviceId[5],item.WLRegiStatus,item.WLRegiConnStatus,item.Crc)
+    send_data = struct.pack("<I4HI2B8BH", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.TrainNum,item.ManCode,item.WUPInitStatus,item.DeviceId[0],item.DeviceId[1],item.DeviceId[2],item.DeviceId[3],item.DeviceId[4],item.DeviceId[5],item.WLRegiStatus,item.WLRegiConnStatus,item.Crc)
 
     #数据组包加密
     send_data = send_data_package(send_data)
