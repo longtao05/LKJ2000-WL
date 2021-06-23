@@ -380,7 +380,7 @@ def SN_WLActiDetectionInfo(data_Effbytes):
     #打印解析数据
     if(1 ==LOG):
         f = open('./log/log.txt', 'ab') # 若是'wb'就表示写二进制文件
-        f.write('LKJ设备状态:'.encode('utf-8')+int_to_binascii(item.LKJDeviceStatus,1)+'LKJ与无线扩展单元状态:'.encode('utf-8')+'换装状态:'.encode('utf-8')+int_to_binascii(item.ChangeStatusInfo,1)+int_to_binascii(item.LKJWUStatus,1)+'换装进度:'.encode('utf-8')+ int_to_binascii(item.ChangeSpeed,1) +'DMI换装进度:'.encode('utf-8')+int_to_binascii(item.DMIChangeSpeed,1))
+        f.write('LKJ设备状态:'.encode('utf-8')+int_to_binascii(item.LKJDeviceStatus,1)+'LKJ与无线扩展单元状态:'.encode('utf-8')+'换装状态:'.encode('utf-8')+int_to_binascii(item.ChangeStatusInfo,1)+int_to_binascii(item.LKJWUStatus,1)+'换装进度:'.encode('utf-8')+ int_to_binascii(item.ChangeSpeed,2) +'DMI换装进度:'.encode('utf-8')+int_to_binascii(item.DMIChangeSpeed,2))
         f.write(b'\r\n')
         f.close()
     return item
@@ -451,6 +451,7 @@ def SN_VersionConfirmInfo(data_Effbytes):
     byteOffset = byteOffset + byteNum
     byteNum = 2
     item.Crc = struct.unpack('<H',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
+
     return item
 
 '''
@@ -460,7 +461,7 @@ def SN_VersionConfirmInfo(data_Effbytes):
 1003
 '''
 def SN_UpgradePlanCancelledReply(data_Effbytes):
-
+    global LOG
     item = _SN_UpgradePlanCancelledReply()
     byteOffset = 12
     byteNum = 1
@@ -504,6 +505,12 @@ def SN_UpgradePlanCancelledReply(data_Effbytes):
 
     byteNum = 2
     item.Crc = struct.unpack('<H',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
+    #打印解析数据
+    if(1 ==LOG):
+        f = open('./log/log.txt', 'ab') # 若是'wb'就表示写二进制文件
+        f.write('取消数据类型:'.encode('utf-8')+ int_to_binascii(item.CancelDataType,1) +'机车号:'.encode('utf-8')+int_to_binascii(item.TrainNum,4)+'文件标识:'.encode('utf-8')+int_to_binascii(item.FileWLFlag,2)+'取消原因:'.encode('utf-8')+int_to_binascii(item.CancelRelust,2)+'升级计划取消版本:'.encode('utf-8')+int_to_binascii(item.UpgrradeVer,8))
+        f.write(b'\r\n')
+        f.close()
     return item
 
 def SN_HostEventInfo(data_Effbytes):

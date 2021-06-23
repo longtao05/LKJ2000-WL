@@ -20,7 +20,7 @@ class COM:
     self.get_data_flag = True
     self.real_time_data = ''
     self.getData = []
-    self.szTemp = TSciParseInfo()
+    #self.szTemp = TSciParseInfo()
 
   # return real time data form com
   def get_real_time_data(self):
@@ -118,7 +118,7 @@ def get_data_test(com):
 if __name__ == '__main__':
   print("start")
 
-  com = COM('COM4', 115200)
+  com = COM('COM6', 115200)
 
   com.open()
   i=0

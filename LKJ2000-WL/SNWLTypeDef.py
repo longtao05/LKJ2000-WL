@@ -219,7 +219,8 @@ class _SN_ChangeNotice_StartUpgrade(Structure):
               ("WLFileFlag",c_ushort),
               #("ParamVerInfo",c_wchar_p),#16
               ("ParamVerInfo",c_ubyte*16),#16
-              ("K2dataVerInfo",c_wchar_p),#18
+              #("K2dataVerInfo",c_wchar_p),#18
+              ("K2dataVerInfo",c_ubyte*18),#18
 
               ("K2dataSignaCode",c_uint),#基础数据特征码
               ("BureauNum",c_ubyte),#局号

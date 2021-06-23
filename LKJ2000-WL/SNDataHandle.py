@@ -20,9 +20,15 @@ def test(mSerial):
     #send_data = '1002da9d000004206a00290000000000000072656c6f6164207465737400326b646174612e7a6d620000e68ea5e694b6e58800000c0b051500000c1407154433221101010300000012340000000000000000000000000000000000000000000000000000000000000000000014131003'
     send_data ='1002949d000004206a00020000000000000072656c6f6164207465737400326b646174612e7a6d620000e68ea5e694b6e58800000c0b051500000c14071544332211010103000000123400000000000000000000000000000000000000000000000000000000000000000000e68b1003'
     mSerial.send_data(bytes.fromhex(send_data))
+
+global Count
+Count = 0
 def SN_businesstype_handle(mSerial,datatype,data_Effbytes):
     global send_data
     global LOG
+    global Flag
+    global PlanCancelled
+    global Count
     if(1==LOG):
         f = open('./log/log.txt', 'ab') # 若是'wb'就表示写二进制文件
         f.write('接收数据:  时间戳:'.encode('utf-8')+str.encode(str(datetime.now()))+'  包类型:'.encode('utf-8')+binascii.b2a_hex(datatype.PacketType.to_bytes(2,byteorder='little', signed=False))+b"\r\n"+binascii.b2a_hex(data_Effbytes))
@@ -38,11 +44,12 @@ def SN_businesstype_handle(mSerial,datatype,data_Effbytes):
         send_data = SN_VersionInfoPackageReply(datatype,item)
         mSerial.send_data(send_data)
 
-        #延时10毫秒后，发送换装通知--升级信息
-        time.sleep(0.2)
-        #换装通知--升级信息
-        send_data = SN_ChangeNotice_UpgradeInfo(datatype,item)
-        mSerial.send_data(send_data)
+        if(0 == Flag):
+            #延时10毫秒后，发送换装通知--升级信息
+            time.sleep(0.2)
+            #换装通知--升级信息
+            send_data = SN_ChangeNotice_UpgradeInfo(datatype,item)
+            mSerial.send_data(send_data)
 
     elif(0x1002 == datatype.PacketType):
         print("包类型：",'%#x'%datatype.PacketType)
@@ -53,6 +60,13 @@ def SN_businesstype_handle(mSerial,datatype,data_Effbytes):
         #回复活动性检测帧
         send_data = SN_ActiDetectionInfoReply(datatype,item)
         mSerial.send_data(send_data)
+        if(1 == Flag):
+            Count+=1
+            if(Count > 3):
+                exit(0)
+
+
+
     elif(0x1003 == datatype.PacketType):
         print("包类型：",'%#x'%datatype.PacketType)
          #换装通知应答包
@@ -101,17 +115,29 @@ def SN_businesstype_handle(mSerial,datatype,data_Effbytes):
         #回复活动性检测帧
         send_data = SN_WLActiDetectionInfoReply(datatype,item)
         mSerial.send_data(send_data)
+
+        Flag = 1
+
+        #取消换装测试
+        if(PlanCancelled == 1):
+            time.sleep(50)
+            send_data = SN_UpgradePlanCancelled(datatype,item)
+            mSerial.send_data(send_data)
+            PlanCancelled = 0
+            Flag = 1
+
     elif(0x1008 == datatype.PacketType):
         print("包类型：",'%#x'%datatype.PacketType)
         item = _SN_VersionConfirmInfo()
         item = SN_VersionConfirmInfo(data_Effbytes)
         send_data = SN_VersionConfirmInfoReply(datatype,item)
         mSerial.send_data(send_data)
-        #延时1秒后，发送升级计划取消包
-        time.sleep(1)
-        send_data = SN_StartUpgradeOperationInfo(datatype,item)
-        mSerial.send_data(send_data)
-
+        #延时3秒后，正常退出程序
+        #time.sleep(3)
+        #exit(0)
+        #send_data = SN_StartUpgradeOperationInfo(datatype,item)
+        #mSerial.send_data(send_data)
+        Flag = 1
     elif(0x1009 == datatype.PacketType):
         print("包类型：",'%#x'%datatype.PacketType)
         item = _SN_UpgradePlanCancelledReply()

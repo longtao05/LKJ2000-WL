@@ -28,7 +28,7 @@ class SerialPort:
         while not is_exit:
             send_data ='100200ff780002201a003f1a0000d8004000040101020304050601017e6f1003'
             #3s未回复会产生重连
-            time.sleep(2)
+            time.sleep(2.5)
             #mSerial.send_data(bytes.fromhex(send_data))
             mSerial.port.write(bytes.fromhex(send_data))
     #测试200A包周期包：
@@ -39,7 +39,15 @@ class SerialPort:
             time.sleep(0.8)
             #mSerial.send_data(bytes.fromhex(send_data))
             mSerial.port.write(bytes.fromhex(send_data))
-
+    def Test_UpgradePlanCancelled(mSerial):
+        global is_exit
+        x = 1
+        z = 2
+        while not is_exit:
+            time.sleep(10)
+            SN_UpgradePlanCancelled(x,z)
+            print("1111111111111")
+            time.sleep(200)
     def port_open(self):
         if not self.port.isOpen():
             self.port.open()
@@ -89,8 +97,8 @@ class SerialPort:
                 #print(count)
                 rec_str = self.port.read(count)
                 data_bytes=data_bytes+rec_str
-                print('当前数据接收总字节数：'+str(len(data_bytes))+' 本次接收字节数：'+str(len(rec_str)))
-                print(str(datetime.now()),':',binascii.b2a_hex(rec_str))
+                #print('当前数据接收总字节数：'+str(len(data_bytes))+' 本次接收字节数：'+str(len(rec_str)))
+                #print(str(datetime.now()),':',binascii.b2a_hex(rec_str))
                 if(1==LOG):
                     f = open('./log/getlog.txt', 'ab') # 若是'wb'就表示写二进制文件
                     f.write(binascii.b2a_hex(data_bytes))
@@ -176,10 +184,10 @@ def SNprotocolAnalysis():
 
                 elif(data_bytes[i]==0x10 and data_bytes[i+1]==0x03):
 
-                    print("33333333333333")
+                    #print("33333333333333")
                     print("串口数据：",str(datetime.now()),':',binascii.b2a_hex(data_bytes))
                     print("有效数据：",str(datetime.now()),':',binascii.b2a_hex(data_Effbytes))
-                    print("44444444444444")
+                    #print("44444444444444")
                     #一包有效数据完整，进行数据处理
                     send_data = SN_data_handle(mSerial,data_Effbytes)
                     #mSerial.send_data(send_data)
@@ -222,6 +230,11 @@ def dellogfile():
     # 删除文件，可使用以下两种方法。
         os.remove(path)
 
+
+
+
+
+
 if __name__ == '__main__':
     #打开串口
     mSerial = SerialPort(serialPort, baudRate)
@@ -241,15 +254,15 @@ if __name__ == '__main__':
     t1.setDaemon(True)
     t1.start()
 
-    #新增周期包发送线程；防止串口数据切片后，周期包识别为无效包，导致主机重连
+    #新增周期包发送线程；防止串口数据切片后，周期包识别为无效包，导致主机重C连
     t2 = threading.Thread(target=mSerial.ActiDetectionInfoReply)
     t2.setDaemon(True)
     t2.start()
 
-    #开始数据处理线程
-    '''t2 = threading.Thread(target=data_handle)
-    t2.setDaemon(True)
-    t2.start()'''
+    #事件处理
+    #t3 = threading.Thread(target=mSerial.Test_UpgradePlanCancelled)
+    #t3.setDaemon(True)
+    #t3.start()
     #删除调试log
     dellogfile()
     while not is_exit:
