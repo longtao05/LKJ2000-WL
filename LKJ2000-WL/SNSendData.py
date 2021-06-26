@@ -404,45 +404,25 @@ def SN_ChangeNotice_StartUpgrade(datatype,m_item):
     #item.K2dataVerInfo = '1'
 
     #生成软件版本
-    item.ParamVerInfo[0] = 0x01
-    item.ParamVerInfo[1] = 0x02
-    item.ParamVerInfo[2] = 0x03
-    item.ParamVerInfo[3] = 0x01
-    #数据格式版本
-    item.ParamVerInfo[4] = 46
-    item.ParamVerInfo[5] = 11
-    item.ParamVerInfo[6] = 17
-    item.ParamVerInfo[7] = 9
-    item.ParamVerInfo[8] = 6
-    item.ParamVerInfo[9] = 21
-    #生成日期
-    item.ParamVerInfo[10] = 46
-    item.ParamVerInfo[11] = 11
-    item.ParamVerInfo[12] = 9
-    item.ParamVerInfo[13] = 17
-    item.ParamVerInfo[14] = 6
-    item.ParamVerInfo[15] = 21
-
-    #生成软件版本
-    item.K2dataVerInfo[0] = 46
-    item.K2dataVerInfo[1] = 11
-    item.K2dataVerInfo[2] = 9
-    item.K2dataVerInfo[3] = 17
-    item.K2dataVerInfo[4] = 6
+    item.K2dataVerInfo[0] = 51
+    item.K2dataVerInfo[1] = 32
+    item.K2dataVerInfo[2] = 16
+    item.K2dataVerInfo[3] = 25
+    item.K2dataVerInfo[4] = 4
     item.K2dataVerInfo[5] = 21
     #数据格式版本
-    item.K2dataVerInfo[6] = 46
-    item.K2dataVerInfo[7] = 11
-    item.K2dataVerInfo[8] = 9
-    item.K2dataVerInfo[9] = 17
-    item.K2dataVerInfo[10] = 6
+    item.K2dataVerInfo[6] = 51
+    item.K2dataVerInfo[7] = 32
+    item.K2dataVerInfo[8] = 16
+    item.K2dataVerInfo[9] = 25
+    item.K2dataVerInfo[10] = 4
     item.K2dataVerInfo[11] = 21
-    #生成日期
-    item.K2dataVerInfo[12] = 46
-    item.K2dataVerInfo[13] = 11
-    item.K2dataVerInfo[14] = 9
-    item.K2dataVerInfo[15] = 17
-    item.K2dataVerInfo[16] = 6
+    #生成日期2kdata.bin  13~16
+    item.K2dataVerInfo[12] = 51
+    item.K2dataVerInfo[13] = 32
+    item.K2dataVerInfo[14] = 16
+    item.K2dataVerInfo[15] = 25
+    item.K2dataVerInfo[16] = 4
     item.K2dataVerInfo[17] = 21
 
 
