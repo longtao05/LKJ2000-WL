@@ -1,0 +1,25 @@
+[Data]
+#log日志记录 1：记录 非1：不记录
+global LOG
+LOG = 1
+
+#计划取消包发送 0：不发送 非0：发送 也做发送延迟时间使用
+global PlanCancelled
+PlanCancelled = 0
+
+global WLFileFlag #换装标识 0:换装信息无效 1：线路数据 2：控制参数 3：控制参数和线路数据
+WLFileFlag = 3
+
+global UpdataModeType #1:自动更新 2:确认更新 3:凭证码
+UpdataModeType = 2
+
+global UpgradePlanVer #升级计划版本 预留
+UpgradePlanVer = 0x1506110200000000
+
+#换装通知发送标志 # 0 发送 预留不可更改
+global Flag
+Flag = 0
+
+#串口
+global serialPort
+serialPort = 'COM6'  # 串口

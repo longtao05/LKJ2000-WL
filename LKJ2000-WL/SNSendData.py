@@ -351,7 +351,7 @@ def SN_ChangeNotice_ControlInfo(datatype,m_item):
     item.ShowTime = 5 #显示弹出时间间隔
     item.Resrve1 = 0
     item.Resrve2 = 0
-    item.ChangeNoticeReason = "SNLKJ-2000临时计划升级fjl"
+    item.ChangeNoticeReason = "snLKJ-2000(VV测试版本)"
 
     send_tempdata = struct.pack("<I4HI32s6B6BI4BI32sH", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.TrainNum,item.OrderID.encode('utf-8'),item.PlanStartTime[0],item.PlanStartTime[1],item.PlanStartTime[2],item.PlanStartTime[3],item.PlanStartTime[4],item.PlanStartTime[5],item.PlanEffectiveTime[0],item.PlanEffectiveTime[1],item.PlanEffectiveTime[2],item.PlanEffectiveTime[3],item.PlanEffectiveTime[4],item.PlanEffectiveTime[5],item.VoucherCode,item.UpdataModeType,item.DeviceType,item.EjectCount,item.Resrve1,item.ShowTime,item.ChangeNoticeReason.encode('utf-8'),item.Resrve2)
 

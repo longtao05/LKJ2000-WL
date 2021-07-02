@@ -28,7 +28,7 @@ class SerialPort:
         while not is_exit:
             send_data ='100200ff780002201a003f1a0000d8004000040101020304050601017e6f1003'
             #3s未回复会产生重连
-            time.sleep(2.5)
+            time.sleep(1.5)
             #mSerial.send_data(bytes.fromhex(send_data))
             mSerial.port.write(bytes.fromhex(send_data))
     #测试200A包周期包：
@@ -46,7 +46,6 @@ class SerialPort:
         while not is_exit:
             time.sleep(10)
             SN_UpgradePlanCancelled(x,z)
-            print("1111111111111")
             time.sleep(200)
     def port_open(self):
         if not self.port.isOpen():
@@ -65,6 +64,7 @@ class SerialPort:
             f.write(binascii.b2a_hex(data))
             f.write(b'\r\n')
             f.close()
+
 
 
     def read_all(port, chunk_size=200):
@@ -109,7 +109,7 @@ class SerialPort:
                 #time.sleep(1)
                 #print("串口无数据")
 
-serialPort = 'COM6'  # 串口
+#serialPort = 'COM6'  # 串口
 baudRate = 115200  # 波特率C
 is_exit=False
 data_bytes=bytearray()
@@ -229,6 +229,19 @@ def dellogfile():
     if os.path.exists(path):  # 如果文件存在
     # 删除文件，可使用以下两种方法。
         os.remove(path)
+    path = './log/count.txt'  # 文件路径
+    if os.path.exists(path):  # 如果文件存在
+    # 删除文件，可使用以下两种方法。
+        os.remove(path)
+
+    path = './log'  # 文件路径
+    if os.path.exists(path):  # 如果文件存在
+    # 删除文件，可使用以下两种方法。
+        #os.remove(path)
+        os.rmdir("log")
+    #time.sleep(2)
+    os.mkdir("log")
+
 
 
 
@@ -236,6 +249,7 @@ def dellogfile():
 
 
 if __name__ == '__main__':
+    global serialPort
     #打开串口
     mSerial = SerialPort(serialPort, baudRate)
 
