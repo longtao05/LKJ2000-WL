@@ -16,11 +16,12 @@ from SNDataHandle import *
 import Mygol
 import MyFilegol
 import FileHandle
+import ConfigHandle
+
 Mygol._init()
 MyFilegol._init()
 FileHandle.readMyfile()
-Mygol.set_value('PlanCancelled',0)
-
+ConfigHandle.readConfig()
 global DEBUG
 DEBUG = True
 
@@ -49,18 +50,16 @@ class SerialPort:
             mSerial.port.write(bytes.fromhex(send_data))
     def Test_UpgradePlanCancelled(mSerial):
         global is_exit
-        x = 1
-        z = 2
         while not is_exit:
-            PlanCancelled = Mygol.get_value('PlanCancelled')
+            PlanCancelledFlag = Mygol.get_value('PlanCancelledFlag')
             time.sleep(1)
             #取消换装测试
-            print(PlanCancelled)
-            if(PlanCancelled != 0):
-                time.sleep(PlanCancelled)
-                send_data = SN_UpgradePlanCancelled(x,y)
+            if(PlanCancelledFlag == 1):
+                time.sleep(Mygol.get_value('PlanCancelled'))
+                send_data = SN_UpgradePlanCancelled(1,2)
                 mSerial.send_data(send_data)
-                PlanCancelled = 0
+                Mygol.set_value('PlanCancelledFlag',0)
+
 
     def port_open(self):
         if not self.port.isOpen():
@@ -70,10 +69,9 @@ class SerialPort:
         self.port.close()
 
     def send_data(self,data):
-        global LOG
         #self.port.write(bytes.fromhex(data))
         self.port.write(data)
-        if(1==LOG):
+        if(1==Mygol.get_value("LOG")):
             print("发送数据：",binascii.b2a_hex(data))
             f = open('./log/sendlog.txt', 'ab') # 若是'wb'就表示写二进制文件
             f.write(binascii.b2a_hex(data))
@@ -104,7 +102,6 @@ class SerialPort:
     def read_data(self):
         global is_exit
         global data_bytes
-        global LOG
         while not is_exit:
             count = self.port.inWaiting()
 
@@ -114,7 +111,7 @@ class SerialPort:
                 data_bytes=data_bytes+rec_str
                 #print('当前数据接收总字节数：'+str(len(data_bytes))+' 本次接收字节数：'+str(len(rec_str)))
                 #print(str(datetime.now()),':',binascii.b2a_hex(rec_str))
-                if(1==LOG):
+                if(1==Mygol.get_value("LOG")):
                     f = open('./log/getlog.txt', 'ab') # 若是'wb'就表示写二进制文件
                     f.write(binascii.b2a_hex(data_bytes))
                     f.write(b'\r\n')
@@ -124,8 +121,6 @@ class SerialPort:
                 #time.sleep(1)
                 #print("串口无数据")
 
-#serialPort = 'COM6'  # 串口
-baudRate = 115200  # 波特率C
 is_exit=False
 data_bytes=bytearray()
 global data_Effbytes
@@ -221,9 +216,8 @@ def dellogfile():
 
 
 if __name__ == '__main__':
-    global serialPort
     #打开串口
-    mSerial = SerialPort(serialPort, baudRate)
+    mSerial = SerialPort(Mygol.get_value('serialPort'), Mygol.get_value('baudRate'))
 
     #mSerial.send_data("11 22 33 44")
     '''#文件写入操作
@@ -246,9 +240,9 @@ if __name__ == '__main__':
     t2.start()
 
     #事件处理
-    '''    t3 = threading.Thread(target=mSerial.Test_UpgradePlanCancelled)
+    t3 = threading.Thread(target=mSerial.Test_UpgradePlanCancelled)
     t3.setDaemon(True)
-    t3.start()'''
+    t3.start()
     #删除调试log
     dellogfile()
     while not is_exit:

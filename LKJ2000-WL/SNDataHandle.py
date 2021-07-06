@@ -13,6 +13,7 @@ from SNSendData import *
 from SNGetData import *
 from SNWLTypeDef import _SN_DataType,  _SN_VersionInfoPackage , _SN_ActiDetectionInfo,_SN_UpgradeRequestInfo ,_SN_UpgradeOperationInfo,_SN_WLActiDetectionInfo,_SN_VersionConfirmInfo,_SN_UpgradePlanCancelledReply,_SN_HostEventInfo
 
+import Mygol
 
 
 send_data =bytearray()
@@ -24,12 +25,10 @@ global Count1
 Count1 = 0
 def SN_businesstype_handle(mSerial,datatype,data_Effbytes):
     global send_data
-    global LOG
-    global Flag
     global PlanCancelled
     global Count
     global Count1
-    if(1==LOG):
+    if(1==Mygol.get_value("LOG")):
         f = open('./log/log.txt', 'ab') # 若是'wb'就表示写二进制文件
         f.write('接收数据:  时间戳:'.encode('utf-8')+str.encode(str(datetime.now()))+'  包类型:'.encode('utf-8')+binascii.b2a_hex(datatype.PacketType.to_bytes(2,byteorder='little', signed=False))+b"\r\n"+binascii.b2a_hex(data_Effbytes))
         f.write(b'\r\n')
@@ -44,13 +43,13 @@ def SN_businesstype_handle(mSerial,datatype,data_Effbytes):
         send_data = SN_VersionInfoPackageReply(datatype,item)
         mSerial.send_data(send_data)
         Count1+=1
-        if(1==LOG):
+        if(1==Mygol.get_value("LOG")):
             f = open('./log/count.txt', 'ab') # 若是'wb'就表示写二进制文件
             f.write('换装时间:'.encode('utf-8')+str.encode(str(datetime.now()))+b"\r\n"+binascii.b2a_hex(Count1.to_bytes(2,byteorder='little', signed=False))+b"\r\n")
             f.write(b'\r\n')
             f.close()
 
-        if(0 == Flag):
+        if(0 == Mygol.get_value("StopFlag")):
             #延时10毫秒后，发送换装通知--升级信息
             time.sleep(0.2)
             #换装通知--升级信息
@@ -67,7 +66,7 @@ def SN_businesstype_handle(mSerial,datatype,data_Effbytes):
         #回复活动性检测帧
         send_data = SN_ActiDetectionInfoReply(datatype,item)
         mSerial.send_data(send_data)
-        if(1 == Flag):
+        if(1 == Mygol.get_value("StopFlag")):
             Count+=1
             if(Count > 3):
                 exit(0)
@@ -101,7 +100,7 @@ def SN_businesstype_handle(mSerial,datatype,data_Effbytes):
         item = SN_UpgradeOperationInfo(data_Effbytes)
 
         if(1!=item.OperationType):
-            Flag = 1
+            Mygol.set_value("StopFlag",1)
 
         #升级操作信息应答
         send_data = SN_UpgradeOperationInfoReply(datatype,item)
@@ -123,12 +122,9 @@ def SN_businesstype_handle(mSerial,datatype,data_Effbytes):
         #回复活动性检测帧
         send_data = SN_WLActiDetectionInfoReply(datatype,item)
         mSerial.send_data(send_data)
-        Flag = 1
-        '''        Flag = 1
-        Mygol.set_value('PlanCancelled',PlanCancelled)
-        print(PlanCancelled)
-        print( Mygol.get_value('PlanCancelled'))'''
-
+        Mygol.set_value("StopFlag",1)
+        #可以处理换装取消
+        Mygol.set_value('PlanCancelledFlag',1)
 
     elif(0x1008 == datatype.PacketType):
         print("包类型：",'%#x'%datatype.PacketType)
@@ -161,9 +157,9 @@ def SN_businesstype_handle(mSerial,datatype,data_Effbytes):
         mSerial.send_data(send_data)
     elif(0x100C == datatype.PacketType):
         print("包类型：",'%#x'%datatype.PacketType)
-        Flag = 1
+        Mygol.set_value("StopFlag",1)
 
-        if(1 == Flag):
+        if(1 == Mygol.get_value("StopFlag")):
             Count+=1
             if(Count > 3):
                 exit(0)

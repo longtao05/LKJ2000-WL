@@ -109,7 +109,7 @@ def SN_UpgradeInfoSend(datatype,m_item):
     item.PlanEffectiveTime[3] = 4
     item.PlanEffectiveTime[4] = 9
     item.PlanEffectiveTime[5] = 21
-    item.UpdataModeType = 1
+    item.UpdataModeType = Mygol.get_value('UpdataModeType')
     item.VoucherCode = 1
     item.FileType = 1
     item.EjectCount = 1
@@ -129,7 +129,6 @@ def SN_UpgradeInfoSend(datatype,m_item):
     return send_data
 
 def SN_UpgradeOperationInfoReply(datatype,m_item):
-    global WLFileFlag
     item = _SN_UpgradeOperationInfoReply()
     item.Resrve = 0 # 预留字节
     item.PacketType = 0x2005
@@ -141,7 +140,7 @@ def SN_UpgradeOperationInfoReply(datatype,m_item):
 
     item.OrderID = '1' #32
     item.LocoNum = 216
-    item.WLFileFlag = WLFileFlag
+    item.WLFileFlag = Mygol.get_value('WLFileFlag')
 
     item.DMIOperationTer = 1
 
@@ -170,7 +169,6 @@ def SN_UpgradeOperationInfoReply(datatype,m_item):
 
 
 def SN_StartUpgradeOperationInfo(datatype,m_item):
-    global WLFileFlag
     item = _SN_StartUpgradeOperationInfo()
     item.Resrve = 0 # 预留字节
     item.PacketType = 0x2006
@@ -181,7 +179,7 @@ def SN_StartUpgradeOperationInfo(datatype,m_item):
     item.UpdateResult = 1
 
 
-    item.WLFileFlag = WLFileFlag
+    item.WLFileFlag =  Mygol.get_value('WLFileFlag')
 
     item.ParamVerInfo = '1'
     item.K2dataVerInfo = '1'
@@ -298,8 +296,6 @@ def SN_UpgradePlanCancelled(datatype,m_item):
     return send_data
 
 def SN_ChangeNotice_UpgradeInfo(datatype,m_item):
-    global WLFileFlag
-    global UpgradePlanVer
     item = _SN_ChangeNotice_UpgradeInfo()
     item.Resrve = 0 # 预留字节
     item.PacketType = 0x2003
@@ -310,12 +306,12 @@ def SN_ChangeNotice_UpgradeInfo(datatype,m_item):
 
     item.TrainNum = 1
     item.DataToolVersion = 1
-    item.UpgradePlanVer = UpgradePlanVer#0x1506110200000000
+    item.UpgradePlanVer = Mygol.get_value('UpgradePlanVer') #0x1506110200000000
     #item.OrderID = '1' #32
     item.FileName = 'param.dat'
     item.FileLen = 1111
     item.Crc48 = '0'
-    item.WLFileFlag = WLFileFlag
+    item.WLFileFlag = Mygol.get_value('WLFileFlag')
     item.FileType= 1
     item.DataType = 1
 
@@ -332,7 +328,6 @@ def SN_ChangeNotice_UpgradeInfo(datatype,m_item):
 
 
 def SN_ChangeNotice_ControlInfo(datatype,m_item):
-    global UpdataModeType
     item = _SN_ChangeNotice_ControlInfo()
     item.Resrve = 0 # 预留字节
     item.PacketType = 0x2004
@@ -359,7 +354,7 @@ def SN_ChangeNotice_ControlInfo(datatype,m_item):
     item.PlanEffectiveTime[4] = 9
     item.PlanEffectiveTime[5] = 21
     item.VoucherCode = 202106
-    item.UpdataModeType = UpdataModeType #1:自动更新 2:确认更新 3:凭证码
+    item.UpdataModeType = Mygol.get_value('UpdataModeType') #1:自动更新 2:确认更新 3:凭证码
     item.DeviceType = 1
     item.EjectCount = 0 #连续弹出次数
     #item.FileWLFlag = 1
@@ -382,8 +377,6 @@ def SN_ChangeNotice_ControlInfo(datatype,m_item):
 
 
 def SN_ChangeNotice_StartUpgrade(datatype,m_item):
-
-    global WLFileFlag
     item = _SN_ChangeNotice_StartUpgrade()
     item.Resrve = 0 # 预留字节
     item.PacketType = 0x2006
@@ -392,7 +385,7 @@ def SN_ChangeNotice_StartUpgrade(datatype,m_item):
     item.PacketNum = datatype.PacketNum
 
     item.UpdateResult = 1
-    item.WLFileFlag = WLFileFlag #换装标志 1 线路数据 2 控制参数 换装标识
+    item.WLFileFlag = Mygol.get_value('WLFileFlag') #换装标志 1 线路数据 2 控制参数 换装标识
 
     #item.ParamVerInfo = '1'
     #由Index.dat获取

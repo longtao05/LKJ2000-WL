@@ -5,7 +5,7 @@ import os
 import binascii
 import time
 import struct
-
+import Mygol
 from Comm import *
 from SNWLTypeDef import _SN_VersionInfoPackage ,_SN_ActiDetectionInfo ,_SN_UpgradeRequestInfo,_SN_UpgradeOperationInfo ,_SN_WLActiDetectionInfo,_SN_VersionConfirmInfo,_SN_UpgradePlanCancelledReply,_SN_HostEventInfo
 
@@ -97,7 +97,7 @@ def SN_VersionInfoPackage(data_Effbytes):
     item.Crc = struct.unpack('<H',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
 
     #打印解析数据
-    if(1 ==LOG):
+    if(1 ==Mygol.get_value('LOG')):
         f = open('./log/log.txt', 'ab') # 若是'wb'就表示写二进制文件
         f.write('LKJVersion:'.encode('utf-8')+int_to_binascii(item.LKJVersion,4)+'DMI1Ver:'.encode('utf-8')+int_to_binascii(item.DMI1Ver,4)+'DMI2Ver:'.encode('utf-8')+int_to_binascii(item.DMI2Ver,4)+'DMI1xlbVer:'.encode('utf-8')+int_to_binascii(item.DMI1xlbVer,4)+'DMI1zmbVer:'.encode('utf-8')+int_to_binascii(item.DMI1zmbVer,4)+'DMI2xlbVer:'.encode('utf-8')+int_to_binascii(item.DMI2xlbVer,4)+'DMI2zmbVer:'.encode('utf-8')+int_to_binascii(item.DMI2zmbVer,4)+'BureauNum:'.encode('utf-8')+int_to_binascii(item.BureauNum,2)+'ALocoModel:'.encode('utf-8')+ int_to_binascii(item.ALocoModel,2) +'ATrainNum:'.encode('utf-8')+int_to_binascii(item.ATrainNum,4)+'BLocoModel:'.encode('utf-8')+int_to_binascii(item.BLocoModel,2)+'BTrainNum:'.encode('utf-8')+int_to_binascii(item.BTrainNum,4)+'DeviceNum:'.encode('utf-8')+int_to_binascii(item.DeviceNum,2)+'LocoType:'.encode('utf-8')+int_to_binascii(item.LocoType,2)+'CommProVer:'.encode('utf-8')+int_to_binascii(item.CommProVer,2)+'ManCode:'.encode('utf-8')+int_to_binascii(item.ManCode,2)+'DeviceType:'.encode('utf-8')+int_to_binascii(item.DeviceType,2))
         f.write(b'\r\n')
@@ -116,9 +116,6 @@ b0f0 2103 0121 0333 0300 2020 2020 0460
 ChangeStatusInfo = 2
 def SN_ActiDetectionInfo(data_Effbytes):
     global ChangeStatusInfo
-    global LOG
-
-
     item = _SN_ActiDetectionInfo()
     byteOffset = 12
     '''byteNum = 1
@@ -131,13 +128,13 @@ def SN_ActiDetectionInfo(data_Effbytes):
     item.ChangeStatusInfo = struct.unpack('<B',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
     byteOffset = byteOffset + byteNum
 
-    if(1==LOG and 0 == ChangeStatusInfo and 1 == item.ChangeStatusInfo):
+    if(1==Mygol.get_value('LOG') and 0 == ChangeStatusInfo and 1 == item.ChangeStatusInfo):
         #print("~~换装状态信息变化为1~~")
         f = open('./log/log.txt', 'ab') # 若是'wb'就表示写二进制文件
         f.write('换装状态信息变化为1:'.encode('utf-8'))
         f.write(b'\r\n')
         f.close()
-    elif(1==LOG and 1 == ChangeStatusInfo and 0 == item.ChangeStatusInfo):
+    elif(1==Mygol.get_value('LOG') and 1 == ChangeStatusInfo and 0 == item.ChangeStatusInfo):
         #print("~~换装状态信息变化为0~~")
         f = open('./log/log.txt', 'ab') # 若是'wb'就表示写二进制文件
         f.write('换装状态信息变化为0:'.encode('utf-8'))
@@ -222,7 +219,7 @@ def SN_ActiDetectionInfo(data_Effbytes):
     byteNum = 2
     item.Crc = struct.unpack('<H',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
     #打印解析数据
-    if(1 ==LOG):
+    if(1 ==Mygol.get_value('LOG')):
         f = open('./log/log.txt', 'ab') # 若是'wb'就表示写二进制文件
         f.write('换装条件:'.encode('utf-8')+ int_to_binascii(item.ChangeConInfo,1) +'换装状态:'.encode('utf-8')+int_to_binascii(item.ChangeStatusInfo,1)+'模式:'.encode('utf-8')+int_to_binascii(item.Model,1)+'LKJ设备状态:'.encode('utf-8')+int_to_binascii(item.LKJDeviceStatus,1)+'停车状态:'.encode('utf-8')+int_to_binascii(item.ParkingSta,1)+'DMI配置:'.encode('utf-8')+int_to_binascii(item.DMIConfig,1)+'LKJ与无线扩展单元状态:'.encode('utf-8')+int_to_binascii(item.LKJWUStatus,1))
         f.write(b'\r\n')
@@ -347,7 +344,6 @@ def SN_StartUpgradeOperationInfoReply(data_Effbytes):
 1002 00000610d00300001400290000000700000000003e7f 1003
 '''
 def SN_WLActiDetectionInfo(data_Effbytes):
-    global LOG
     item = _SN_WLActiDetectionInfo()
     byteOffset = 12
 
@@ -374,7 +370,7 @@ def SN_WLActiDetectionInfo(data_Effbytes):
     item.Crc = struct.unpack('<H',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
 
     #打印解析数据
-    if(1 ==LOG):
+    if(1 ==Mygol.get_value('LOG')):
         f = open('./log/log.txt', 'ab') # 若是'wb'就表示写二进制文件
         f.write('LKJ设备状态:'.encode('utf-8')+int_to_binascii(item.LKJDeviceStatus,1)+'LKJ与无线扩展单元状态:'.encode('utf-8')+'换装状态:'.encode('utf-8')+int_to_binascii(item.ChangeStatusInfo,1)+int_to_binascii(item.LKJWUStatus,1)+'换装进度:'.encode('utf-8')+ int_to_binascii(item.ChangeSpeed,2) +'DMI换装进度:'.encode('utf-8')+int_to_binascii(item.DMIChangeSpeed,2))
         f.write(b'\r\n')
@@ -457,7 +453,6 @@ def SN_VersionConfirmInfo(data_Effbytes):
 1003
 '''
 def SN_UpgradePlanCancelledReply(data_Effbytes):
-    global LOG
     item = _SN_UpgradePlanCancelledReply()
     byteOffset = 12
     byteNum = 1
@@ -502,7 +497,7 @@ def SN_UpgradePlanCancelledReply(data_Effbytes):
     byteNum = 2
     item.Crc = struct.unpack('<H',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
     #打印解析数据
-    if(1 ==LOG):
+    if(1 ==Mygol.get_value('LOG')):
         f = open('./log/log.txt', 'ab') # 若是'wb'就表示写二进制文件
         f.write('取消数据类型:'.encode('utf-8')+ int_to_binascii(item.CancelDataType,1) +'机车号:'.encode('utf-8')+int_to_binascii(item.TrainNum,4)+'文件标识:'.encode('utf-8')+int_to_binascii(item.FileWLFlag,2)+'取消原因:'.encode('utf-8')+int_to_binascii(item.CancelRelust,2)+'升级计划取消版本:'.encode('utf-8')+int_to_binascii(item.UpgrradeVer,8))
         f.write(b'\r\n')
