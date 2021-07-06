@@ -10,7 +10,6 @@ import csv
 import time
 from CRC import *
 from Comm import *
-from WLTypeDef import _ActiDetectionInfoReply
 
 #send_data = b'\x14\x00\x10\x11\x10\x02\x00\x01\x05\x00\x124\x03\x03D3"\x11fU\xc8\x82'
 

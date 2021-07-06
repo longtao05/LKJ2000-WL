@@ -115,6 +115,14 @@ def bytesToHexString(bs):
     hex_str += str(hex(item))[2:].zfill(2).upper() + " "
 
   return hex_str
+
+
+  #时间戳转换为日期:0转换为2000-01-01 00:00:00
+def TimestampToData(time_sj):
+    time_sj+=946656000 #1970-01-01 00：00：00 ~2000-01-01 00：00：00 的时间戳
+    data_sj = time.localtime(time_sj)
+    return data_sj
+
   #return ''.join(['%02X' % b for b in bs])
 
 #print(int('0x82c8',16))

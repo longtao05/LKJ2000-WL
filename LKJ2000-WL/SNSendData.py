@@ -12,6 +12,9 @@ import time
 from CRC import *
 from Comm import *
 from Package import *
+
+import Mygol
+import MyFilegol
 from SNWLTypeDef import _SN_VersionInfoPackageReply ,_SN_ActiDetectionInfoReply ,_SN_UpgradeInfoSend,_SN_UpgradeOperationInfoReply,_SN_StartUpgradeOperationInfo ,_SN_WLActiDetectionInfoReply,_SN_VersionConfirmInfoReply,_SN_UpgradePlanCancelled,_SN_HostEventInfoReply,_SN_ChangeNotice_StartUpgrade,_SN_ChangeNotice_ControlInfo,_SN_ChangeNotice_UpgradeInfo
 
 
@@ -141,7 +144,17 @@ def SN_UpgradeOperationInfoReply(datatype,m_item):
     item.WLFileFlag = WLFileFlag
 
     item.DMIOperationTer = 1
-    item.IsCanUpgrade = 0
+
+    if(1 == m_item.OperationType):
+        item.IsCanUpgrade =0 #升级
+    elif(2 == m_item.OperationType):
+        item.IsCanUpgrade =2#版本错误，提示未知
+    elif(3 == m_item.OperationType):
+        item.IsCanUpgrade =3 #退出
+    else:
+        item.IsCanUpgrade =4
+
+
     item.Resrve2 = 0
 
     send_tempdata = struct.pack("<I4H32sIH4B", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.OrderID.encode('utf-8'),item.LocoNum,item.WLFileFlag,item.DMIOperationTer,item.IsCanUpgrade,item.DataType,item.Resrve2)
@@ -160,12 +173,14 @@ def SN_StartUpgradeOperationInfo(datatype,m_item):
     global WLFileFlag
     item = _SN_StartUpgradeOperationInfo()
     item.Resrve = 0 # 预留字节
-    item.PacketType = 0x2005
+    item.PacketType = 0x2006
     item.TimeStamp = datatype.TimeStamp
     item.InfoLen = 94
     item.PacketNum = datatype.PacketNum
 
     item.UpdateResult = 1
+
+
     item.WLFileFlag = WLFileFlag
 
     item.ParamVerInfo = '1'
@@ -367,6 +382,7 @@ def SN_ChangeNotice_ControlInfo(datatype,m_item):
 
 
 def SN_ChangeNotice_StartUpgrade(datatype,m_item):
+
     global WLFileFlag
     item = _SN_ChangeNotice_StartUpgrade()
     item.Resrve = 0 # 预留字节
@@ -381,36 +397,37 @@ def SN_ChangeNotice_StartUpgrade(datatype,m_item):
     #item.ParamVerInfo = '1'
     #由Index.dat获取
     #生成软件版本
-    item.ParamVerInfo[0] = 0x01
-    item.ParamVerInfo[1] = 0x02
-    item.ParamVerInfo[2] = 0x03
-    item.ParamVerInfo[3] = 0x01
+    #Mygol.get_value()
+    item.ParamVerInfo[0] = MyFilegol.get_value("ParamVerInfo[0]")
+    item.ParamVerInfo[1] = MyFilegol.get_value("ParamVerInfo[1]")
+    item.ParamVerInfo[2] = MyFilegol.get_value("ParamVerInfo[2]")
+    item.ParamVerInfo[3] = MyFilegol.get_value("ParamVerInfo[3]")
     #item.ParamVerInfo[3] = 0x02
-    #数据格式版本
-    item.ParamVerInfo[4] = 46
-    item.ParamVerInfo[5] = 11
-    item.ParamVerInfo[6] = 17
-    item.ParamVerInfo[7] = 9
-    item.ParamVerInfo[8] = 6
-    item.ParamVerInfo[9] = 21
+    #数据格式版本 1.0.0.8
+    item.ParamVerInfo[4] = MyFilegol.get_value("ParamVerInfo[4]")
+    item.ParamVerInfo[5] = MyFilegol.get_value("ParamVerInfo[5]")
+    item.ParamVerInfo[6] = MyFilegol.get_value("ParamVerInfo[6]")
+    item.ParamVerInfo[7] = MyFilegol.get_value("ParamVerInfo[7]")
+    item.ParamVerInfo[8] = MyFilegol.get_value("ParamVerInfo[8]")
+    item.ParamVerInfo[9] = MyFilegol.get_value("ParamVerInfo[9]")
     #生成日期
-    item.ParamVerInfo[10] = 46
-    item.ParamVerInfo[11] = 11
-    item.ParamVerInfo[12] = 9
-    item.ParamVerInfo[13] = 17
-    item.ParamVerInfo[14] = 6
-    item.ParamVerInfo[15] = 21
+    item.ParamVerInfo[10] = MyFilegol.get_value("ParamVerInfo[10]")
+    item.ParamVerInfo[11] = MyFilegol.get_value("ParamVerInfo[11]")
+    item.ParamVerInfo[12] = MyFilegol.get_value("ParamVerInfo[12]")
+    item.ParamVerInfo[13] = MyFilegol.get_value("ParamVerInfo[13]")
+    item.ParamVerInfo[14] = MyFilegol.get_value("ParamVerInfo[14]")
+    item.ParamVerInfo[15] = MyFilegol.get_value("ParamVerInfo[15]")
 
     #item.K2dataVerInfo = '1'
 
     #生成软件版本
-    item.K2dataVerInfo[0] = 51
-    item.K2dataVerInfo[1] = 32
-    item.K2dataVerInfo[2] = 16
-    item.K2dataVerInfo[3] = 25
-    item.K2dataVerInfo[4] = 4
-    item.K2dataVerInfo[5] = 21
-    #数据格式版本
+    item.K2dataVerInfo[0] = MyFilegol.get_value("K2dataVerInfo[0]")
+    item.K2dataVerInfo[1] = MyFilegol.get_value("K2dataVerInfo[1]")
+    item.K2dataVerInfo[2] = MyFilegol.get_value("K2dataVerInfo[2]")
+    item.K2dataVerInfo[3] = MyFilegol.get_value("K2dataVerInfo[3]")
+    item.K2dataVerInfo[4] = MyFilegol.get_value("K2dataVerInfo[4]")
+    item.K2dataVerInfo[5] = MyFilegol.get_value("K2dataVerInfo[5]")
+    #数据格式版本 #无发获取
     item.K2dataVerInfo[6] = 51
     item.K2dataVerInfo[7] = 32
     item.K2dataVerInfo[8] = 16
@@ -418,31 +435,30 @@ def SN_ChangeNotice_StartUpgrade(datatype,m_item):
     item.K2dataVerInfo[10] = 4
     item.K2dataVerInfo[11] = 21
     #生成日期2kdata.bin  13~16
-    item.K2dataVerInfo[12] = 51
-    item.K2dataVerInfo[13] = 32
-    item.K2dataVerInfo[14] = 16
-    item.K2dataVerInfo[15] = 25
-    item.K2dataVerInfo[16] = 4
-    item.K2dataVerInfo[17] = 21
+    item.K2dataVerInfo[12] = MyFilegol.get_value("K2dataVerInfo[12]")
+    item.K2dataVerInfo[13] = MyFilegol.get_value("K2dataVerInfo[13]")
+    item.K2dataVerInfo[14] = MyFilegol.get_value("K2dataVerInfo[14]")
+    item.K2dataVerInfo[15] = MyFilegol.get_value("K2dataVerInfo[15]")
+    item.K2dataVerInfo[16] = MyFilegol.get_value("K2dataVerInfo[16]")
+    item.K2dataVerInfo[17] = MyFilegol.get_value("K2dataVerInfo[17]")
 
 
 
     item.K2dataSignaCode = 0
-    item.BureauNum = 3
+    item.BureauNum = MyFilegol.get_value('BureauNum')
     item.ManCode = 3
 
-
-    item.ParamLen = 44604 #从文件中获取
+    item.ParamLen =yFilegol.get_value('ParamLen')#44604 #从文件中获取
     #item.ParamLen = 0 #长度为0不换装
-    item.ParamCRC = 0x077B88ED #从文件中获取
-    item.CrcLen = 11700
-    item.CrcCRC = 0x33878e49
-    item.K2dataLen = 2994944
-    item.K2dataCRC = 0x1f280e08
-    item.K2dataXlbLenLen = 6720 #
-    item.K2dataXlbLenCRC = 0xe572c5fc #需要自己计算CRC
-    item.K2dataZmbLenLen = 0x59568
-    item.K2dataZmbLenCRC = 0x25b297fd
+    item.ParamCRC = MyFilegol.get_value('ParamCRC')#0x077B88ED #从文件中获取
+    item.CrcLen = MyFilegol.get_value('CrcLen')#11700
+    item.CrcCRC = MyFilegol.get_value('CrcCRC')#0x33878e49
+    item.K2dataLen =MyFilegol.get_value('K2dataLen')# 2994944
+    item.K2dataCRC = MyFilegol.get_value('K2dataCRC')#0x1f280e08
+    item.K2dataXlbLenLen = MyFilegol.get_value('K2dataXlbLenLen')#6720 #
+    item.K2dataXlbLenCRC = MyFilegol.get_value('K2dataXlbLenCRC')#0xe572c5fc #需要自己计算CRC
+    item.K2dataZmbLenLen = MyFilegol.get_value('K2dataZmbLenLen')#0x59568
+    item.K2dataZmbLenCRC =MyFilegol.get_value('K2dataZmbLenCRC')#0x25b297fd
     item.Resrve2 = 0
     send_tempdata = struct.pack("<I4H2H16B18BI2B10IH", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.UpdateResult,item.WLFileFlag,item.ParamVerInfo[0],item.ParamVerInfo[1],item.ParamVerInfo[2],item.ParamVerInfo[3],item.ParamVerInfo[4],item.ParamVerInfo[5],item.ParamVerInfo[6],item.ParamVerInfo[7],item.ParamVerInfo[8],item.ParamVerInfo[9],item.ParamVerInfo[10],item.ParamVerInfo[11],item.ParamVerInfo[12],item.ParamVerInfo[13],item.ParamVerInfo[14],item.ParamVerInfo[15],item.K2dataVerInfo[0],item.K2dataVerInfo[1],item.K2dataVerInfo[2],item.K2dataVerInfo[3],item.K2dataVerInfo[4],item.K2dataVerInfo[5],item.K2dataVerInfo[6],item.K2dataVerInfo[7],item.K2dataVerInfo[8],item.K2dataVerInfo[9],item.K2dataVerInfo[10],item.K2dataVerInfo[11],item.K2dataVerInfo[12],item.K2dataVerInfo[13],item.K2dataVerInfo[14],item.K2dataVerInfo[15],item.K2dataVerInfo[16],item.K2dataVerInfo[17],item.K2dataSignaCode,item.BureauNum,item.ManCode,item.ParamLen,item.ParamCRC,item.CrcLen,item.CrcCRC,item.K2dataLen,item.K2dataCRC,item.K2dataXlbLenLen,item.K2dataXlbLenCRC,item.K2dataZmbLenLen,item.K2dataZmbLenCRC,item.Resrve2)
 

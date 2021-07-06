@@ -10,8 +10,16 @@ import csv
 import time
 import os
 import Comm
-from DataHandle import *
+
 from SNDataHandle import *
+
+import Mygol
+import MyFilegol
+import FileHandle
+Mygol._init()
+MyFilegol._init()
+FileHandle.readMyfile()
+Mygol.set_value('PlanCancelled',0)
 
 global DEBUG
 DEBUG = True
@@ -44,9 +52,16 @@ class SerialPort:
         x = 1
         z = 2
         while not is_exit:
-            time.sleep(10)
-            SN_UpgradePlanCancelled(x,z)
-            time.sleep(200)
+            PlanCancelled = Mygol.get_value('PlanCancelled')
+            time.sleep(1)
+            #取消换装测试
+            print(PlanCancelled)
+            if(PlanCancelled != 0):
+                time.sleep(PlanCancelled)
+                send_data = SN_UpgradePlanCancelled(x,y)
+                mSerial.send_data(send_data)
+                PlanCancelled = 0
+
     def port_open(self):
         if not self.port.isOpen():
             self.port.open()
@@ -116,49 +131,6 @@ data_bytes=bytearray()
 global data_Effbytes
 data_Effbytes=bytearray()
 
-
-'''#按铁科协议解析数据
-def TKprotocolAnalysis():
-    global data_Effbytes
-    #主线程:对读取的串口数据进行处理过滤
-    data_len=len(data_bytes)
-    i=0
-    invalidflag = 0
-
-    while(i<data_len-1):
-        #数据头 10 02 a5
-        if(data_bytes[i]==0x10 and data_bytes[i+1]==0x02 and data_bytes[i+2]==0xA5):
-            i=i+3
-            while(i<dataB_len-1):
-                #处理数据中0x10后的
-                if(data_bytes[i]==0x10 and data_bytes[i+1]==0x00 and data_bytes[i+1]!=0x03):
-                    #删除0xff
-                    data_Effbytes =data_Effbytes + data_bytes[i].to_bytes(1,byteorder='little', signed=False)
-                    i+=2
-
-                elif(data_bytes[i]==0x5A and data_bytes[i+1]==0x10 and data_bytes[i+2]==0x03):
-
-                    print("1111111111111")
-                    print("串口数据：",str(datetime.now()),':',binascii.b2a_hex(data_bytes))
-                    print("有效数据：",str(datetime.now()),':',binascii.b2a_hex(data_Effbytes))
-                    print("2222222222222")
-                    #一包有效数据完整，进行数据处理
-                    send_data = data_handle(data_Effbytes)
-                    mSerial.send_data(send_data)
-                    invalidflag = 1
-
-                    break
-                else:
-                    data_Effbytes =data_Effbytes + data_bytes[i].to_bytes(1,byteorder='little', signed=False)
-                    i+=1
-        else:
-            i=i+1
-
-
-
-    return i
-
-'''
 #按SN协议解析数据
 def SNprotocolAnalysis():
     global data_Effbytes
@@ -274,9 +246,9 @@ if __name__ == '__main__':
     t2.start()
 
     #事件处理
-    #t3 = threading.Thread(target=mSerial.Test_UpgradePlanCancelled)
-    #t3.setDaemon(True)
-    #t3.start()
+    '''    t3 = threading.Thread(target=mSerial.Test_UpgradePlanCancelled)
+    t3.setDaemon(True)
+    t3.start()'''
     #删除调试log
     dellogfile()
     while not is_exit:

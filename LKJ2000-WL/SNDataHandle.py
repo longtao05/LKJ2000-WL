@@ -99,6 +99,10 @@ def SN_businesstype_handle(mSerial,datatype,data_Effbytes):
         item = _SN_UpgradeOperationInfo()
         #升级操作信息请求
         item = SN_UpgradeOperationInfo(data_Effbytes)
+
+        if(1!=item.OperationType):
+            Flag = 1
+
         #升级操作信息应答
         send_data = SN_UpgradeOperationInfoReply(datatype,item)
         mSerial.send_data(send_data)
@@ -119,16 +123,12 @@ def SN_businesstype_handle(mSerial,datatype,data_Effbytes):
         #回复活动性检测帧
         send_data = SN_WLActiDetectionInfoReply(datatype,item)
         mSerial.send_data(send_data)
-
         Flag = 1
+        '''        Flag = 1
+        Mygol.set_value('PlanCancelled',PlanCancelled)
+        print(PlanCancelled)
+        print( Mygol.get_value('PlanCancelled'))'''
 
-        #取消换装测试
-        if(PlanCancelled != 0):
-            time.sleep(PlanCancelled)
-            send_data = SN_UpgradePlanCancelled(datatype,item)
-            mSerial.send_data(send_data)
-            PlanCancelled = 0
-            #Flag = 1
 
     elif(0x1008 == datatype.PacketType):
         print("包类型：",'%#x'%datatype.PacketType)
@@ -162,6 +162,11 @@ def SN_businesstype_handle(mSerial,datatype,data_Effbytes):
     elif(0x100C == datatype.PacketType):
         print("包类型：",'%#x'%datatype.PacketType)
         Flag = 1
+
+        if(1 == Flag):
+            Count+=1
+            if(Count > 3):
+                exit(0)
 
     else:
         print("未识别的包类型：",'%#x'%datatype.PacketType)

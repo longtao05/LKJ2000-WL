@@ -1,16 +1,12 @@
-#!/usr/bin/python
-# -*-coding: utf-8 -*-
-
-import serial
-import threading
+#encoding:utf-8
+#系统库导入
+import sys
+import os
 import binascii
-from datetime import datetime
-import struct
-import csv
 import time
-from CRC import *
+import struct
+
 from Comm import *
-from Package import *
 from SNWLTypeDef import _SN_VersionInfoPackage ,_SN_ActiDetectionInfo ,_SN_UpgradeRequestInfo,_SN_UpgradeOperationInfo ,_SN_WLActiDetectionInfo,_SN_VersionConfirmInfo,_SN_UpgradePlanCancelledReply,_SN_HostEventInfo
 
 '''
