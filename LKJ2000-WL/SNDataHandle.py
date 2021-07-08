@@ -66,6 +66,8 @@ def SN_businesstype_handle(mSerial,datatype,data_Effbytes):
         #回复活动性检测帧
         send_data = SN_ActiDetectionInfoReply(datatype,item)
         mSerial.send_data(send_data)
+
+
         if(1 == Mygol.get_value("StopFlag")):
             Count+=1
             if(Count > 3):
@@ -124,7 +126,8 @@ def SN_businesstype_handle(mSerial,datatype,data_Effbytes):
         mSerial.send_data(send_data)
         Mygol.set_value("StopFlag",1)
         #可以处理换装取消
-        Mygol.set_value('PlanCancelledFlag',1)
+        if(0!=Mygol.get_value("PlanCancelled")):
+            Mygol.set_value('PlanCancelledFlag',1)
 
     elif(0x1008 == datatype.PacketType):
         print("包类型：",'%#x'%datatype.PacketType)
@@ -155,6 +158,9 @@ def SN_businesstype_handle(mSerial,datatype,data_Effbytes):
         time.sleep(0.1)
         send_data = SN_ChangeNotice_StartUpgrade(datatype,item)
         mSerial.send_data(send_data)
+
+        Mygol.set_value('StopSendActReply',1)
+
     elif(0x100C == datatype.PacketType):
         print("包类型：",'%#x'%datatype.PacketType)
         Mygol.set_value("StopFlag",1)

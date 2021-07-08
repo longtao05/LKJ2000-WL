@@ -105,7 +105,7 @@ class _SN_ActiDetectionInfoReply(Structure):
               ("Resrve",c_ushort),#预留 字节对齐
               #("IdNum",c_ubyte),
               #("IdNumReply",c_ubyte),
-              #("Resrve1",c_ushort),#预留 字节对齐
+              #("Resrve1",c_K2dataSignaCodeushort),#预留 字节对齐
               ("TrainNum",c_uint),#机车号
               ("ManCode",c_ubyte),#厂家编号
               ("WUPInitStatus",c_ubyte),#WUP自检状态
@@ -156,7 +156,7 @@ class _SN_UpgradeInfoSend(Structure):
               ("VoucherCode",c_uint),#凭证码
               ("FileType",c_ubyte),#文件类型
               ("EjectCount",c_ubyte),#连续弹出次数
-              ("FileWLFlag",c_ushort),#文件换装标识
+              ("WLFileFlag",c_ushort),#文件换装标识
               ("ShowTime",c_uint),#显示弹出时间间隔
               ("Resrve2",c_ushort),#预留 字节对齐
               ("Crc",c_ushort)]
@@ -257,7 +257,7 @@ class _SN_UpgradeOperationInfo(Structure):
               ("Resrve2",c_ubyte),
               ("Resrve1",c_ushort),#预留 字节对齐
               ("OrderID",c_ubyte*32),#32字节
-              ("LocoNum",c_uint),
+              ("TrainNum",c_uint),
               ("VoucherCode",c_uint),
               ("DriverNum",c_uint),
               ("OperationTime",c_ubyte*6),
@@ -278,7 +278,7 @@ class _SN_UpgradeOperationInfoReply(Structure):
               #("IdNumReply",c_ubyte),
               #("Resrve1",c_ushort),#预留 字节对齐
               ("OrderID",c_wchar_p),#32字节
-              ("LocoNum",c_uint),
+              ("TrainNum",c_uint),
               ("WLFileFlag",c_ushort),
               ("DMIOperationTer",c_ubyte),
               ("IsCanUpgrade",c_ubyte),
@@ -368,7 +368,7 @@ class _SN_VersionConfirmInfo(Structure):
               ("TrainNum",c_uint),#机车号
               ("ParamVer",c_ubyte*16),#16 #V1.2.0 2021-4-30 缺省0x00  [0x01,0x02,0x00,0x15,0x04,0x1e,0x00]
               ("k2DataVer",c_ubyte*18),#18
-              ("FileWLFlag",c_ushort),
+              ("WLFileFlag",c_ushort),
               ("DriverNum",c_uint),
               ("OperationTime",c_ubyte*6),
               ("DriverOperation",c_ubyte),
@@ -389,7 +389,7 @@ class _SN_VersionConfirmInfoReply(Structure):
               #("IdNumReply",c_ubyte),
               #("Resrve1",c_ubyte),#预留 字节对齐
               ("TrainNum",c_uint),#机车号
-              ("FileWLFlag",c_ushort),
+              ("WLFileFlag",c_ushort),
               ("DriverOperation",c_ubyte),
               ("DMIOperationTer",c_ubyte),
               ("DriverNum",c_uint),
@@ -409,7 +409,7 @@ class _SN_UpgradePlanCancelled(Structure):
               ("PacketNum",c_ushort),#包序号
               ("Resrve",c_ushort),#预留 字节对齐
               ("TrainNum",c_uint),
-              ("FileWLFlag",c_ushort),
+              ("WLFileFlag",c_ushort),
               ("MessgaeInfo",c_ushort),#消息内容
               ("OrderID",c_wchar_p),#32
               ("UpgrradeVer",c_uint64),#升级计划取消版本
@@ -432,7 +432,7 @@ class _SN_UpgradePlanCancelledReply(Structure):
               ("Resrve1",c_ubyte),#预留 字节对齐
               ("OrderID",c_ubyte*32),
               ("TrainNum",c_uint),
-              ("FileWLFlag",c_ushort),
+              ("WLFileFlag",c_ushort),
               ("CancelRelust",c_ushort),
               ("UpgrradeVer",c_uint64),#升级计划取消版本
               ("Resrve2",c_ushort),

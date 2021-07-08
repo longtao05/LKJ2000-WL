@@ -292,7 +292,7 @@ def SN_UpgradeOperationInfo(data_Effbytes):
         byteOffset+=1
 
     byteNum = 4
-    item.LocoNum = struct.unpack('<I',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
+    item.TrainNum = struct.unpack('<I',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
     byteOffset = byteOffset + byteNum
     byteNum = 4
     item.VoucherCode = struct.unpack('<I',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
@@ -413,7 +413,7 @@ def SN_VersionConfirmInfo(data_Effbytes):
         i+=1
         byteOffset+=1
     byteNum = 2
-    item.FileWLFlag = struct.unpack('<H',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
+    item.WLFileFlag = struct.unpack('<H',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
     byteOffset = byteOffset + byteNum
     byteNum = 4
     item.DriverNum = struct.unpack('<I',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
@@ -482,7 +482,7 @@ def SN_UpgradePlanCancelledReply(data_Effbytes):
     item.TrainNum = struct.unpack('<I',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
     byteOffset = byteOffset + byteNum
     byteNum = 2
-    item.FileWLFlag = struct.unpack('<H',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
+    item.WLFileFlag = struct.unpack('<H',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
     byteOffset = byteOffset + byteNum
     byteNum = 2
     item.CancelRelust = struct.unpack('<H',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
@@ -499,7 +499,7 @@ def SN_UpgradePlanCancelledReply(data_Effbytes):
     #打印解析数据
     if(1 ==Mygol.get_value('LOG')):
         f = open('./log/log.txt', 'ab') # 若是'wb'就表示写二进制文件
-        f.write('取消数据类型:'.encode('utf-8')+ int_to_binascii(item.CancelDataType,1) +'机车号:'.encode('utf-8')+int_to_binascii(item.TrainNum,4)+'文件标识:'.encode('utf-8')+int_to_binascii(item.FileWLFlag,2)+'取消原因:'.encode('utf-8')+int_to_binascii(item.CancelRelust,2)+'升级计划取消版本:'.encode('utf-8')+int_to_binascii(item.UpgrradeVer,8))
+        f.write('取消数据类型:'.encode('utf-8')+ int_to_binascii(item.CancelDataType,1) +'机车号:'.encode('utf-8')+int_to_binascii(item.TrainNum,4)+'文件标识:'.encode('utf-8')+int_to_binascii(item.WLFileFlag,2)+'取消原因:'.encode('utf-8')+int_to_binascii(item.CancelRelust,2)+'升级计划取消版本:'.encode('utf-8')+int_to_binascii(item.UpgrradeVer,8))
         f.write(b'\r\n')
         f.close()
     return item

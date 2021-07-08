@@ -39,7 +39,8 @@ class SerialPort:
             #3s未回复会产生重连
             time.sleep(1.5)
             #mSerial.send_data(bytes.fromhex(send_data))
-            mSerial.port.write(bytes.fromhex(send_data))
+            if(0==Mygol.get_value('StopSendActReply')):
+                mSerial.port.write(bytes.fromhex(send_data))
     #测试200A包周期包：
     def HostEventInfoReply(mSerial):
         while not is_exit:
@@ -59,6 +60,7 @@ class SerialPort:
                 send_data = SN_UpgradePlanCancelled(1,2)
                 mSerial.send_data(send_data)
                 Mygol.set_value('PlanCancelledFlag',0)
+                #time.sleep(100)
 
 
     def port_open(self):

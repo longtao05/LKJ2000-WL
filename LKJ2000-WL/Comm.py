@@ -47,3 +47,5 @@ def TimestampToData(time_sj):
     data_sj = time.localtime(time_sj)
     return data_sj
 
+
+#print(TimestampToData(0x28789f5f))

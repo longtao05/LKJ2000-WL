@@ -48,8 +48,8 @@ def SN_ActiDetectionInfoReply(datatype,m_item):
     item.InfoLen = 26
     item.PacketNum = datatype.PacketNum+1
 
-    item.TrainNum = 0x4000D8
-    item.ManCode = 0x04
+    item.TrainNum = Mygol.get_value('TrainNum')*2**10
+    item.ManCode = Mygol.get_value('ManCode')
     item.WUPInitStatus =1
 
     item.DeviceId[0] =0x01
@@ -72,62 +72,6 @@ def SN_ActiDetectionInfoReply(datatype,m_item):
     send_data = send_data_package(send_data)
     return send_data
 
-'''item = _SN_UpgradeInfoSend()
-print(sizeof(item))
-print(struct.calcsize('2HI2H3BHIIQ32B36BI6B6B6B2BI2B3H'))
-print(struct.calcsize('Q'))'''
-
-def SN_UpgradeInfoSend(datatype,m_item):
-    global UpgradePlanVer
-    item = _SN_UpgradeInfoSend()
-    item.Resrve = 0 # 预留字节
-    item.PacketType = 0x2003
-    item.TimeStamp = datatype.TimeStamp
-    item.InfoLen = 138
-    item.PacketNum = datatype.PacketNum
-
-    item.DataType = 1
-    item.IdNum = m_item.IdNum
-    item.IdNumReply = item.IdNum +1
-    item.Resrve1 = 0
-    item.TrainNum = 1
-    item.DataToolVersion = 1
-    item.UpgradePlanVer =  UpgradePlanVer#0x1506110200000000
-    item.OrderID = '1' #32
-    item.FileName = 'param.dat'
-    item.FileLen = 1111
-    item.Crc48 = '0'
-    item.PlanStartTime[0] = 1
-    item.PlanStartTime[1] = 2
-    item.PlanStartTime[2] = 3
-    item.PlanStartTime[3] = 4
-    item.PlanStartTime[4] = 5
-    item.PlanStartTime[5] = 21
-    item.PlanEffectiveTime[0] = 1
-    item.PlanEffectiveTime[1] = 2
-    item.PlanEffectiveTime[2] = 3
-    item.PlanEffectiveTime[3] = 4
-    item.PlanEffectiveTime[4] = 9
-    item.PlanEffectiveTime[5] = 21
-    item.UpdataModeType = Mygol.get_value('UpdataModeType')
-    item.VoucherCode = 1
-    item.FileType = 1
-    item.EjectCount = 1
-    item.FileWLFlag = 1
-    item.ShowTime = 1
-    item.Resrve2 = 0
-
-    send_tempdata = struct.pack("<I4H3BHIIQ32s36sI6s6B6B2BI2BHIH", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.DataType,item.IdNum,item.IdNumReply,item.Resrve1,item.TrainNum,item.DataToolVersion,item.UpgradePlanVer,item.OrderID.encode('utf-8'),item.FileName.encode('utf-8'),item.FileLen,item.Crc48.encode('utf-8'),item.PlanStartTime[0],item.PlanStartTime[1],item.PlanStartTime[2],item.PlanStartTime[3],item.PlanStartTime[4],item.PlanStartTime[5],item.PlanEffectiveTime[0],item.PlanEffectiveTime[1],item.PlanEffectiveTime[2],item.PlanEffectiveTime[3],item.PlanEffectiveTime[4],item.PlanEffectiveTime[5],item.UpdataModeType,item.DeviceType,item.VoucherCode,item.FileType,item.EjectCount,item.FileWLFlag,item.ShowTime,item.Resrve2)
-
-    send_tempdata = bytesToHexString(send_tempdata)
-    item.Crc = crc16(send_tempdata)
-
-    send_data = struct.pack("<I4H3BHIIQ32s36sI6s6B6B2BI2BHIHH", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.DataType,item.IdNum,item.IdNumReply,item.Resrve1,item.TrainNum,item.DataToolVersion,item.UpgradePlanVer,item.OrderID.encode('utf-8'),item.FileName.encode('utf-8'),item.FileLen,item.Crc48.encode('utf-8'),item.PlanStartTime[0],item.PlanStartTime[1],item.PlanStartTime[2],item.PlanStartTime[3],item.PlanStartTime[4],item.PlanStartTime[5],item.PlanEffectiveTime[0],item.PlanEffectiveTime[1],item.PlanEffectiveTime[2],item.PlanEffectiveTime[3],item.PlanEffectiveTime[4],item.PlanEffectiveTime[5],item.UpdataModeType,item.DeviceType,item.VoucherCode,item.FileType,item.EjectCount,item.FileWLFlag,item.ShowTime,item.Resrve2,item.Crc)
-    #数据组包加密
-
-    send_data = send_data_package(send_data)
-    return send_data
-
 def SN_UpgradeOperationInfoReply(datatype,m_item):
     item = _SN_UpgradeOperationInfoReply()
     item.Resrve = 0 # 预留字节
@@ -136,10 +80,10 @@ def SN_UpgradeOperationInfoReply(datatype,m_item):
     item.InfoLen = 54
     item.PacketNum = datatype.PacketNum
 
-    item.DataType = 1
+    item.DataType =  Mygol.get_value('DataType')
 
-    item.OrderID = '1' #32
-    item.LocoNum = 216
+    item.OrderID = Mygol.get_value('OrderID') #32
+    item.TrainNum = Mygol.get_value('TrainNum')*2**10
     item.WLFileFlag = Mygol.get_value('WLFileFlag')
 
     item.DMIOperationTer = 1
@@ -156,50 +100,19 @@ def SN_UpgradeOperationInfoReply(datatype,m_item):
 
     item.Resrve2 = 0
 
-    send_tempdata = struct.pack("<I4H32sIH4B", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.OrderID.encode('utf-8'),item.LocoNum,item.WLFileFlag,item.DMIOperationTer,item.IsCanUpgrade,item.DataType,item.Resrve2)
+    send_tempdata = struct.pack("<I4H32sIH4B", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.OrderID.encode('utf-8'),item.TrainNum,item.WLFileFlag,item.DMIOperationTer,item.IsCanUpgrade,item.DataType,item.Resrve2)
 
     send_tempdata = bytesToHexString(send_tempdata)
     item.Crc = crc16(send_tempdata)
 
-    send_data = struct.pack("<I4H32sIH4BH", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.OrderID.encode('utf-8'),item.LocoNum,item.WLFileFlag,item.DMIOperationTer,item.IsCanUpgrade,item.DataType,item.Resrve2,item.Crc)
+    send_data = struct.pack("<I4H32sIH4BH", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.OrderID.encode('utf-8'),item.TrainNum,item.WLFileFlag,item.DMIOperationTer,item.IsCanUpgrade,item.DataType,item.Resrve2,item.Crc)
     #数据组包加密
 
     send_data = send_data_package(send_data)
     return send_data
 
 
-def SN_StartUpgradeOperationInfo(datatype,m_item):
-    item = _SN_StartUpgradeOperationInfo()
-    item.Resrve = 0 # 预留字节
-    item.PacketType = 0x2006
-    item.TimeStamp = datatype.TimeStamp
-    item.InfoLen = 94
-    item.PacketNum = datatype.PacketNum
 
-    item.UpdateResult = 1
-
-
-    item.WLFileFlag =  Mygol.get_value('WLFileFlag')
-
-    item.ParamVerInfo = '1'
-    item.K2dataVerInfo = '1'
-    item.Resrve1 = 0
-    item.ParamCRC = 2
-    item.CrcCRC = 2
-    item.K2dataCRC = 2
-    item.K2dataXlbLenCRC = 2
-    item.K2dataZmbLenCRC = 2
-    item.Resrve2 = 0
-    send_tempdata = struct.pack("<I4H2H16s18sH5QH", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.UpdateResult,item.WLFileFlag,item.ParamVerInfo.encode('utf-8'),item.K2dataVerInfo.encode('utf-8'),item.Resrve1,item.ParamCRC,item.CrcCRC,item.K2dataCRC,item.K2dataXlbLenCRC,item.K2dataZmbLenCRC,item.Resrve2)
-
-    send_tempdata = bytesToHexString(send_tempdata)
-    item.Crc = crc16(send_tempdata)
-
-    send_data = struct.pack("<I4H2H16s18sH5QHH", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.UpdateResult,item.WLFileFlag,item.ParamVerInfo.encode('utf-8'),item.K2dataVerInfo.encode('utf-8'),item.Resrve1,item.ParamCRC,item.CrcCRC,item.K2dataCRC,item.K2dataXlbLenCRC,item.K2dataZmbLenCRC,item.Resrve2,item.Crc)
-    #数据组包加密
-
-    send_data = send_data_package(send_data)
-    return send_data
 
 def SN_WLActiDetectionInfoReply(datatype,m_item):
     item = _SN_ActiDetectionInfoReply()
@@ -208,8 +121,8 @@ def SN_WLActiDetectionInfoReply(datatype,m_item):
     item.TimeStamp = datatype.TimeStamp
     item.InfoLen = 26
     item.PacketNum = datatype.PacketNum
-    item.TrainNum = 0x4000D8
-    item.ManCode = 0x04
+    item.TrainNum = Mygol.get_value('TrainNum')*2**10
+    item.ManCode =  Mygol.get_value('ManCode')
     item.WUPInitStatus =0
 
     item.DeviceId[0] =0x01
@@ -244,23 +157,23 @@ def SN_VersionConfirmInfoReply(datatype,m_item):
 
     item.UpgraddeDataType = m_item.UpgraddeDataType
 
-    item.TrainNum = 0x4000D8
-    item.FileWLFlag = 1
+    item.TrainNum = Mygol.get_value('TrainNum')*2**10
+    item.WLFileFlag = Mygol.get_value('WLFileFlag')
     item.DriverOperation =1
     item.DMIOperationTer =1
     item.DriverNum =571
     item.CurVer =1
-    item.OrderID = '1'
+    item.OrderID = Mygol.get_value('OrderID')
     item.Resrve2 =0
 
 
 
-    send_tempdata = struct.pack("<I4HIH2BIQ32sBB", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.TrainNum,item.FileWLFlag,item.DriverOperation,item.DMIOperationTer,item.DriverNum,item.CurVer,item.OrderID.encode('utf-8') ,item.UpgraddeDataType,item.Resrve2)
+    send_tempdata = struct.pack("<I4HIH2BIQ32sBB", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.TrainNum,item.WLFileFlag,item.DriverOperation,item.DMIOperationTer,item.DriverNum,item.CurVer,item.OrderID.encode('utf-8') ,item.UpgraddeDataType,item.Resrve2)
 
     send_tempdata = bytesToHexString(send_tempdata)
     item.Crc = crc16(send_tempdata)
 
-    send_data = struct.pack("<I4HIH2BIQ32sBBH", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.TrainNum,item.FileWLFlag,item.DriverOperation,item.DMIOperationTer,item.DriverNum,item.CurVer,item.OrderID.encode('utf-8') ,item.UpgraddeDataType,item.Resrve2,item.Crc)
+    send_data = struct.pack("<I4HIH2BIQ32sBBH", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.TrainNum,item.WLFileFlag,item.DriverOperation,item.DMIOperationTer,item.DriverNum,item.CurVer,item.OrderID.encode('utf-8') ,item.UpgraddeDataType,item.Resrve2,item.Crc)
     #数据组包加密
     send_data = send_data_package(send_data)
 
@@ -274,23 +187,23 @@ def SN_UpgradePlanCancelled(datatype,m_item):
     item.InfoLen = 62
     item.PacketNum = 0x22
 
-    item.DataType = 1
+    item.DataType = Mygol.get_value('DataType')
 
-    item.TrainNum = 0x51400 #
-    item.FileWLFlag = 1
+    item.TrainNum = Mygol.get_value('TrainNum')*2**10#0x51400 #
+    item.WLFileFlag = Mygol.get_value('WLFileFlag')
     item.MessgaeInfo =3
-    item.OrderID = '1'
+    item.OrderID = Mygol.get_value('OrderID')
     item.Resrve2 =0
-    item.UpgrradeVer =0x1506110200000000
+    item.UpgrradeVer = Mygol.get_value('UpgradePlanVer') #0x1506110200000000
 
 
 
-    send_tempdata = struct.pack("<I4HI2H32sQ2B", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.TrainNum,item.FileWLFlag,item.MessgaeInfo,item.OrderID.encode('utf-8'),item.UpgrradeVer,item.DataType,item.Resrve2)
+    send_tempdata = struct.pack("<I4HI2H32sQ2B", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.TrainNum,item.WLFileFlag,item.MessgaeInfo,item.OrderID.encode('utf-8'),item.UpgrradeVer,item.DataType,item.Resrve2)
 
     send_tempdata = bytesToHexString(send_tempdata)
     item.Crc = crc16(send_tempdata)
 
-    send_data = struct.pack("<I4HI2H32sQ2BH", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.TrainNum,item.FileWLFlag,item.MessgaeInfo,item.OrderID.encode('utf-8'),item.UpgrradeVer,item.DataType,item.Resrve2,item.Crc)
+    send_data = struct.pack("<I4HI2H32sQ2BH", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.TrainNum,item.WLFileFlag,item.MessgaeInfo,item.OrderID.encode('utf-8'),item.UpgrradeVer,item.DataType,item.Resrve2,item.Crc)
     #数据组包加密
     send_data = send_data_package(send_data)
     return send_data
@@ -304,7 +217,7 @@ def SN_ChangeNotice_UpgradeInfo(datatype,m_item):
     item.PacketNum = datatype.PacketNum
 
 
-    item.TrainNum = 1
+    item.TrainNum = Mygol.get_value('TrainNum')*2**10
     item.DataToolVersion = 1
     item.UpgradePlanVer = Mygol.get_value('UpgradePlanVer') #0x1506110200000000
     #item.OrderID = '1' #32
@@ -313,7 +226,7 @@ def SN_ChangeNotice_UpgradeInfo(datatype,m_item):
     item.Crc48 = '0'
     item.WLFileFlag = Mygol.get_value('WLFileFlag')
     item.FileType= 1
-    item.DataType = 1
+    item.DataType = Mygol.get_value('DataType')
 
     send_tempdata = struct.pack("<I4H2IQ36sI6sH2B", item.TimeStamp,item.PacketType,item.InfoLen,item.PacketNum,item.Resrve,item.TrainNum,item.DataToolVersion,item.UpgradePlanVer,item.FileName.encode('utf-8'),item.FileLen,item.Crc48.encode('utf-8'),item.WLFileFlag,item.FileType,item.DataType)
 
@@ -336,10 +249,10 @@ def SN_ChangeNotice_ControlInfo(datatype,m_item):
     item.PacketNum = datatype.PacketNum
 
 
-    item.TrainNum = 1
+    item.TrainNum = Mygol.get_value('TrainNum')*2**10
     #item.DataToolVersion = 1
     #item.UpgradePlanVer = 1
-    item.OrderID = '1' #32
+    item.OrderID = Mygol.get_value('OrderID')#'1' #32
 
     item.PlanStartTime[0] = 1
     item.PlanStartTime[1] = 2
@@ -353,11 +266,11 @@ def SN_ChangeNotice_ControlInfo(datatype,m_item):
     item.PlanEffectiveTime[3] = 4
     item.PlanEffectiveTime[4] = 9
     item.PlanEffectiveTime[5] = 21
-    item.VoucherCode = 202106
+    item.VoucherCode = Mygol.get_value('VoucherCode')
     item.UpdataModeType = Mygol.get_value('UpdataModeType') #1:自动更新 2:确认更新 3:凭证码
     item.DeviceType = 1
     item.EjectCount = 0 #连续弹出次数
-    #item.FileWLFlag = 1
+    #item.WLFileFlag = Mygol.get_value('WLFileFlag')
     item.ShowTime = 5 #显示弹出时间间隔
     item.Resrve1 = 0
     item.Resrve2 = 0
@@ -439,9 +352,9 @@ def SN_ChangeNotice_StartUpgrade(datatype,m_item):
 
     item.K2dataSignaCode = 0
     item.BureauNum = MyFilegol.get_value('BureauNum')
-    item.ManCode = 3
+    item.ManCode = Mygol.get_value('ManCode')
 
-    item.ParamLen =yFilegol.get_value('ParamLen')#44604 #从文件中获取
+    item.ParamLen =MyFilegol.get_value('ParamLen')#44604 #从文件中获取
     #item.ParamLen = 0 #长度为0不换装
     item.ParamCRC = MyFilegol.get_value('ParamCRC')#0x077B88ED #从文件中获取
     item.CrcLen = MyFilegol.get_value('CrcLen')#11700
