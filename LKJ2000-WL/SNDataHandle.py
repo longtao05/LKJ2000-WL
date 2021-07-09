@@ -106,6 +106,7 @@ def SN_businesstype_handle(mSerial,datatype,data_Effbytes):
 
         #升级操作信息应答
         send_data = SN_UpgradeOperationInfoReply(datatype,item)
+
         mSerial.send_data(send_data)
 
         #延时1秒后，发送启动升级信息
@@ -157,6 +158,7 @@ def SN_businesstype_handle(mSerial,datatype,data_Effbytes):
         #换装通知--启动升级
         time.sleep(0.1)
         send_data = SN_ChangeNotice_StartUpgrade(datatype,item)
+
         mSerial.send_data(send_data)
 
         Mygol.set_value('StopSendActReply',1)

@@ -74,9 +74,9 @@ class SerialPort:
         #self.port.write(bytes.fromhex(data))
         self.port.write(data)
         if(1==Mygol.get_value("LOG")):
-            print("发送数据：",binascii.b2a_hex(data))
-            f = open('./log/sendlog.txt', 'ab') # 若是'wb'就表示写二进制文件
-            f.write(binascii.b2a_hex(data))
+            print("发送数据：",str(datetime.now()),':',binascii.b2a_hex(data))
+            f = open('./log/xxxlog.txt', 'ab') # 若是'wb'就表示写二进制文件
+            f.write('发送数据:  时间戳:'.encode('utf-8')+str.encode(str(datetime.now()))+'数据: '.encode('utf-8')+binascii.b2a_hex(data))
             f.write(b'\r\n')
             f.close()
 
@@ -114,8 +114,8 @@ class SerialPort:
                 #print('当前数据接收总字节数：'+str(len(data_bytes))+' 本次接收字节数：'+str(len(rec_str)))
                 #print(str(datetime.now()),':',binascii.b2a_hex(rec_str))
                 if(1==Mygol.get_value("LOG")):
-                    f = open('./log/getlog.txt', 'ab') # 若是'wb'就表示写二进制文件
-                    f.write(binascii.b2a_hex(data_bytes))
+                    f = open('./log/xxxlog.txt', 'ab') # 若是'wb'就表示写二进制文件
+                    f.write('原始数据:  时间戳:'.encode('utf-8')+str.encode(str(datetime.now()))+'数据: '.encode('utf-8')+binascii.b2a_hex(data_bytes))
                     f.write(b'\r\n')
                     f.close()
             else:
@@ -190,7 +190,7 @@ def dellogfile():
     if os.path.exists(path):  # 如果文件存在
     # 删除文件，可使用以下两种方法。
         os.remove(path)
-    path = './log/getlog.txt'  # 文件路径
+    path = './log/xxxlog.txt'  # 文件路径
     if os.path.exists(path):  # 如果文件存在
     # 删除文件，可使用以下两种方法。
         os.remove(path)
