@@ -15,3 +15,6 @@ DataType = 1 #升级数据类型 1：LKJ200数据 2：程序 3：LKJ15数据
 OrderID = 1 #命令ID，目前未使用，32字节
 VoucherCode = 202106 #凭证码换装 凭证码：6位
 ManCode = 4 #厂家编号 4：SN
+
+[TestCase]
+CaseNum = 0#正常测试时需修改未0 ；VV异常测试程序 1-4，王国英 5:李楠新增 

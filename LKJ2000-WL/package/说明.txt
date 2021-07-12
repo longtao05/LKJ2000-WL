@@ -1,0 +1,20 @@
+
+说明：将U盘烧写数据放置运行程序目录data文件夹下；
+config.conf 放置同级目录
+[SerialConfig]
+serialPort = 'COM6'  # 串口
+baudRate = 115200  #波特率
+LOG = 1 #log日志记录 1：记录 非1：不记录
+PlanCancelled = 0 #计划取消包发送 0：不发送 非0：发送 也做发送延迟时间使用
+WLFileFlag = 3 #换装标识 0:换装信息无效 1：线路数据 2：控制参数 3：控制参数和线路数据
+UpdataModeType = 2 #1:自动更新 2:确认更新 3:凭证码
+UpgradePlanVer = 0x1506110200000000 #升级计划版本 预留
+StopFlag = 0 # 0：换装一次， 非0：不换装
+TrainNum = 325 #机车号
+DataType = 1 #升级数据类型 1：LKJ200数据 2：程序 3：LKJ15数据
+OrderID = 1 #命令ID，目前未使用，32字节
+VoucherCode = 202106 #凭证码换装 凭证码：6位
+ManCode = 4 #厂家编号 4：SN
+
+[TestCase]
+CaseNum = 0#正常测试时需修改未0 ；VV异常测试程序 1-4，王国英 5:李楠新增 
