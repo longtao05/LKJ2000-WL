@@ -158,6 +158,7 @@ def SNprotocolAnalysis():
                     print("有效数据：",str(datetime.now()),':',binascii.b2a_hex(data_Effbytes))
                     #print("44444444444444")
                     #一包有效数据完整，进行数据处理
+                    print(type(data_Effbytes))
                     send_data = SN_data_handle(mSerial,data_Effbytes)
                     #mSerial.send_data(send_data)
                     invalidflag = 1
