@@ -1,4 +1,6 @@
 from ctypes import *
+
+import binascii
 #global g_szCrc32ValueTable
 g_szCrc32ValueTable =[
 0x00000000, 0x77073096, 0xee0e612c, 0x990951ba,
@@ -73,24 +75,80 @@ def Cal_Crc32(puiData,ulSize,ulInitValue):
     puiDataCal = puiData
     ulCrc = ulInitValue
     for uloop in range(ulSize):
-        ulCrc = g_szCrc32ValueTable[(ulCrc^((puiDataCal[uloop])&0xff))&0xff]^(ulCrc>>8)
         ulCrc = g_szCrc32ValueTable[(ulCrc^((puiDataCal[uloop])>>8))&0xff]^(ulCrc>>8)
+        ulCrc = g_szCrc32ValueTable[(ulCrc^((puiDataCal[uloop])&0xff))&0xff]^(ulCrc>>8)
         uloop+=1
     return ulCrc
 
 
 
-filename = "./data/index.dat"
-with open(filename, 'rb+') as f:
+filename = "./data/param.dat"
+'''with open(filename, 'rb+') as f:
     p = f.read()
 print(type(p))
 print(p)
 print(len(p))
 for i in range(len(p)):
     print(p[i])
-print(hex(Cal_Crc32(p,len(p),0xc3c33c3c)))
+print(hex(Cal_Crc32(p,len(p),0xc3c33c3c)))'''
 
+data_bytes=bytearray()
+global data_Effbytes
+data_Effbytes=bytearray()
+def Read_File(filename):
+    with open(filename, 'rb+') as f:
+        btype = f.read()
+        btype = binascii.b2a_hex(btype)
+        #print(type(btype),)
+        stype = str(btype)
+        stype = stype.replace("\\n","").replace(" ","").replace("\\r","")
+        btype = bytes(stype.encode(encoding="utf-8"))
+        #print(btype)
+        btype = btype[2:-1]
+        #print(type(btype),btype)
+        data_bytes = btype
+
+        return data_bytes
+
+#Read_File(filename)
+
+
+def Bytes_To_List(data_bytes):
+    global data_Effbytes
+    data_len=int(len(data_bytes)/4)
+    i=0
+    list1 = []
+    #print(data_bytes)
+    while(i<data_len):
+        btype = data_bytes[i*4:i*4+4]
+        stype = bytes.decode(btype)
+        #htype = btype.hex()
+        htype = int(stype,16)
+        list1.append(htype)
+
+        i+=1
+    print(data_len)
+    #print(list1)
+    return list1
+
+xlist = Bytes_To_List(Read_File(filename))
 
 #195e d402
+#8f3b a1bb
 
+xx= [257, 0, 768, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 45667, 13313, 63033, 31528, 0, 0, 53405, 11520, 40493, 0, 43246, 31272, 0, 0, 15534, 0, 37361, 42662, 26488, 30871, 24411, 18671, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4314, 0, 56035, 28311, 26773, 1280, 37233, 31180]
+
+xy = [0x0101,0x0000,0x0300,0x0000,0x0000,0x0000,0x0000,0x0000,
+0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,0xb263,0x3401,
+0xf639,0x7b28,0x0000,0x0000,0xd09d,0x2d00,0x9e2d,0x0000,
+0xa8ee,0x7a28,0x0000,0x0000,0x3cae,0x0000,0x91f1,0xa6a6,
+0x6778,0x7897,0x5f5b,0x48ef,0x0000,0x0000,0x0000,0x0000,
+0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,
+0x10da,0x0000,0xdae3,0x6e97,0x6895,0x0500,0x9171,0x79cc]
+
+xz = [0x3412]
+#print(hex(Cal_Crc32(xz,len(xz),0xc3c33c3c)))
+print(hex(Cal_Crc32(xlist,len(xlist),0xc3c33c3c)))
+print(hex(Cal_Crc32(xlist,len(xlist)-2,0xFFFFFFFF)))
+#print(hex(Cal_Crc32(xy,len(xy),0xc3c33c3c)))
 
