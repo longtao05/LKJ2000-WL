@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['Main.py'],
-             pathex=['./Common', './BusinessManager', './Comm', './DataManager', './Graphic', './SysDataPreProc', './LogSys', '', 'E:\\软件重构\\LKJ2000'],
+             pathex=['./Common', './BusinessManager', './Comm', './DataManager', './Graphic', './SysDataPreProc', './LogSys', '', 'E:\\fjl-test\\LKJ2000-WL'],
              binaries=[],
              datas=[],
              hiddenimports=[],

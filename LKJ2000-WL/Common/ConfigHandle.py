@@ -44,6 +44,7 @@ def readConfig():
         Mygol.set_value('OrderID',config['SerialConfig']['OrderID'])
         Mygol.set_value('VoucherCode',int(config['SerialConfig']['VoucherCode']))
         Mygol.set_value('ManCode',int(config['SerialConfig']['ManCode']))
+        Mygol.set_value('UpgradeCount',int(config['SerialConfig']['UpgradeCount']))
 
         Mygol.set_value('CaseNum',int(config['TestCase']['CaseNum']))
 

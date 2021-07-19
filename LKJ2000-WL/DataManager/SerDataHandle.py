@@ -65,12 +65,22 @@ class SerDataHandle():
 
                 #self.serDataH.set_send_data(self.senddata)
 
-                if(0 == Mygol.get_value('UpgradeInfo')):
+                if(0 != Mygol.get_value('UpgradeCount')):
                     #延时10毫秒后，发送换装通知--升级信息
                     time.sleep(0.01)
                     #换装通知--升级信息
                     self.senddata = SN_ChangeNotice_UpgradeInfo(self.dataHead,self.dataParser)
                     self.serDataH.set_send_data(self.senddata)
+
+                    if(1==Mygol.get_value('LOG')):
+                        f = open('./log/log.txt', 'ab') # 若是'wb'就表示写二进制文件
+                        #f.write(b'Senddata:'+str.encode(str(datetime.now()))+b':\n'+binascii.b2a_hex(send_data))
+                        f.write('换装通知--升级信息:'.encode('utf-8')+str.encode(str(datetime.now()))+'  换装次数:'.encode('utf-8')+binascii.b2a_hex(bytes(Mygol.get_value('UpgradeCount'))))
+
+                        f.write(b'\r\n')
+                        f.close()
+                    #Mygol.set_value('UpgradeCount',Mygol.get_value('UpgradeCount')-1)
+                    Mygol.set_value('UpgradeCount',0)
 
             elif(0x1002 == self.dataHead.PacketType):
                 #回复活动性检测帧
@@ -114,12 +124,12 @@ class SerDataHandle():
                 self.senddata = SN_WLActiDetectionInfoReply(self.dataHead,self.dataParser)
                 #self.serDataH.set_send_data(self.senddata)
 
-                if(4 == Mygol.get_value('CaseNum') and begintestcount>0 and begintestcount<10):
+                if(4 == Mygol.get_value('CaseNum') and begintestcount>0 and begintestcount<=10):
                     pass
                 else:
                     self.serDataH.set_send_data(self.senddata)
 
-                Mygol.set_value('UpgradeInfo',1)
+                #Mygol.set_value('UpgradeInfo',1)
                 #取消换装测试
                 if(0 != Mygol.get_value('PlanCancelled')):
                     #目前换装阶段周期包不检测超时
@@ -130,6 +140,12 @@ class SerDataHandle():
             elif(0x1008 == self.dataHead.PacketType):
                 self.senddata = SN_VersionConfirmInfoReply(self.dataHead,self.dataParser)
                 self.serDataH.set_send_data(self.senddata)
+                if(1==Mygol.get_value('LOG')):
+                    f = open('./log/log.txt', 'ab') # 若是'wb'就表示写二进制文件
+                    #f.write(b'Senddata:'+str.encode(str(datetime.now()))+b':\n'+binascii.b2a_hex(send_data))
+                    f.write('版本确认--换装完成:'.encode('utf-8')+str.encode(str(datetime.now()))+'  换装次数:'.encode('utf-8')+binascii.b2a_hex(bytes(Mygol.get_value('UpgradeCount'))))
+                    f.write(b'\r\n')
+                    f.close()
             elif(0x1009 == self.dataHead.PacketType):
                 print("收到升级计划取消应答包")
             elif(0x100A == self.dataHead.PacketType):
@@ -144,7 +160,7 @@ class SerDataHandle():
 
             elif(0x100C == self.dataHead.PacketType):
                 #print("包类型：",'%#x'%self.dataHead.PacketType)
-                Mygol.set_value('UpgradeInfo',1)
+                Mygol.set_value('UpgradeCount',0)
 
             else:
                 pass
