@@ -73,14 +73,14 @@ class SerDataHandle():
                     self.serDataH.set_send_data(self.senddata)
 
                     if(1==Mygol.get_value('LOG')):
-                        f = open('./log/log.txt', 'ab') # 若是'wb'就表示写二进制文件
+                        f = open('./log/test.txt', 'ab') # 若是'wb'就表示写二进制文件
                         #f.write(b'Senddata:'+str.encode(str(datetime.now()))+b':\n'+binascii.b2a_hex(send_data))
-                        f.write('换装通知--升级信息:'.encode('utf-8')+str.encode(str(datetime.now()))+'  换装次数:'.encode('utf-8')+binascii.b2a_hex(bytes(Mygol.get_value('UpgradeCount'))))
+                        f.write('换装通知--升级信息:'.encode('utf-8')+str.encode(str(datetime.now()))+'  换装次数:'.encode('utf-8'))
 
                         f.write(b'\r\n')
                         f.close()
-                    #Mygol.set_value('UpgradeCount',Mygol.get_value('UpgradeCount')-1)
-                    Mygol.set_value('UpgradeCount',0)
+                    Mygol.set_value('UpgradeCount',Mygol.get_value('UpgradeCount')-1)
+                    #Mygol.set_value('UpgradeCount',0)
 
             elif(0x1002 == self.dataHead.PacketType):
                 #回复活动性检测帧
@@ -93,10 +93,6 @@ class SerDataHandle():
                     self.serDataH.set_send_data(self.senddata)
                 else:
                     self.serDataH.set_send_data(self.senddata)
-
-
-
-
 
 
             elif(0x1003 == self.dataHead.PacketType):
@@ -141,9 +137,9 @@ class SerDataHandle():
                 self.senddata = SN_VersionConfirmInfoReply(self.dataHead,self.dataParser)
                 self.serDataH.set_send_data(self.senddata)
                 if(1==Mygol.get_value('LOG')):
-                    f = open('./log/log.txt', 'ab') # 若是'wb'就表示写二进制文件
+                    f = open('./log/test.txt', 'ab') # 若是'wb'就表示写二进制文件
                     #f.write(b'Senddata:'+str.encode(str(datetime.now()))+b':\n'+binascii.b2a_hex(send_data))
-                    f.write('版本确认--换装完成:'.encode('utf-8')+str.encode(str(datetime.now()))+'  换装次数:'.encode('utf-8')+binascii.b2a_hex(bytes(Mygol.get_value('UpgradeCount'))))
+                    f.write('版本确认--换装完成:'.encode('utf-8')+str.encode(str(datetime.now()))+'  换装次数:'.encode('utf-8'))
                     f.write(b'\r\n')
                     f.close()
             elif(0x1009 == self.dataHead.PacketType):

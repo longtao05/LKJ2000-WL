@@ -64,6 +64,10 @@ def delfile():
     if os.path.exists(path):  # 如果文件存在
     # 删除文件，可使用以下两种方法。
         os.remove(path)
+    path = './log/test.txt'  # 文件路径
+    if os.path.exists(path):  # 如果文件存在
+    # 删除文件，可使用以下两种方法。
+        os.remove(path)
 
 if __name__ == '__main__':
 
