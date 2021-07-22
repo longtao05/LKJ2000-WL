@@ -75,12 +75,11 @@ class SerDataHandle():
                     if(1==Mygol.get_value('LOG')):
                         f = open('./log/test.txt', 'ab') # 若是'wb'就表示写二进制文件
                         #f.write(b'Senddata:'+str.encode(str(datetime.now()))+b':\n'+binascii.b2a_hex(send_data))
-                        f.write('换装通知--升级信息:'.encode('utf-8')+str.encode(str(datetime.now()))+'  换装次数:'.encode('utf-8'))
+                        f.write('换装通知--升级信息:'.encode('utf-8')+str.encode(str(datetime.now())))
 
                         f.write(b'\r\n')
                         f.close()
-                    Mygol.set_value('UpgradeCount',Mygol.get_value('UpgradeCount')-1)
-                    #Mygol.set_value('UpgradeCount',0)
+                    Mygol.set_value('UpgradeCount',0)
 
             elif(0x1002 == self.dataHead.PacketType):
                 #回复活动性检测帧
@@ -93,6 +92,10 @@ class SerDataHandle():
                     self.serDataH.set_send_data(self.senddata)
                 else:
                     self.serDataH.set_send_data(self.senddata)
+
+                if(1 == Mygol.get_value('DelayPerPack')):
+                    sleep(10)
+                    Mygol.set_value('DelayPerPack',0)
 
 
             elif(0x1003 == self.dataHead.PacketType):
@@ -125,7 +128,6 @@ class SerDataHandle():
                 else:
                     self.serDataH.set_send_data(self.senddata)
 
-                #Mygol.set_value('UpgradeInfo',1)
                 #取消换装测试
                 if(0 != Mygol.get_value('PlanCancelled')):
                     #目前换装阶段周期包不检测超时
@@ -139,9 +141,18 @@ class SerDataHandle():
                 if(1==Mygol.get_value('LOG')):
                     f = open('./log/test.txt', 'ab') # 若是'wb'就表示写二进制文件
                     #f.write(b'Senddata:'+str.encode(str(datetime.now()))+b':\n'+binascii.b2a_hex(send_data))
-                    f.write('版本确认--换装完成:'.encode('utf-8')+str.encode(str(datetime.now()))+'  换装次数:'.encode('utf-8'))
+                    f.write('版本确认--换装完成:'.encode('utf-8')+str.encode(str(datetime.now())))
                     f.write(b'\r\n')
                     f.close()
+                #拷机测试
+                if(1 == Mygol.get_value("CopeMacTest")):
+                    Mygol.set_value("DelayPerPack",1)
+                    Mygol.set_value('UpgradeCount',1)
+
+                else:
+                    Mygol.set_value("DelayPerPack",0)
+                    Mygol.set_value('UpgradeCount',0)
+
             elif(0x1009 == self.dataHead.PacketType):
                 print("收到升级计划取消应答包")
             elif(0x100A == self.dataHead.PacketType):

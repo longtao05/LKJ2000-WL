@@ -44,8 +44,3 @@ class SerialPortData():
         if count > 0:
             rec_str = self.port.read(count)
             self.Dataqueue.set_get_data(rec_str)
-            #调试信息
-            #ser_rawdata_bytes=ser_rawdata_bytes+rec_str
-            #print('当前数据接收总字节数：'+str(len(ser_rawdata_bytes))+' 本次接收字节数：'+str(len(rec_str)))
-            #print(str(datetime.now()),':',binascii.b2a_hex(rec_str))
-            #print(ser_rawdata_bytes)

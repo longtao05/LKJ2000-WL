@@ -15,8 +15,8 @@ IMPORTANT: Do NOT post this list to the issue-tracker. Use it as a basis for
            yourself tracking down the missing module. Thanks!
 
 missing module named 'org.python' - imported by copy (optional), xml.sax (delayed, conditional)
-missing module named _dummy_threading - imported by dummy_threading (optional)
 missing module named pwd - imported by posixpath (delayed, conditional), tarfile (optional), shutil (optional), http.server (delayed, optional), webbrowser (delayed), pathlib (delayed, conditional, optional), netrc (delayed, conditional), getpass (delayed)
+missing module named _dummy_threading - imported by dummy_threading (optional)
 missing module named grp - imported by tarfile (optional), shutil (optional), pathlib (delayed)
 missing module named termios - imported by tty (top-level), serial.serialposix (top-level), getpass (optional)
 missing module named _posixsubprocess - imported by subprocess (conditional)

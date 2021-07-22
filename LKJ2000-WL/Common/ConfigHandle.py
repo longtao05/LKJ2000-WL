@@ -13,7 +13,7 @@ import Mygol
 Mygol._init()
 
 def initGol():
-    mygolList=['StopSendActReply','PlanCancelledFlag','serialPort','LOG','PlanCancelled','WLFileFlag','UpdataModeType','UpgradePlanVer','StopFlag','TrainNum','DataType','OrderID','VoucherCode','ManCode','UpgradeInfo','PlanStartTime']
+    mygolList=['StopSendActReply','PlanCancelledFlag','serialPort','LOG','PlanCancelled','WLFileFlag','UpdataModeType','UpgradePlanVer','StopFlag','TrainNum','DataType','OrderID','VoucherCode','ManCode','UpgradeInfo','PlanStartTime','CopeMacTest','DelayPerPack']
     for i in range(len(mygolList)):
         Mygol.set_value(mygolList[i],0)
 
@@ -47,6 +47,8 @@ def readConfig():
         Mygol.set_value('UpgradeCount',int(config['SerialConfig']['UpgradeCount']))
 
         Mygol.set_value('CaseNum',int(config['TestCase']['CaseNum']))
+        Mygol.set_value('CaseNum',int(config['TestCase']['CopeMacTest']))
+
 
         Mygol.set_value('PlanStartTime',CommFun.TimestampToData(CommFun.DataToTimestamp((config['TKConfig']['PlanStartTime']))))
         Mygol.set_value('PlanEffectiveTime',CommFun.TimestampToData(CommFun.DataToTimestamp((config['TKConfig']['PlanEffectiveTime']))))

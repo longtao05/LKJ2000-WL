@@ -19,3 +19,4 @@ UpgradeCount = 1 #升级换装次数，0为不换装。
 
 [TestCase]
 CaseNum = 0#正常测试时需修改未0 ；VV异常测试程序 1-4，王国英 5:李楠新增 
+CopeMacTest = 1# 1：拷机测试
