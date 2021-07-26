@@ -15,8 +15,9 @@ DataType = 1 #升级数据类型 1：LKJ200数据 2：程序 3：LKJ15数据
 OrderID = 1 #命令ID，目前未使用，32字节
 VoucherCode = 202106 #凭证码换装 凭证码：6位
 ManCode = 4 #厂家编号 4：SN
-UpgradeCount = 1 #升级换装次数，0为不换装。
+UpgradeCount = 1 #升级换装，0为不换装。
 
 [TestCase]
 CaseNum = 0#正常测试时需修改未0 ；VV异常测试程序 1-4，王国英 5:李楠新增 
-CopeMacTest = 1# 1：拷机测试
+CopeMacTest = 1# 1：拷机测试,拷机时需同步更新换装方式为自动换装。 0:不拷机，每次换装一次
+

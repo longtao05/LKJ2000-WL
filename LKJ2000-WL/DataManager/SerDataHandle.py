@@ -93,9 +93,9 @@ class SerDataHandle():
                 else:
                     self.serDataH.set_send_data(self.senddata)
 
-                if(1 == Mygol.get_value('DelayPerPack')):
-                    sleep(10)
-                    Mygol.set_value('DelayPerPack',0)
+                #if(1 == Mygol.get_value('DelayPerPack')):
+                    #sleep(10)
+                    #Mygol.set_value('DelayPerPack',0)
 
 
             elif(0x1003 == self.dataHead.PacketType):
@@ -144,10 +144,15 @@ class SerDataHandle():
                     f.write('版本确认--换装完成:'.encode('utf-8')+str.encode(str(datetime.now())))
                     f.write(b'\r\n')
                     f.close()
+
+
                 #拷机测试
                 if(1 == Mygol.get_value("CopeMacTest")):
                     Mygol.set_value("DelayPerPack",1)
                     Mygol.set_value('UpgradeCount',1)
+                    time.sleep(10)
+                    self.serDataH.get_get_Hdata()
+
 
                 else:
                     Mygol.set_value("DelayPerPack",0)

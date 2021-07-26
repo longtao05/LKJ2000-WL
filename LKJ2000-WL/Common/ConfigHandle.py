@@ -47,7 +47,7 @@ def readConfig():
         Mygol.set_value('UpgradeCount',int(config['SerialConfig']['UpgradeCount']))
 
         Mygol.set_value('CaseNum',int(config['TestCase']['CaseNum']))
-        Mygol.set_value('CaseNum',int(config['TestCase']['CopeMacTest']))
+        Mygol.set_value('CopeMacTest',int(config['TestCase']['CopeMacTest']))
 
 
         Mygol.set_value('PlanStartTime',CommFun.TimestampToData(CommFun.DataToTimestamp((config['TKConfig']['PlanStartTime']))))
