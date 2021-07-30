@@ -50,7 +50,7 @@ def SN_ActiDetectionInfoReply(datatype,m_item):
     item.InfoLen = 26
     item.PacketNum = datatype.PacketNum+1
 
-    item.TrainNum = Mygol.get_value('TrainNum')*2**10
+    item.TrainNum = Mygol.get_value('TrainNum')
     item.ManCode = Mygol.get_value('ManCode')
     item.WUPInitStatus =1
 
@@ -85,7 +85,7 @@ def SN_UpgradeOperationInfoReply(datatype,m_item):
     item.DataType =  Mygol.get_value('DataType')
 
     item.OrderID = Mygol.get_value('OrderID') #32
-    item.TrainNum = Mygol.get_value('TrainNum')*2**10
+    item.TrainNum = Mygol.get_value('TrainNum')
     item.WLFileFlag = Mygol.get_value('WLFileFlag')
 
     item.DMIOperationTer = 1
@@ -123,7 +123,7 @@ def SN_WLActiDetectionInfoReply(datatype,m_item):
     item.TimeStamp = datatype.TimeStamp
     item.InfoLen = 26
     item.PacketNum = datatype.PacketNum
-    item.TrainNum = Mygol.get_value('TrainNum')*2**10
+    item.TrainNum = Mygol.get_value('TrainNum')
     item.ManCode =  Mygol.get_value('ManCode')
     item.WUPInitStatus =0
 
@@ -159,7 +159,7 @@ def SN_VersionConfirmInfoReply(datatype,m_item):
 
     item.UpgraddeDataType = m_item.UpgraddeDataType
 
-    item.TrainNum = Mygol.get_value('TrainNum')*2**10
+    item.TrainNum = Mygol.get_value('TrainNum')
     item.WLFileFlag = Mygol.get_value('WLFileFlag')
     item.DriverOperation =1
     item.DMIOperationTer =1
@@ -191,7 +191,7 @@ def SN_UpgradePlanCancelled(datatype,m_item):
 
     item.DataType = Mygol.get_value('DataType')
 
-    item.TrainNum = Mygol.get_value('TrainNum')*2**10#0x51400 #
+    item.TrainNum = Mygol.get_value('TrainNum')#0x51400 #
     item.WLFileFlag = Mygol.get_value('WLFileFlag')
     item.MessgaeInfo =3
     item.OrderID = Mygol.get_value('OrderID')
@@ -219,7 +219,7 @@ def SN_ChangeNotice_UpgradeInfo(datatype,m_item):
     item.PacketNum = datatype.PacketNum
 
 
-    item.TrainNum = Mygol.get_value('TrainNum')*2**10
+    item.TrainNum = Mygol.get_value('TrainNum')
     item.DataToolVersion = 1
     item.UpgradePlanVer = Mygol.get_value('UpgradePlanVer') #0x1506110200000000
     #item.OrderID = '1' #32
@@ -251,7 +251,7 @@ def SN_ChangeNotice_ControlInfo(datatype,m_item):
     item.PacketNum = datatype.PacketNum
 
 
-    item.TrainNum = Mygol.get_value('TrainNum')*2**10
+    item.TrainNum = Mygol.get_value('TrainNum')
     #item.DataToolVersion = 1
     #item.UpgradePlanVer = 1
     item.OrderID = Mygol.get_value('OrderID')#'1' #32

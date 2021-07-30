@@ -90,6 +90,8 @@ class SerDataHandle():
                     time.sleep(2)
                     Mygol.set_value('CaseNum',0)
                     self.serDataH.set_send_data(self.senddata)
+                elif(6 == Mygol.get_value('CaseNum')):
+                    self.serDataH.set_send_data(self.dataParser)
                 else:
                     self.serDataH.set_send_data(self.senddata)
 
@@ -116,7 +118,10 @@ class SerDataHandle():
             elif(0x1005 == self.dataHead.PacketType):
                 #升级操作信息应答
                 self.senddata = SN_UpgradeOperationInfoReply(self.dataHead,self.dataParser)
-                self.serDataH.set_send_data(self.senddata)
+                if(7 != Mygol.get_value('CaseNum')):
+                    self.serDataH.set_send_data(self.senddata)
+
+
 
             elif(0x1007 == self.dataHead.PacketType):
                 #回复活动性检测帧
@@ -150,7 +155,7 @@ class SerDataHandle():
                 if(1 == Mygol.get_value("CopeMacTest")):
                     Mygol.set_value("DelayPerPack",1)
                     Mygol.set_value('UpgradeCount',1)
-                    time.sleep(10)
+                    time.sleep(15)
                     self.serDataH.get_get_Hdata()
 
 
@@ -159,14 +164,14 @@ class SerDataHandle():
                     Mygol.set_value('UpgradeCount',0)
 
             elif(0x1009 == self.dataHead.PacketType):
-                print("收到升级计划取消应答包")
+                #print("收到升级计划取消应答包")
+                pass
             elif(0x100A == self.dataHead.PacketType):
                 self.senddata = SN_HostEventInfoReply(self.dataHead,self.dataParser)
                 self.serDataH.set_send_data(self.senddata)
 
-
                 #换装通知--启动升级
-                time.sleep(0.1)
+                time.sleep(4)
                 self.senddata = SN_ChangeNotice_StartUpgrade(self.dataHead,self.dataParser)
                 self.serDataH.set_send_data(self.senddata)
 

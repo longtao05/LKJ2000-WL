@@ -13,7 +13,7 @@ import Mygol
 Mygol._init()
 
 def initGol():
-    mygolList=['StopSendActReply','PlanCancelledFlag','serialPort','LOG','PlanCancelled','WLFileFlag','UpdataModeType','UpgradePlanVer','StopFlag','TrainNum','DataType','OrderID','VoucherCode','ManCode','UpgradeInfo','PlanStartTime','CopeMacTest','DelayPerPack']
+    mygolList=['StopSendActReply','PlanCancelledFlag','serialPort','LOG','PlanCancelled','WLFileFlag','UpdataModeType','UpgradePlanVer','TrainNum','DataType','OrderID','VoucherCode','ManCode','UpgradeInfo','PlanStartTime','CopeMacTest','DelayPerPack']
     for i in range(len(mygolList)):
         Mygol.set_value(mygolList[i],0)
 
@@ -38,12 +38,10 @@ def readConfig():
         Mygol.set_value('WLFileFlag',int(config['SerialConfig']['WLFileFlag']))
         Mygol.set_value('UpdataModeType',int(config['SerialConfig']['UpdataModeType']))
         Mygol.set_value('UpgradePlanVer',int(config['SerialConfig']['UpgradePlanVer'],16))
-        Mygol.set_value('StopFlag',int(config['SerialConfig']['StopFlag']))
         Mygol.set_value('TrainNum',int(config['SerialConfig']['TrainNum']))
         Mygol.set_value('DataType',int(config['SerialConfig']['DataType']))
         Mygol.set_value('OrderID',config['SerialConfig']['OrderID'])
-        Mygol.set_value('VoucherCode',int(config['SerialConfig']['VoucherCode']))
-        Mygol.set_value('ManCode',int(config['SerialConfig']['ManCode']))
+
         Mygol.set_value('UpgradeCount',int(config['SerialConfig']['UpgradeCount']))
 
         Mygol.set_value('CaseNum',int(config['TestCase']['CaseNum']))
@@ -53,7 +51,8 @@ def readConfig():
         Mygol.set_value('PlanStartTime',CommFun.TimestampToData(CommFun.DataToTimestamp((config['TKConfig']['PlanStartTime']))))
         Mygol.set_value('PlanEffectiveTime',CommFun.TimestampToData(CommFun.DataToTimestamp((config['TKConfig']['PlanEffectiveTime']))))
 
-
+        Mygol.set_value('VoucherCode',int(config['TKConfig']['VoucherCode']))
+        Mygol.set_value('ManCode',int(config['TKConfig']['ManCode']))
 
 
 
