@@ -92,6 +92,8 @@ class SerDataHandle():
                     self.serDataH.set_send_data(self.senddata)
                 elif(6 == Mygol.get_value('CaseNum')):
                     self.serDataH.set_send_data(self.dataParser)
+                elif(100 == Mygol.get_value('CaseNum')):
+                    self.serDataH.set_send_data(self.dataParser)
                 else:
                     self.serDataH.set_send_data(self.senddata)
 
@@ -107,19 +109,34 @@ class SerDataHandle():
                     self.serDataH.set_send_data(self.senddata)
 
                 elif(3==Mygol.get_value('MessgaeRece')):
-                    pass
+                    if(9 == Mygol.get_value('CaseNum')):
+                        time.sleep(3)
+                        self.senddata = SN_UpgradePlanCancelled(self.dataHead,self.dataParser)
+                        self.serDataH.set_send_data(self.senddata)
+                    elif(10 == Mygol.get_value('CaseNum')):
+                        Mygol.set_value('CaseNum',100)
+
+
                     #换装通知--启动升级
                     #self.senddata = SN_ChangeNotice_StartUpgrade(self.dataHead,self.dataParser)
                     #mSerial.self.senddata(self.senddata)
                 elif(4==Mygol.get_value('MessgaeRece')):
                     #换装通知--升级信息
                     print("已正确接收启动信息内容")
+                    if(100 == Mygol.get_value('CaseNum')):
+                        Mygol.set_value('CaseNum',0)
 
             elif(0x1005 == self.dataHead.PacketType):
                 #升级操作信息应答
                 self.senddata = SN_UpgradeOperationInfoReply(self.dataHead,self.dataParser)
+
                 if(7 != Mygol.get_value('CaseNum')):
                     self.serDataH.set_send_data(self.senddata)
+
+                if(100 == Mygol.get_value('CaseNum')):
+                    Mygol.set_value('CaseNum',0)
+                    print(Mygol.get_value('CaseNum'))
+
 
 
 
@@ -130,15 +147,21 @@ class SerDataHandle():
 
                 if(4 == Mygol.get_value('CaseNum') and begintestcount>0 and begintestcount<=10):
                     pass
+                elif(8 == Mygol.get_value('CaseNum')):
+                    time.sleep(10)
+                    self.serDataH.set_send_data(self.senddata)
                 else:
                     self.serDataH.set_send_data(self.senddata)
 
                 #取消换装测试
                 if(0 != Mygol.get_value('PlanCancelled')):
                     #目前换装阶段周期包不检测超时
-                    time.sleep(Mygol.get_value('PlanCancelled'))
-                    self.senddata = SN_UpgradePlanCancelled(self.dataHead,self.dataParser)
-                    self.serDataH.set_send_data(self.senddata)
+                    Mygol.set_value('PlanCancelled',Mygol.get_value('PlanCancelled')-1)
+                    print(Mygol.get_value('PlanCancelled'))
+                    if(0 == Mygol.get_value('PlanCancelled')):
+                        time.sleep(0.5)
+                        self.senddata = SN_UpgradePlanCancelled(self.dataHead,self.dataParser)
+                        self.serDataH.set_send_data(self.senddata)
 
             elif(0x1008 == self.dataHead.PacketType):
                 self.senddata = SN_VersionConfirmInfoReply(self.dataHead,self.dataParser)

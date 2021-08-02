@@ -51,6 +51,8 @@ class Main():
         while not is_exit:
             self.dataTask.OnSendDataProcess()
 
+
+
 ##################################################################################################################################
 is_exit=False
 
@@ -83,6 +85,7 @@ if __name__ == '__main__':
     datasendtask = threading.Thread(target=myMain.DataSendProcessTask)
     datasendtask.setDaemon(True)
     datasendtask.start()
+
 
     while not is_exit:
         #任务管理线程
