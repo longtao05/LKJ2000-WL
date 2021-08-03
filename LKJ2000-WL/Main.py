@@ -72,6 +72,7 @@ def delfile():
         os.remove(path)
 
 if __name__ == '__main__':
+    print("版本:1.0.0")
 
     delfile()
     myMain = Main()

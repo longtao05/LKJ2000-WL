@@ -13,7 +13,7 @@ import Mygol
 Mygol._init()
 
 def initGol():
-    mygolList=['StopSendActReply','PlanCancelledFlag','serialPort','LOG','PlanCancelled','WLFileFlag','UpdataModeType','UpgradePlanVer','TrainNum','DataType','OrderID','VoucherCode','ManCode','UpgradeInfo','PlanStartTime','CopeMacTest','DelayPerPack']
+    mygolList=['StopSendActReply','PlanCancelledFlag','serialPort','LOG','PlanCancelled','WLFileFlag','UpdataModeType','UpgradePlanVer','TrainNum','DataType','OrderID','VoucherCode','ManCode','UpgradeInfo','PlanStartTime','CopeMacTest','DelayPerPack','ChangeNoticeReason']
     for i in range(len(mygolList)):
         Mygol.set_value(mygolList[i],0)
 
@@ -53,6 +53,8 @@ def readConfig():
 
         Mygol.set_value('VoucherCode',int(config['TKConfig']['VoucherCode']))
         Mygol.set_value('ManCode',int(config['TKConfig']['ManCode']))
+        Mygol.set_value('ChangeNoticeReason',config['TKConfig']['ChangeNoticeReason'])
+
 
 
 
