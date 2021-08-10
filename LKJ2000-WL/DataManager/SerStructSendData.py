@@ -272,9 +272,11 @@ def SN_ChangeNotice_ControlInfo(datatype,m_item):
     item.VoucherCode = Mygol.get_value('VoucherCode')
     item.UpdataModeType = Mygol.get_value('UpdataModeType') #1:自动更新 2:确认更新 3:凭证码
     item.DeviceType = 1
-    item.EjectCount = 0 #连续弹出次数
+    item.EjectCount = Mygol.get_value('EjectCount')#0 #连续弹出次数
+    print(item.EjectCount)
     #item.WLFileFlag = Mygol.get_value('WLFileFlag')
-    item.ShowTime = 5 #显示弹出时间间隔
+    item.ShowTime = Mygol.get_value('ShowTime')#5 #显示弹出时间间隔
+    print(item.ShowTime)
     item.Resrve1 = 0
     item.Resrve2 = 0
     item.ChangeNoticeReason = Mygol.get_value('ChangeNoticeReason')#"snLKJ-2000(VV测试版本)"

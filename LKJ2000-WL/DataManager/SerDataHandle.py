@@ -148,8 +148,10 @@ class SerDataHandle():
                 if(4 == Mygol.get_value('CaseNum') and begintestcount>0 and begintestcount<=10):
                     pass
                 elif(8 == Mygol.get_value('CaseNum')):
-                    time.sleep(10)
+                    time.sleep(11)
                     self.serDataH.set_send_data(self.senddata)
+                elif(11 == Mygol.get_value('CaseNum')):
+                    self.serDataH.set_send_data(self.dataParser)
                 else:
                     self.serDataH.set_send_data(self.senddata)
 
