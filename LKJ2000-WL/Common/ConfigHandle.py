@@ -13,7 +13,7 @@ import Mygol
 Mygol._init()
 
 def initGol():
-    mygolList=['StopSendActReply','PlanCancelledFlag','serialPort','LOG','PlanCancelled','WLFileFlag','UpdataModeType','UpgradePlanVer','TrainNum','DataType','OrderID','VoucherCode','ManCode','UpgradeInfo','PlanStartTime','CopeMacTest','DelayPerPack','ChangeNoticeReason','EjectCount','ShowTime']
+    mygolList=['StopSendActReply','PlanCancelledFlag','serialPort','LOG','PlanCancelled','WLFileFlag','UpdataModeType','UpgradePlanVer','TrainNum','DataType','OrderID','VoucherCode','ManCode','UpgradeInfo','PlanStartTime','CopeMacTest','DelayPerPack','ChangeNoticeReason','EjectCount','ShowTime','CountNum']
     for i in range(len(mygolList)):
         Mygol.set_value(mygolList[i],0)
 

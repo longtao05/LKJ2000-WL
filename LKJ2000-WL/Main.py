@@ -32,6 +32,7 @@ class Main():
         #super(Main,self).__init__()
         #全局变量字典定义
         Mygol._init()
+        Mygol.set_value('FuncType','WL')
         MyFilegol._init()
         #读取配置信息至全局变量
 
@@ -72,10 +73,14 @@ def delfile():
         os.remove(path)
 
 if __name__ == '__main__':
-    print("版本:1.0.1")
-    time.sleep(3)
+     if('WL' == Mygol.get_value('FuncType')):
+        print("版本:1.0.1")
+        time.sleep(3)
+        delfile()
+    elif('STP' == Mygol.get_value('FuncType')):
+        print('STP调试版本：1.0.0-1')
 
-    delfile()
+
     myMain = Main()
 
     #数据接收线程

@@ -17,7 +17,10 @@ class BusinessProcess():
         self.serBus = SerBusiness()
 
     def OnBusinessProcess(self):
-        self.serBus.OnSerProcess()
+        if('WL' == Mygol.get_value('FuncType')):
+            self.serBus.OnSerProcess()
+        elif('STP' == Mygol.get_value('FuncType')):
+            pass
 
 
 

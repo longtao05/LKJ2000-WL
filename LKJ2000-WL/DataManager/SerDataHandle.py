@@ -101,7 +101,6 @@ class SerDataHandle():
                     #sleep(10)
                     #Mygol.set_value('DelayPerPack',0)
 
-
             elif(0x1003 == self.dataHead.PacketType):
                 if(2==Mygol.get_value('MessgaeRece')):
                     #换装通知--换装控制信息
@@ -136,9 +135,6 @@ class SerDataHandle():
                 if(100 == Mygol.get_value('CaseNum')):
                     Mygol.set_value('CaseNum',0)
                     print(Mygol.get_value('CaseNum'))
-
-
-
 
             elif(0x1007 == self.dataHead.PacketType):
                 #回复活动性检测帧

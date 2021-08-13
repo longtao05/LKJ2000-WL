@@ -17,10 +17,16 @@ class DataProcess():
         self.SysDataPre = SysDataPreProc()
 
     def OnRecvDataProcess(self):
-        self.OnRecvSerData()
+        if('WL' == Mygol.get_value('FuncType')):
+            self.OnRecvSerData()
+        elif('STP' == Mygol.get_value('FuncType')):
+            pass
 
     def OnSendDataProcess(self):
-        self.OnSendSerData()
+        if('WL' == Mygol.get_value('FuncType')):
+            self.OnSendSerData()
+        elif('STP' == Mygol.get_value('FuncType')):
+            pass
 
     #串口相关函数
     def OnRecvSerData(self):
