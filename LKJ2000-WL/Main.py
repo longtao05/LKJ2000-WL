@@ -32,7 +32,7 @@ class Main():
         #super(Main,self).__init__()
         #全局变量字典定义
         Mygol._init()
-        Mygol.set_value('FuncType','WL')
+        Mygol.set_value('FuncType','STP')
         MyFilegol._init()
         #读取配置信息至全局变量
 
@@ -73,7 +73,7 @@ def delfile():
         os.remove(path)
 
 if __name__ == '__main__':
-     if('WL' == Mygol.get_value('FuncType')):
+    if('WL' == Mygol.get_value('FuncType')):
         print("版本:1.0.1")
         time.sleep(3)
         delfile()

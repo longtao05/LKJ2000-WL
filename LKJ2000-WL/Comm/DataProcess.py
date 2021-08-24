@@ -8,25 +8,31 @@ import time
 sys.path.append(r"../Common")
 import Mygol
 from SerialPortData import SerialPortData
+from CanData import CanData
+from SockCanData import SockCanData
 from SysDataPreProc import SysDataPreProc
 from DataQueue import *
 
 class DataProcess():
     def __init__(self):
-        self.SerialTask = SerialPortData()
-        self.SysDataPre = SysDataPreProc()
+        if('WL' == Mygol.get_value('FuncType')):
+            self.SerialTask = SerialPortData()
+            self.SysDataPre = SysDataPreProc()
+        elif('STP' == Mygol.get_value('FuncType')):
+            #self.CanTask = CanData()
+            self.CanTask = SockCanData()
 
     def OnRecvDataProcess(self):
         if('WL' == Mygol.get_value('FuncType')):
             self.OnRecvSerData()
         elif('STP' == Mygol.get_value('FuncType')):
-            pass
+            self.OnRecvCanData()
 
     def OnSendDataProcess(self):
         if('WL' == Mygol.get_value('FuncType')):
             self.OnSendSerData()
         elif('STP' == Mygol.get_value('FuncType')):
-            pass
+            self.OnSendCanData()
 
     #串口相关函数
     def OnRecvSerData(self):
@@ -37,4 +43,12 @@ class DataProcess():
         self.SysDataPre.OnSendSysDataPreProc()
         self.SerialTask.send_data()
 
+    #串口相关函数
+    def OnRecvCanData(self):
+        self.CanTask.read_data()
+        #self.SysDataPre.OnRecvSysDataPreProc()
+
+    def OnSendCanData(self):
+        #self.SysDataPre.OnSendSysDataPreProc()
+        self.CanTask.send_data()
 
