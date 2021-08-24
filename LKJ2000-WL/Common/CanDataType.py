@@ -1,6 +1,15 @@
 import struct
 import ctypes
 from ctypes import *
+
+class _UDP_CAN_OBJ(Structure):
+    _pack_=1
+    _fields_ = [('ID', c_uint),
+                ('DataLen', c_uint),
+                ('Data', c_ubyte*8),
+               ]
+
+
 class _VCI_INIT_CONFIG(Structure):
     _fields_ = [("AccCode", c_uint),  # 验收码。SJA1000的帧过滤验收码。对经过屏蔽码过滤为“有关位”进行匹配，全部匹配成功后，此帧可以被接收。
                 ("AccMask", c_uint),
