@@ -46,7 +46,7 @@ class Main():
         while not is_exit:
             self.dataTask.OnRecvDataProcess()
 
-    #数据发送线程
+    #数据发送线程 
     def DataSendProcessTask(self):
         global is_exit
         while not is_exit:
@@ -70,6 +70,7 @@ def delfile():
     path = './log/test.txt'  # 文件路径
     if os.path.exists(path):  # 如果文件存在
     # 删除文件，可使用以下两种方法。
+        time.sleep(1)
         os.remove(path)
 
 if __name__ == '__main__':

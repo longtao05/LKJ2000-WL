@@ -42,7 +42,6 @@ class DataQueue():
                 ret = True
                 #调试
                 #print(hex(canA_recv_data.get().ID))
-                print(data)
         return ret
     def get_canA_recv_data(self):
         ret = False
@@ -50,6 +49,24 @@ class DataQueue():
         with canA_recv_data_lock:
             if(False == canA_recv_data.empty()):
                 data = canA_recv_data.get()
+                ret = True
+        return [ret, data]
+
+    def put_can_send_data(self,data):
+        ret = False
+        with can_send_data_lock:
+            if(False == can_send_data.full()):
+                can_send_data.put(data)
+                ret = True
+                #调试
+                #print(hex(can_send_data.get().ID))
+        return ret
+    def get_can_send_data(self):
+        ret = False
+        data = ''
+        with can_send_data_lock:
+            if(False == can_send_data.empty()):
+                data = can_send_data.get()
                 ret = True
         return [ret, data]
     def put_canB_recv_data(self,data):
