@@ -9,6 +9,8 @@ import os
 import binascii
 import time
 import threading
+import os,inspect
+os.chdir(os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()))))
 #模块导入
 sys.path.append(r".\Graphic")
 sys.path.append(r".\BusinessManager")

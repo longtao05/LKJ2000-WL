@@ -1,0 +1,7 @@
+{
+    "python.analysis.extraPaths": [
+        "./LKJ2000-WL/Common",
+        "./LKJ2000-WL/BusinessManager",
+        "./LKJ2000-WL/Comm"
+    ]
+}
