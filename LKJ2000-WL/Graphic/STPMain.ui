@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>STPMain</class>
+ <widget class="QMainWindow" name="STPMain">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -319,11 +319,11 @@
       <height>181</height>
      </rect>
     </property>
-    <attribute name="horizontalHeaderDefaultSectionSize">
-     <number>53</number>
-    </attribute>
     <attribute name="horizontalHeaderMinimumSectionSize">
      <number>15</number>
+    </attribute>
+    <attribute name="horizontalHeaderDefaultSectionSize">
+     <number>53</number>
     </attribute>
     <row>
      <property name="text">
@@ -421,11 +421,11 @@
       <height>181</height>
      </rect>
     </property>
-    <attribute name="horizontalHeaderDefaultSectionSize">
-     <number>75</number>
-    </attribute>
     <attribute name="horizontalHeaderMinimumSectionSize">
      <number>20</number>
+    </attribute>
+    <attribute name="horizontalHeaderDefaultSectionSize">
+     <number>75</number>
     </attribute>
     <row>
      <property name="text">
@@ -735,40 +735,7 @@
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>pushButton</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>slot1()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>46</x>
-     <y>291</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>17</x>
-     <y>257</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>dateTimeEdit</sender>
-   <signal>dateTimeChanged(QDateTime)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>DataTimeChangedslot()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>229</x>
-     <y>46</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>155</x>
-     <y>71</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
  <slots>
   <slot>slot1()</slot>
   <slot>DataTimeChangedslot()</slot>

@@ -1,42 +1,41 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'Login.ui'
-#
-# Created by: PyQt5 UI code generator 5.11.3
-#
-# WARNING! All changes made in this file will be lost!
-
+from PyQt5.QtWidgets import QApplication, QFrame, QMainWindow, QFileDialog
 from PyQt5 import QtCore, QtGui, QtWidgets
+import Ui_Login
+import sys
+import STPMain
+class Login(QFrame):
+    def __init__(self,parent=None,name = "调试工具"):
+        #构造函数
+        super().__init__(parent)
+        self.initUI(name)
+    def initUI(self, name):
+        # 初始化函数
+        self.m_ui=Ui_Login.Ui_Form()
+        self.m_ui1 = None
+        self.m_ui.setupUi(self)
+        self.setWindowTitle(name)
+        self.initConnect()
 
-class Ui_Form(object):
-    def setupUi(self, Form):
-        Form.setObjectName("Form")
-        Form.resize(382, 256)
-        self.label = QtWidgets.QLabel(Form)
-        self.label.setGeometry(QtCore.QRect(120, 20, 121, 61))
-        self.label.setObjectName("label")
-        self.pushButton = QtWidgets.QPushButton(Form)
-        self.pushButton.setGeometry(QtCore.QRect(50, 100, 75, 23))
-        self.pushButton.setObjectName("pushButton")
-        self.pushButton_2 = QtWidgets.QPushButton(Form)
-        self.pushButton_2.setGeometry(QtCore.QRect(160, 100, 75, 23))
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.pushButton_3 = QtWidgets.QPushButton(Form)
-        self.pushButton_3.setEnabled(False)
-        self.pushButton_3.setGeometry(QtCore.QRect(270, 100, 75, 23))
-        self.pushButton_3.setObjectName("pushButton_3")
-
-        self.retranslateUi(Form)
-        self.pushButton.clicked.connect(Form.WL_slot)
-        self.pushButton_2.clicked.connect(Form.STP_slot)
-        QtCore.QMetaObject.connectSlotsByName(Form)
-
-    def retranslateUi(self, Form):
-        _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.label.setText(_translate("Form", "请选择使用工具类型"))
-        self.pushButton.setText(_translate("Form", "无线换装"))
-        self.pushButton_2.setText(_translate("Form", "STP"))
-        self.pushButton_3.setText(_translate("Form", "其他"))
+    def initConnect(self):
+        # 初始化信号与槽
+        self.m_ui.wl_pushButton.clicked.connect(self.WL_slot)
+        self.m_ui.stp_pushButton.clicked.connect(self.STP_slot)
 
 
+    def WL_slot(self):
+        #pushButton的槽函数
+        print("wl")
+        self.m_ui1=STPMain.STPMain()
+        self.m_ui1.setupUi(self.m_ui1)
+        self.m_ui1.show()
+
+    def STP_slot(self):
+        #pushButton的槽函数
+        print("stp")
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    md = Login()
+    md.show()
+    app.exec_()
+    #sys.exit(app.exec_())
