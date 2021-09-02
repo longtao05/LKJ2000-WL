@@ -6,728 +6,574 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>810</width>
-    <height>600</height>
+    <width>730</width>
+    <height>611</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>10</y>
-      <width>54</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>企业标识</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>360</x>
-      <y>10</y>
-      <width>54</width>
-      <height>12</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>站场名</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_3">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>10</y>
-      <width>54</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>设备名称</string>
-    </property>
-   </widget>
-   <widget class="QDateTimeEdit" name="dateTimeEdit">
-    <property name="geometry">
-     <rect>
-      <x>170</x>
-      <y>10</y>
-      <width>121</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="maximumDateTime">
-     <datetime>
-      <hour>23</hour>
-      <minute>59</minute>
-      <second>59</second>
-      <year>7994</year>
-      <month>12</month>
-      <day>31</day>
-     </datetime>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_4">
-    <property name="geometry">
-     <rect>
-      <x>550</x>
-      <y>10</y>
-      <width>54</width>
-      <height>12</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>机车号</string>
-    </property>
-   </widget>
-   <widget class="QWidget" name="widget" native="true">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>100</y>
-      <width>561</width>
-      <height>131</height>
-     </rect>
-    </property>
-    <widget class="QLabel" name="label_5">
-     <property name="geometry">
-      <rect>
-       <x>110</x>
-       <y>30</y>
-       <width>54</width>
-       <height>12</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>站场图</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>260</y>
-      <width>41</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>交班</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_2">
-    <property name="geometry">
-     <rect>
-      <x>70</x>
-      <y>260</y>
-      <width>61</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>编辑模式</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_3">
-    <property name="geometry">
-     <rect>
-      <x>140</x>
-      <y>260</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>发送作业单</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_4">
-    <property name="geometry">
-     <rect>
-      <x>220</x>
-      <y>260</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>机车监控</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_5">
-    <property name="geometry">
-     <rect>
-      <x>300</x>
-      <y>260</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>越站调车</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_6">
-    <property name="geometry">
-     <rect>
-      <x>380</x>
-      <y>260</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>历史回放</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_7">
-    <property name="geometry">
-     <rect>
-      <x>460</x>
-      <y>260</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>注销机车</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_8">
-    <property name="geometry">
-     <rect>
-      <x>70</x>
-      <y>290</y>
-      <width>71</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>打印作业单</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEdit">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>290</y>
-      <width>41</width>
-      <height>20</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QSpinBox" name="spinBox">
-    <property name="geometry">
-     <rect>
-      <x>150</x>
-      <y>290</y>
-      <width>42</width>
-      <height>22</height>
-     </rect>
-    </property>
-    <property name="inputMethodHints">
-     <set>Qt::ImhNone</set>
-    </property>
-    <property name="accelerated">
-     <bool>true</bool>
-    </property>
-    <property name="suffix">
-     <string notr="true"/>
-    </property>
-    <property name="prefix">
-     <string notr="true"/>
-    </property>
-    <property name="singleStep">
-     <number>1</number>
-    </property>
-   </widget>
-   <widget class="QSpinBox" name="spinBox_2">
-    <property name="geometry">
-     <rect>
-      <x>220</x>
-      <y>290</y>
-      <width>71</width>
-      <height>22</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_9">
-    <property name="geometry">
-     <rect>
-      <x>300</x>
-      <y>290</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>维护</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_10">
-    <property name="geometry">
-     <rect>
-      <x>380</x>
-      <y>290</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>权限管理</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_11">
-    <property name="geometry">
-     <rect>
-      <x>460</x>
-      <y>290</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>刷新站场</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEdit_2">
-    <property name="geometry">
-     <rect>
-      <x>540</x>
-      <y>260</y>
-      <width>91</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>正常</string>
-    </property>
-   </widget>
-   <widget class="QTableWidget" name="tableWidget">
-    <property name="geometry">
-     <rect>
-      <x>350</x>
-      <y>350</y>
-      <width>391</width>
-      <height>181</height>
-     </rect>
-    </property>
-    <attribute name="horizontalHeaderMinimumSectionSize">
-     <number>15</number>
-    </attribute>
-    <attribute name="horizontalHeaderDefaultSectionSize">
-     <number>53</number>
-    </attribute>
-    <row>
-     <property name="text">
-      <string/>
-     </property>
-    </row>
-    <row>
-     <property name="text">
-      <string/>
-     </property>
-    </row>
-    <row>
-     <property name="text">
-      <string/>
-     </property>
-    </row>
-    <row>
-     <property name="text">
-      <string/>
-     </property>
-    </row>
-    <row>
-     <property name="text">
-      <string/>
-     </property>
-    </row>
-    <row>
-     <property name="text">
-      <string/>
-     </property>
-    </row>
-    <row>
-     <property name="text">
-      <string/>
-     </property>
-    </row>
-    <row>
-     <property name="text">
-      <string/>
-     </property>
-    </row>
-    <column>
-     <property name="text">
-      <string>勾号</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>线别</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>作业方法</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>限速</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>首尾</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>本勾状态</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>附注</string>
-     </property>
-    </column>
-    <item row="0" column="0">
-     <property name="foreground">
-      <brush brushstyle="Dense5Pattern">
-       <color alpha="255">
-        <red>0</red>
-        <green>0</green>
-        <blue>0</blue>
-       </color>
-      </brush>
-     </property>
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <widget class="QGroupBox" name="tag_groupBox">
+      <property name="title">
+       <string/>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QLabel" name="tag_lab">
+         <property name="text">
+          <string>企业标识</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="devName_lab">
+         <property name="text">
+          <string>设备名称</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDateTimeEdit" name="dateTimeEdit">
+         <property name="maximumDateTime">
+          <datetime>
+           <hour>23</hour>
+           <minute>59</minute>
+           <second>59</second>
+           <year>7994</year>
+           <month>12</month>
+           <day>31</day>
+          </datetime>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="stationName_lab">
+         <property name="text">
+          <string>站场名</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="trainNo_lab">
+         <property name="text">
+          <string>机车号</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </item>
-   </widget>
-   <widget class="QTableWidget" name="tableWidget_2">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>350</y>
-      <width>321</width>
-      <height>181</height>
-     </rect>
-    </property>
-    <attribute name="horizontalHeaderMinimumSectionSize">
-     <number>20</number>
-    </attribute>
-    <attribute name="horizontalHeaderDefaultSectionSize">
-     <number>75</number>
-    </attribute>
-    <row>
-     <property name="text">
-      <string notr="true"/>
-     </property>
-    </row>
-    <row>
-     <property name="text">
-      <string/>
-     </property>
-    </row>
-    <row>
-     <property name="text">
-      <string/>
-     </property>
-    </row>
-    <row>
-     <property name="text">
-      <string/>
-     </property>
-    </row>
-    <row>
-     <property name="text">
-      <string/>
-     </property>
-    </row>
-    <row>
-     <property name="text">
-      <string/>
-     </property>
-    </row>
-    <row>
-     <property name="text">
-      <string/>
-     </property>
-    </row>
-    <row>
-     <property name="text">
-      <string/>
-     </property>
-    </row>
-    <column>
-     <property name="text">
-      <string>调车单号</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>调车机</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>车次</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>时间范围</string>
-     </property>
-    </column>
-    <item row="0" column="0">
-     <property name="text">
-      <string notr="true"/>
-     </property>
+    <item>
+     <widget class="QGroupBox" name="groupBox_5">
+      <property name="title">
+       <string/>
+      </property>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="0">
+        <widget class="QLabel" name="ledA_lab">
+         <property name="text">
+          <string>led_1</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLabel" name="ledB_lab">
+         <property name="text">
+          <string>led_2</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QLabel" name="ledTmis_lab">
+         <property name="text">
+          <string>led_3</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <widget class="QLabel" name="ledILock_lab">
+         <property name="text">
+          <string>led_4</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="4">
+        <widget class="QLabel" name="stationO_lab">
+         <property name="text">
+          <string>led_5</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="5">
+        <widget class="QLabel" name="stationT_lab">
+         <property name="text">
+          <string>led_6</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="6">
+        <widget class="QLabel" name="stationT_lab_2">
+         <property name="text">
+          <string>led_7</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="7">
+        <widget class="QLabel" name="stationF_lab">
+         <property name="text">
+          <string>led_8</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="A_lab">
+         <property name="text">
+          <string>A机</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLabel" name="B_lab">
+         <property name="text">
+          <string>B机</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QLabel" name="tmis_lab">
+         <property name="text">
+          <string>TMIS</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="3">
+        <widget class="QLabel" name="iLock_lab">
+         <property name="text">
+          <string>联锁</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="4">
+        <widget class="QLabel" name="one_lab">
+         <property name="text">
+          <string>一场</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="5">
+        <widget class="QLabel" name="two_lab">
+         <property name="text">
+          <string>二场</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="6">
+        <widget class="QLabel" name="three_lab">
+         <property name="text">
+          <string>三场</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="7">
+        <widget class="QLabel" name="four_lab">
+         <property name="text">
+          <string>四场</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </item>
-    <item row="0" column="1">
-     <property name="text">
-      <string/>
-     </property>
+    <item>
+     <widget class="QGroupBox" name="groupBox_4">
+      <property name="minimumSize">
+       <size>
+        <width>10</width>
+        <height>10</height>
+       </size>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QListWidget" name="listWidget">
+         <item>
+          <property name="text">
+           <string>站场图</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </item>
-    <item row="0" column="2">
-     <property name="text">
-      <string/>
-     </property>
-     <property name="font">
-      <font>
-       <kerning>false</kerning>
-      </font>
-     </property>
+    <item>
+     <widget class="QGroupBox" name="groupBox_3">
+      <property name="title">
+       <string/>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="4" colspan="2">
+        <widget class="QPushButton" name="locoMon_pB">
+         <property name="text">
+          <string>机车监控</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1" rowspan="2" colspan="2">
+        <widget class="QPushButton" name="printJobOrder_pB">
+         <property name="text">
+          <string>打印作业单</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QPushButton" name="editMod_pB">
+         <property name="text">
+          <string>编辑模式</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="11" colspan="2">
+        <widget class="QLineEdit" name="stpState_lE">
+         <property name="text">
+          <string>正常</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2" colspan="2">
+        <widget class="QPushButton" name="sendJobOrder_pB">
+         <property name="text">
+          <string>发送作业单</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="8">
+        <widget class="QPushButton" name="historyPlayB_pB">
+         <property name="text">
+          <string>历史回放</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="6" colspan="2">
+        <widget class="QPushButton" name="passStShunt_pB">
+         <property name="text">
+          <string>越站调车</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="9" colspan="2">
+        <widget class="QPushButton" name="cancleLoco_pB">
+         <property name="text">
+          <string>注销机车</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0" rowspan="2">
+        <widget class="QLineEdit" name="lineEdit"/>
+       </item>
+       <item row="0" column="0">
+        <widget class="QPushButton" name="handOver_pB">
+         <property name="text">
+          <string>交班</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="5">
+        <widget class="QComboBox" name="comboBox_2"/>
+       </item>
+       <item row="4" column="3">
+        <widget class="QComboBox" name="station_cB">
+         <item>
+          <property name="text">
+           <string>一场</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>二场</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>三场</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>四场</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="4" column="7">
+        <widget class="QPushButton" name="maintain_pB">
+         <property name="text">
+          <string>维护</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="8">
+        <widget class="QPushButton" name="powerMang_pB">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>权限管理</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="9">
+        <widget class="QPushButton" name="refreshStation_pB">
+         <property name="text">
+          <string>刷新站场</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </item>
-    <item row="0" column="3">
-     <property name="text">
-      <string/>
-     </property>
+    <item>
+     <widget class="QGroupBox" name="groupBox">
+      <property name="title">
+       <string/>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QTableWidget" name="locoInfo_tW">
+         <attribute name="horizontalHeaderMinimumSectionSize">
+          <number>20</number>
+         </attribute>
+         <attribute name="horizontalHeaderDefaultSectionSize">
+          <number>75</number>
+         </attribute>
+         <row>
+          <property name="text">
+           <string notr="true"/>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string/>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string/>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string/>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string/>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string/>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string/>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string/>
+          </property>
+         </row>
+         <column>
+          <property name="text">
+           <string>调车单号</string>
+          </property>
+          <property name="font">
+           <font>
+            <weight>50</weight>
+            <bold>false</bold>
+            <underline>false</underline>
+           </font>
+          </property>
+          <property name="background">
+           <color alpha="10">
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+           </color>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>调车机</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>车次</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>时间范围</string>
+          </property>
+         </column>
+         <item row="0" column="0">
+          <property name="text">
+           <string notr="true"/>
+          </property>
+         </item>
+         <item row="0" column="1">
+          <property name="text">
+           <string/>
+          </property>
+         </item>
+         <item row="0" column="2">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="font">
+           <font>
+            <kerning>false</kerning>
+           </font>
+          </property>
+         </item>
+         <item row="0" column="3">
+          <property name="text">
+           <string/>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QTableWidget" name="jobOrder_tW">
+         <attribute name="horizontalHeaderVisible">
+          <bool>true</bool>
+         </attribute>
+         <attribute name="horizontalHeaderCascadingSectionResizes">
+          <bool>true</bool>
+         </attribute>
+         <attribute name="horizontalHeaderMinimumSectionSize">
+          <number>15</number>
+         </attribute>
+         <attribute name="horizontalHeaderDefaultSectionSize">
+          <number>53</number>
+         </attribute>
+         <attribute name="horizontalHeaderHighlightSections">
+          <bool>true</bool>
+         </attribute>
+         <attribute name="verticalHeaderVisible">
+          <bool>false</bool>
+         </attribute>
+         <attribute name="verticalHeaderHighlightSections">
+          <bool>true</bool>
+         </attribute>
+         <row>
+          <property name="text">
+           <string/>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string/>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string/>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string/>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string/>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string/>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string/>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string/>
+          </property>
+         </row>
+         <column>
+          <property name="text">
+           <string>勾号</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>线别</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>作业方法</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>限速</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>首尾</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>本勾状态</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>附注</string>
+          </property>
+         </column>
+         <item row="0" column="0">
+          <property name="foreground">
+           <brush brushstyle="Dense5Pattern">
+            <color alpha="255">
+             <red>0</red>
+             <green>0</green>
+             <blue>0</blue>
+            </color>
+           </brush>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </item>
-   </widget>
-   <widget class="QLabel" name="label_6">
-    <property name="geometry">
-     <rect>
-      <x>390</x>
-      <y>40</y>
-      <width>54</width>
-      <height>12</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>led_2</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_7">
-    <property name="geometry">
-     <rect>
-      <x>440</x>
-      <y>40</y>
-      <width>54</width>
-      <height>12</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>led_3</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_8">
-    <property name="geometry">
-     <rect>
-      <x>490</x>
-      <y>40</y>
-      <width>54</width>
-      <height>12</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>led_4</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_9">
-    <property name="geometry">
-     <rect>
-      <x>540</x>
-      <y>40</y>
-      <width>41</width>
-      <height>10</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>led_5</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_10">
-    <property name="geometry">
-     <rect>
-      <x>340</x>
-      <y>40</y>
-      <width>54</width>
-      <height>12</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>led_1</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_11">
-    <property name="geometry">
-     <rect>
-      <x>590</x>
-      <y>40</y>
-      <width>51</width>
-      <height>10</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>led_6</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_12">
-    <property name="geometry">
-     <rect>
-      <x>390</x>
-      <y>60</y>
-      <width>54</width>
-      <height>12</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>B机</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_13">
-    <property name="geometry">
-     <rect>
-      <x>340</x>
-      <y>60</y>
-      <width>54</width>
-      <height>12</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>A机</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_14">
-    <property name="geometry">
-     <rect>
-      <x>440</x>
-      <y>60</y>
-      <width>54</width>
-      <height>12</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>TMIS</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_15">
-    <property name="geometry">
-     <rect>
-      <x>600</x>
-      <y>60</y>
-      <width>31</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>二场</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_16">
-    <property name="geometry">
-     <rect>
-      <x>500</x>
-      <y>60</y>
-      <width>54</width>
-      <height>12</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>联锁</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_17">
-    <property name="geometry">
-     <rect>
-      <x>549</x>
-      <y>60</y>
-      <width>31</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>一场</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_18">
-    <property name="geometry">
-     <rect>
-      <x>630</x>
-      <y>40</y>
-      <width>54</width>
-      <height>12</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>led_7</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_19">
-    <property name="geometry">
-     <rect>
-      <x>680</x>
-      <y>40</y>
-      <width>54</width>
-      <height>12</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>led_8</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_20">
-    <property name="geometry">
-     <rect>
-      <x>680</x>
-      <y>60</y>
-      <width>41</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>四场</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_21">
-    <property name="geometry">
-     <rect>
-      <x>633</x>
-      <y>60</y>
-      <width>41</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>三场</string>
-    </property>
-   </widget>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>810</width>
+     <width>730</width>
      <height>23</height>
     </rect>
    </property>

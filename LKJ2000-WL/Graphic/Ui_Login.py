@@ -11,13 +11,15 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_Form(object):
-    def setupUi(self, Form):
-        Form.setObjectName("Form")
-        Form.resize(382, 256)
-        self.gridLayout = QtWidgets.QGridLayout(Form)
+class Ui_Login(object):
+    def setupUi(self, Login):
+        Login.setObjectName("Login")
+        Login.resize(543, 437)
+        self.centralwidget = QtWidgets.QWidget(Login)
+        self.centralwidget.setObjectName("centralwidget")
+        self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
         self.gridLayout.setObjectName("gridLayout")
-        self.groupBox_2 = QtWidgets.QGroupBox(Form)
+        self.groupBox_2 = QtWidgets.QGroupBox(self.centralwidget)
         self.groupBox_2.setTitle("")
         self.groupBox_2.setObjectName("groupBox_2")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.groupBox_2)
@@ -30,7 +32,7 @@ class Ui_Form(object):
         spacerItem1 = QtWidgets.QSpacerItem(109, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem1)
         self.gridLayout.addWidget(self.groupBox_2, 0, 0, 1, 1)
-        self.groupBox = QtWidgets.QGroupBox(Form)
+        self.groupBox = QtWidgets.QGroupBox(self.centralwidget)
         self.groupBox.setObjectName("groupBox")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.groupBox)
         self.horizontalLayout.setObjectName("horizontalLayout")
@@ -45,14 +47,22 @@ class Ui_Form(object):
         self.other_pushButton.setObjectName("other_pushButton")
         self.horizontalLayout.addWidget(self.other_pushButton)
         self.gridLayout.addWidget(self.groupBox, 1, 0, 1, 1)
+        Login.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(Login)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 543, 23))
+        self.menubar.setObjectName("menubar")
+        Login.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(Login)
+        self.statusbar.setObjectName("statusbar")
+        Login.setStatusBar(self.statusbar)
 
-        self.retranslateUi(Form)
-        QtCore.QMetaObject.connectSlotsByName(Form)
+        self.retranslateUi(Login)
+        QtCore.QMetaObject.connectSlotsByName(Login)
 
-    def retranslateUi(self, Form):
+    def retranslateUi(self, Login):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.cho_label.setText(_translate("Form", "请选择使用工具类型"))
-        self.wl_pushButton.setText(_translate("Form", "无线换装"))
-        self.stp_pushButton.setText(_translate("Form", "STP"))
-        self.other_pushButton.setText(_translate("Form", "其他"))
+        Login.setWindowTitle(_translate("Login", "MainWindow"))
+        self.cho_label.setText(_translate("Login", "请选择使用工具类型"))
+        self.wl_pushButton.setText(_translate("Login", "无线换装"))
+        self.stp_pushButton.setText(_translate("Login", "STP"))
+        self.other_pushButton.setText(_translate("Login", "其他"))
