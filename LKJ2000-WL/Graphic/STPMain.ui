@@ -1,589 +1,572 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>STPMain</class>
- <widget class="QMainWindow" name="STPMain">
+ <widget class="QDialog" name="STPMain">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>730</width>
-    <height>611</height>
+    <width>1055</width>
+    <height>585</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Dialog</string>
   </property>
-  <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout_2">
-    <item>
-     <widget class="QGroupBox" name="tag_groupBox">
-      <property name="title">
-       <string/>
-      </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_2">
-       <item>
-        <widget class="QLabel" name="tag_lab">
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <widget class="QGroupBox" name="tag_groupBox">
+     <property name="title">
+      <string/>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QLabel" name="tag_lab">
+        <property name="text">
+         <string>企业标识</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="devName_lab">
+        <property name="text">
+         <string>设备名称</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QDateTimeEdit" name="dateTimeEdit">
+        <property name="maximumDateTime">
+         <datetime>
+          <hour>23</hour>
+          <minute>59</minute>
+          <second>59</second>
+          <year>7994</year>
+          <month>12</month>
+          <day>31</day>
+         </datetime>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="stationName_lab">
+        <property name="text">
+         <string>站场名</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="trainNo_lab">
+        <property name="text">
+         <string>机车号</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox_5">
+     <property name="title">
+      <string/>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0">
+       <widget class="QLabel" name="ledA_lab">
+        <property name="text">
+         <string>led_1</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLabel" name="ledB_lab">
+        <property name="text">
+         <string>led_2</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QLabel" name="ledTmis_lab">
+        <property name="text">
+         <string>led_3</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QLabel" name="ledILock_lab">
+        <property name="text">
+         <string>led_4</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="4">
+       <widget class="QLabel" name="stationO_lab">
+        <property name="text">
+         <string>led_5</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="5">
+       <widget class="QLabel" name="stationT_lab">
+        <property name="text">
+         <string>led_6</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="6">
+       <widget class="QLabel" name="stationT_lab_2">
+        <property name="text">
+         <string>led_7</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="7">
+       <widget class="QLabel" name="stationF_lab">
+        <property name="text">
+         <string>led_8</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="A_lab">
+        <property name="text">
+         <string>A机</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLabel" name="B_lab">
+        <property name="text">
+         <string>B机</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QLabel" name="tmis_lab">
+        <property name="text">
+         <string>TMIS</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <widget class="QLabel" name="iLock_lab">
+        <property name="text">
+         <string>联锁</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="4">
+       <widget class="QLabel" name="one_lab">
+        <property name="text">
+         <string>一场</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="5">
+       <widget class="QLabel" name="two_lab">
+        <property name="text">
+         <string>二场</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="6">
+       <widget class="QLabel" name="three_lab">
+        <property name="text">
+         <string>三场</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="7">
+       <widget class="QLabel" name="four_lab">
+        <property name="text">
+         <string>四场</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox_4">
+     <property name="minimumSize">
+      <size>
+       <width>10</width>
+       <height>10</height>
+      </size>
+     </property>
+     <property name="title">
+      <string/>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QListWidget" name="listWidget">
+        <item>
          <property name="text">
-          <string>企业标识</string>
+          <string>站场图</string>
          </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="devName_lab">
-         <property name="text">
-          <string>设备名称</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QDateTimeEdit" name="dateTimeEdit">
-         <property name="maximumDateTime">
-          <datetime>
-           <hour>23</hour>
-           <minute>59</minute>
-           <second>59</second>
-           <year>7994</year>
-           <month>12</month>
-           <day>31</day>
-          </datetime>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="stationName_lab">
-         <property name="text">
-          <string>站场名</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="trainNo_lab">
-         <property name="text">
-          <string>机车号</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <item>
-     <widget class="QGroupBox" name="groupBox_5">
-      <property name="title">
-       <string/>
-      </property>
-      <layout class="QGridLayout" name="gridLayout">
-       <item row="0" column="0">
-        <widget class="QLabel" name="ledA_lab">
-         <property name="text">
-          <string>led_1</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QLabel" name="ledB_lab">
-         <property name="text">
-          <string>led_2</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="2">
-        <widget class="QLabel" name="ledTmis_lab">
-         <property name="text">
-          <string>led_3</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="3">
-        <widget class="QLabel" name="ledILock_lab">
-         <property name="text">
-          <string>led_4</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="4">
-        <widget class="QLabel" name="stationO_lab">
-         <property name="text">
-          <string>led_5</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="5">
-        <widget class="QLabel" name="stationT_lab">
-         <property name="text">
-          <string>led_6</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="6">
-        <widget class="QLabel" name="stationT_lab_2">
-         <property name="text">
-          <string>led_7</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="7">
-        <widget class="QLabel" name="stationF_lab">
-         <property name="text">
-          <string>led_8</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="A_lab">
-         <property name="text">
-          <string>A机</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QLabel" name="B_lab">
-         <property name="text">
-          <string>B机</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="2">
-        <widget class="QLabel" name="tmis_lab">
-         <property name="text">
-          <string>TMIS</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="3">
-        <widget class="QLabel" name="iLock_lab">
-         <property name="text">
-          <string>联锁</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="4">
-        <widget class="QLabel" name="one_lab">
+        </item>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox_3">
+     <property name="title">
+      <string/>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="4" colspan="2">
+       <widget class="QPushButton" name="locoMon_pB">
+        <property name="text">
+         <string>机车监控</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1" rowspan="2" colspan="2">
+       <widget class="QPushButton" name="printJobOrder_pB">
+        <property name="text">
+         <string>打印作业单</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QPushButton" name="editMod_pB">
+        <property name="text">
+         <string>编辑模式</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="11" colspan="2">
+       <widget class="QLineEdit" name="stpState_lE">
+        <property name="text">
+         <string>正常</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2" colspan="2">
+       <widget class="QPushButton" name="sendJobOrder_pB">
+        <property name="text">
+         <string>发送作业单</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="8">
+       <widget class="QPushButton" name="historyPlayB_pB">
+        <property name="text">
+         <string>历史回放</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="6" colspan="2">
+       <widget class="QPushButton" name="passStShunt_pB">
+        <property name="text">
+         <string>越站调车</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="9" colspan="2">
+       <widget class="QPushButton" name="cancleLoco_pB">
+        <property name="text">
+         <string>注销机车</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0" rowspan="2">
+       <widget class="QLineEdit" name="lineEdit"/>
+      </item>
+      <item row="0" column="0">
+       <widget class="QPushButton" name="handOver_pB">
+        <property name="text">
+         <string>交班</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="5">
+       <widget class="QComboBox" name="comboBox_2"/>
+      </item>
+      <item row="4" column="3">
+       <widget class="QComboBox" name="station_cB">
+        <item>
          <property name="text">
           <string>一场</string>
          </property>
-        </widget>
-       </item>
-       <item row="1" column="5">
-        <widget class="QLabel" name="two_lab">
+        </item>
+        <item>
          <property name="text">
           <string>二场</string>
          </property>
-        </widget>
-       </item>
-       <item row="1" column="6">
-        <widget class="QLabel" name="three_lab">
+        </item>
+        <item>
          <property name="text">
           <string>三场</string>
          </property>
-        </widget>
-       </item>
-       <item row="1" column="7">
-        <widget class="QLabel" name="four_lab">
+        </item>
+        <item>
          <property name="text">
           <string>四场</string>
          </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <item>
-     <widget class="QGroupBox" name="groupBox_4">
-      <property name="minimumSize">
-       <size>
-        <width>10</width>
-        <height>10</height>
-       </size>
-      </property>
-      <property name="title">
-       <string/>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout">
-       <item>
-        <widget class="QListWidget" name="listWidget">
-         <item>
-          <property name="text">
-           <string>站场图</string>
-          </property>
-         </item>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <item>
-     <widget class="QGroupBox" name="groupBox_3">
-      <property name="title">
-       <string/>
-      </property>
-      <layout class="QGridLayout" name="gridLayout_2">
-       <item row="0" column="4" colspan="2">
-        <widget class="QPushButton" name="locoMon_pB">
+        </item>
+       </widget>
+      </item>
+      <item row="4" column="7">
+       <widget class="QPushButton" name="maintain_pB">
+        <property name="text">
+         <string>维护</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="8">
+       <widget class="QPushButton" name="powerMang_pB">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>权限管理</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="9">
+       <widget class="QPushButton" name="refreshStation_pB">
+        <property name="text">
+         <string>刷新站场</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string/>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QTableWidget" name="locoInfo_tW">
+        <attribute name="horizontalHeaderMinimumSectionSize">
+         <number>20</number>
+        </attribute>
+        <attribute name="horizontalHeaderDefaultSectionSize">
+         <number>75</number>
+        </attribute>
+        <row>
          <property name="text">
-          <string>机车监控</string>
+          <string notr="true"/>
          </property>
-        </widget>
-       </item>
-       <item row="3" column="1" rowspan="2" colspan="2">
-        <widget class="QPushButton" name="printJobOrder_pB">
+        </row>
+        <row>
          <property name="text">
-          <string>打印作业单</string>
+          <string/>
          </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QPushButton" name="editMod_pB">
+        </row>
+        <row>
          <property name="text">
-          <string>编辑模式</string>
+          <string/>
          </property>
-        </widget>
-       </item>
-       <item row="0" column="11" colspan="2">
-        <widget class="QLineEdit" name="stpState_lE">
+        </row>
+        <row>
          <property name="text">
-          <string>正常</string>
+          <string/>
          </property>
-        </widget>
-       </item>
-       <item row="0" column="2" colspan="2">
-        <widget class="QPushButton" name="sendJobOrder_pB">
+        </row>
+        <row>
          <property name="text">
-          <string>发送作业单</string>
+          <string/>
          </property>
-        </widget>
-       </item>
-       <item row="0" column="8">
-        <widget class="QPushButton" name="historyPlayB_pB">
+        </row>
+        <row>
          <property name="text">
-          <string>历史回放</string>
+          <string/>
          </property>
-        </widget>
-       </item>
-       <item row="0" column="6" colspan="2">
-        <widget class="QPushButton" name="passStShunt_pB">
+        </row>
+        <row>
          <property name="text">
-          <string>越站调车</string>
+          <string/>
          </property>
-        </widget>
-       </item>
-       <item row="0" column="9" colspan="2">
-        <widget class="QPushButton" name="cancleLoco_pB">
+        </row>
+        <row>
          <property name="text">
-          <string>注销机车</string>
+          <string/>
          </property>
-        </widget>
-       </item>
-       <item row="3" column="0" rowspan="2">
-        <widget class="QLineEdit" name="lineEdit"/>
-       </item>
-       <item row="0" column="0">
-        <widget class="QPushButton" name="handOver_pB">
+        </row>
+        <column>
          <property name="text">
-          <string>交班</string>
+          <string>调车单号</string>
          </property>
-        </widget>
-       </item>
-       <item row="4" column="5">
-        <widget class="QComboBox" name="comboBox_2"/>
-       </item>
-       <item row="4" column="3">
-        <widget class="QComboBox" name="station_cB">
-         <item>
-          <property name="text">
-           <string>一场</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>二场</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>三场</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>四场</string>
-          </property>
-         </item>
-        </widget>
-       </item>
-       <item row="4" column="7">
-        <widget class="QPushButton" name="maintain_pB">
+         <property name="font">
+          <font>
+           <weight>50</weight>
+           <bold>false</bold>
+           <underline>false</underline>
+          </font>
+         </property>
+         <property name="background">
+          <color alpha="10">
+           <red>0</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
+         </property>
+        </column>
+        <column>
          <property name="text">
-          <string>维护</string>
+          <string>调车机</string>
          </property>
-        </widget>
-       </item>
-       <item row="4" column="8">
-        <widget class="QPushButton" name="powerMang_pB">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
+        </column>
+        <column>
          <property name="text">
-          <string>权限管理</string>
+          <string>车次</string>
          </property>
-        </widget>
-       </item>
-       <item row="4" column="9">
-        <widget class="QPushButton" name="refreshStation_pB">
+        </column>
+        <column>
          <property name="text">
-          <string>刷新站场</string>
+          <string>时间范围</string>
          </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <item>
-     <widget class="QGroupBox" name="groupBox">
-      <property name="title">
-       <string/>
-      </property>
-      <layout class="QHBoxLayout" name="horizontalLayout">
-       <item>
-        <widget class="QTableWidget" name="locoInfo_tW">
-         <attribute name="horizontalHeaderMinimumSectionSize">
-          <number>20</number>
-         </attribute>
-         <attribute name="horizontalHeaderDefaultSectionSize">
-          <number>75</number>
-         </attribute>
-         <row>
-          <property name="text">
-           <string notr="true"/>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string/>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string/>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string/>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string/>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string/>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string/>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string/>
-          </property>
-         </row>
-         <column>
-          <property name="text">
-           <string>调车单号</string>
-          </property>
-          <property name="font">
-           <font>
-            <weight>50</weight>
-            <bold>false</bold>
-            <underline>false</underline>
-           </font>
-          </property>
-          <property name="background">
-           <color alpha="10">
+        </column>
+        <item row="0" column="0">
+         <property name="text">
+          <string notr="true"/>
+         </property>
+        </item>
+        <item row="0" column="1">
+         <property name="text">
+          <string/>
+         </property>
+        </item>
+        <item row="0" column="2">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="font">
+          <font>
+           <kerning>false</kerning>
+          </font>
+         </property>
+        </item>
+        <item row="0" column="3">
+         <property name="text">
+          <string/>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <widget class="QTableWidget" name="jobOrder_tW">
+        <attribute name="horizontalHeaderVisible">
+         <bool>true</bool>
+        </attribute>
+        <attribute name="horizontalHeaderCascadingSectionResizes">
+         <bool>true</bool>
+        </attribute>
+        <attribute name="horizontalHeaderMinimumSectionSize">
+         <number>15</number>
+        </attribute>
+        <attribute name="horizontalHeaderDefaultSectionSize">
+         <number>53</number>
+        </attribute>
+        <attribute name="horizontalHeaderHighlightSections">
+         <bool>true</bool>
+        </attribute>
+        <attribute name="verticalHeaderVisible">
+         <bool>false</bool>
+        </attribute>
+        <attribute name="verticalHeaderHighlightSections">
+         <bool>true</bool>
+        </attribute>
+        <row>
+         <property name="text">
+          <string/>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string/>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string/>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string/>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string/>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string/>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string/>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string/>
+         </property>
+        </row>
+        <column>
+         <property name="text">
+          <string>勾号</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>线别</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>作业方法</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>限速</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>首尾</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>本勾状态</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>附注</string>
+         </property>
+        </column>
+        <item row="0" column="0">
+         <property name="foreground">
+          <brush brushstyle="Dense5Pattern">
+           <color alpha="255">
             <red>0</red>
             <green>0</green>
             <blue>0</blue>
            </color>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>调车机</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>车次</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>时间范围</string>
-          </property>
-         </column>
-         <item row="0" column="0">
-          <property name="text">
-           <string notr="true"/>
-          </property>
-         </item>
-         <item row="0" column="1">
-          <property name="text">
-           <string/>
-          </property>
-         </item>
-         <item row="0" column="2">
-          <property name="text">
-           <string/>
-          </property>
-          <property name="font">
-           <font>
-            <kerning>false</kerning>
-           </font>
-          </property>
-         </item>
-         <item row="0" column="3">
-          <property name="text">
-           <string/>
-          </property>
-         </item>
-        </widget>
-       </item>
-       <item>
-        <widget class="QTableWidget" name="jobOrder_tW">
-         <attribute name="horizontalHeaderVisible">
-          <bool>true</bool>
-         </attribute>
-         <attribute name="horizontalHeaderCascadingSectionResizes">
-          <bool>true</bool>
-         </attribute>
-         <attribute name="horizontalHeaderMinimumSectionSize">
-          <number>15</number>
-         </attribute>
-         <attribute name="horizontalHeaderDefaultSectionSize">
-          <number>53</number>
-         </attribute>
-         <attribute name="horizontalHeaderHighlightSections">
-          <bool>true</bool>
-         </attribute>
-         <attribute name="verticalHeaderVisible">
-          <bool>false</bool>
-         </attribute>
-         <attribute name="verticalHeaderHighlightSections">
-          <bool>true</bool>
-         </attribute>
-         <row>
-          <property name="text">
-           <string/>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string/>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string/>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string/>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string/>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string/>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string/>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string/>
-          </property>
-         </row>
-         <column>
-          <property name="text">
-           <string>勾号</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>线别</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>作业方法</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>限速</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>首尾</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>本勾状态</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>附注</string>
-          </property>
-         </column>
-         <item row="0" column="0">
-          <property name="foreground">
-           <brush brushstyle="Dense5Pattern">
-            <color alpha="255">
-             <red>0</red>
-             <green>0</green>
-             <blue>0</blue>
-            </color>
-           </brush>
-          </property>
-         </item>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>730</width>
-     <height>23</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QStatusBar" name="statusbar"/>
+          </brush>
+         </property>
+        </item>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>
- <slots>
-  <slot>slot1()</slot>
-  <slot>DataTimeChangedslot()</slot>
- </slots>
 </ui>

@@ -2,9 +2,9 @@ from PyQt5.QtWidgets import QApplication, QDialog, QMainWindow, QFileDialog
 from PyQt5 import QtCore, QtGui, QtWidgets
 import Ui_STPMain
 import sys
-class STPMain(QMainWindow, Ui_STPMain.Ui_STPMain):
+class STPMain(QDialog, Ui_STPMain.Ui_STPMain):
 
-    def __init__(self,name = "STPM"):
+    def __init__(self,name = "SPM"):
         #构造函数
         super().__init__()
         self.initUI(name)
@@ -36,4 +36,4 @@ if __name__ == "__main__":
     md = STPMain()
     md.show()
     app.exec_()
-    # sys.exit(app.exec_())
+    sys.exit(app.exec_())

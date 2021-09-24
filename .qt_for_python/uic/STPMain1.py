@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'f:\work\fjl\LKJ2000-WL\LKJ2000-WL\Graphic\STPMain.ui'
+# Form implementation generated from reading ui file 'f:\work\fjl\LKJ2000-WL\LKJ2000-WL\Graphic\STPMain1.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -14,10 +14,12 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_STPMain(object):
     def setupUi(self, STPMain):
         STPMain.setObjectName("STPMain")
-        STPMain.resize(1055, 585)
-        self.verticalLayout_2 = QtWidgets.QVBoxLayout(STPMain)
+        STPMain.resize(730, 611)
+        self.centralwidget = QtWidgets.QWidget(STPMain)
+        self.centralwidget.setObjectName("centralwidget")
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.centralwidget)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.tag_groupBox = QtWidgets.QGroupBox(STPMain)
+        self.tag_groupBox = QtWidgets.QGroupBox(self.centralwidget)
         self.tag_groupBox.setTitle("")
         self.tag_groupBox.setObjectName("tag_groupBox")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.tag_groupBox)
@@ -39,7 +41,7 @@ class Ui_STPMain(object):
         self.trainNo_lab.setObjectName("trainNo_lab")
         self.horizontalLayout_2.addWidget(self.trainNo_lab)
         self.verticalLayout_2.addWidget(self.tag_groupBox)
-        self.groupBox_5 = QtWidgets.QGroupBox(STPMain)
+        self.groupBox_5 = QtWidgets.QGroupBox(self.centralwidget)
         self.groupBox_5.setTitle("")
         self.groupBox_5.setObjectName("groupBox_5")
         self.gridLayout = QtWidgets.QGridLayout(self.groupBox_5)
@@ -93,7 +95,7 @@ class Ui_STPMain(object):
         self.four_lab.setObjectName("four_lab")
         self.gridLayout.addWidget(self.four_lab, 1, 7, 1, 1)
         self.verticalLayout_2.addWidget(self.groupBox_5)
-        self.groupBox_4 = QtWidgets.QGroupBox(STPMain)
+        self.groupBox_4 = QtWidgets.QGroupBox(self.centralwidget)
         self.groupBox_4.setMinimumSize(QtCore.QSize(10, 10))
         self.groupBox_4.setTitle("")
         self.groupBox_4.setObjectName("groupBox_4")
@@ -105,7 +107,7 @@ class Ui_STPMain(object):
         self.listWidget.addItem(item)
         self.verticalLayout.addWidget(self.listWidget)
         self.verticalLayout_2.addWidget(self.groupBox_4)
-        self.groupBox_3 = QtWidgets.QGroupBox(STPMain)
+        self.groupBox_3 = QtWidgets.QGroupBox(self.centralwidget)
         self.groupBox_3.setTitle("")
         self.groupBox_3.setObjectName("groupBox_3")
         self.gridLayout_2 = QtWidgets.QGridLayout(self.groupBox_3)
@@ -161,7 +163,7 @@ class Ui_STPMain(object):
         self.refreshStation_pB.setObjectName("refreshStation_pB")
         self.gridLayout_2.addWidget(self.refreshStation_pB, 4, 9, 1, 1)
         self.verticalLayout_2.addWidget(self.groupBox_3)
-        self.groupBox = QtWidgets.QGroupBox(STPMain)
+        self.groupBox = QtWidgets.QGroupBox(self.centralwidget)
         self.groupBox.setTitle("")
         self.groupBox.setObjectName("groupBox")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.groupBox)
@@ -262,13 +264,21 @@ class Ui_STPMain(object):
         self.jobOrder_tW.verticalHeader().setHighlightSections(True)
         self.horizontalLayout.addWidget(self.jobOrder_tW)
         self.verticalLayout_2.addWidget(self.groupBox)
+        STPMain.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(STPMain)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 730, 23))
+        self.menubar.setObjectName("menubar")
+        STPMain.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(STPMain)
+        self.statusbar.setObjectName("statusbar")
+        STPMain.setStatusBar(self.statusbar)
 
         self.retranslateUi(STPMain)
         QtCore.QMetaObject.connectSlotsByName(STPMain)
 
     def retranslateUi(self, STPMain):
         _translate = QtCore.QCoreApplication.translate
-        STPMain.setWindowTitle(_translate("STPMain", "Dialog"))
+        STPMain.setWindowTitle(_translate("STPMain", "MainWindow"))
         self.tag_lab.setText(_translate("STPMain", "企业标识"))
         self.devName_lab.setText(_translate("STPMain", "设备名称"))
         self.stationName_lab.setText(_translate("STPMain", "站场名"))

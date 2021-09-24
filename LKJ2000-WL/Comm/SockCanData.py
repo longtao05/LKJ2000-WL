@@ -50,7 +50,7 @@ class SockCanData():
         #self.lkjhost = '192.168.208.131' # 这是客户端的电脑的ip
         
         self.lkjhost = '127.0.0.1'# 这是客户端的电脑的ip
-        self.lkjport = 10001 #接口必须一致
+        self.lkjport = 10003 #接口必须一致
         self.lkjaddr=(self.lkjhost,self.lkjport)
         #setdefaulttimeout(500)
         self.lkjsocket= socket(AF_INET,SOCK_DGRAM)#创建数据发送端

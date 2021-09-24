@@ -3,6 +3,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import Ui_Login
 import sys
 import STPMain
+import Mygol 
 class Login(QMainWindow):
     def __init__(self,parent=None,name = "调试工具"):
         #构造函数
@@ -15,24 +16,28 @@ class Login(QMainWindow):
         self.setWindowTitle(name)
         self.initConnect()
         #STP主窗口
-        self.m_uiSTPMain = STPMain.STPMain()
+        #self.m_uiSTPMain = STPMain.STPMain()
 
     def initConnect(self):
         # 初始化信号与槽
         self.m_ui.wl_pushButton.clicked.connect(self.WL_slot)
         self.m_ui.stp_pushButton.clicked.connect(self.STP_slot)
 
-    def WL_slot(self):
-        #pushButton的槽函数
-        print("wl")
-        self.m_uiSTPMain.show()
-        # self.m_uiSTPMain.exec_()
-        # tmp = STPMain.STPMain(self)
-        # tmp.exec()
+    # def WL_slot(self):
+    #     #pushButton的槽函数
+    #     print("wl")
+    #     Mygol.set_value('FuncType','WL')
 
-    def STP_slot(self):
-        #pushButton的槽函数
-        print("stp")
+        
+
+    # def STP_slot(self):
+    #     #pushButton的槽函数
+    #     print("stp")
+    #     Mygol.set_value('FuncType','STP')
+
+    #     #self.m_uiSTPMain.show()
+    #     tmp = STPMain.STPMain(self)
+    #     tmp.exec_()
 
     def closeEvent(self, a0: QtGui.QCloseEvent) -> None:
         return super().closeEvent(a0)
