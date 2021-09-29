@@ -52,3 +52,9 @@ class DataProcess():
         #self.SysDataPre.OnSendSysDataPreProc()
         self.CanTask.send_data()
 
+    def OnsendData(self,dataTy):
+        dataTy.send_data()
+
+    def OnreadData(self,dataTy):
+        dataTy.read_data()
+

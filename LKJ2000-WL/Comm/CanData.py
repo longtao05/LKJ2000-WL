@@ -15,14 +15,24 @@ from datetime import datetime
 sys.path.append(r"..\Common")
 import Mygol
 from DataQueue import *
+import DataBase
 
 import DataQueue
 from CanDataType import _VCI_CAN_OBJ,_RX_CAN_OBJ,_VCI_INIT_CONFIG
 
 #02000000 6ea0ef00 01 00 00 00 08 0001020304050607 000077
 
+def singleton(cls, *args, **kwargs):
+    instances = {}
+    
+    def _singleton():
+        if cls not in instances:
+            instances[cls] = cls(*args, **kwargs)
+        return instances[cls]
+    return _singleton
 
-class CanData():
+@singleton
+class CanData(DataBase.DataBase):
     def __init__(self):
         self.rxdataA=_RX_CAN_OBJ()
         self.rxdataA_put_flag = True #写标志

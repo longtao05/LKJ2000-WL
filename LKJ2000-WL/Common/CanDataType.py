@@ -482,7 +482,7 @@ class _STP_StationBroadcastInfo_DMI(Structure):
 
 #STP->DMI 作业计划包头定义
 class _STP_WorkPlanPacketDef_DMI(Structure):
-    _pack_=19
+    _pack_=1
     _fields_ = [('Crc16', c_ushort),     # CRC16
                 ('Length', c_ushort),    # 长度
                 ('WorkPlanNum', c_ubyte), # 作业计划序号

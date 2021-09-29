@@ -17,6 +17,7 @@ from DataQueue import *
 
 import DataQueue
 from CanDataType import _UDP_CAN_OBJ
+import DataBase
 
 bufsize = 1024
 
@@ -34,7 +35,17 @@ initdata.Data = (9, 8, 7, 6, 5, 4, 3, 2)
 lkjID = [0x300,0x308,0x309,0x30a,0x390,0x391,0x392,0x388,0x389,0x38a,0x38b,0x38c,0x38d,0x38e,0x38f,0x393,0x398,0x39b]
 dmiID = [0x400,0x403,0x408,0x409,0x40a,0x410,0x411,0x412,0x413,0x414,0x415,0x416,0x417,0x418,0x41a,0x41b,0x41c]
 
-class SockCanData():
+def singleton(cls, *args, **kwargs):
+    instances = {}
+    
+    def _singleton():
+        if cls not in instances:
+            instances[cls] = cls(*args, **kwargs)
+        return instances[cls]
+    return _singleton
+
+@singleton
+class SockCanData(DataBase.DataBase):
     def __init__(self):
         self.Dataqueue = DataQueue.DataQueue()
         serialPort = Mygol.get_value('serialPort')
@@ -50,7 +61,7 @@ class SockCanData():
         #self.lkjhost = '192.168.208.131' # 这是客户端的电脑的ip
         
         self.lkjhost = '127.0.0.1'# 这是客户端的电脑的ip
-        self.lkjport = 10003 #接口必须一致
+        self.lkjport = 10001 #接口必须一致
         self.lkjaddr=(self.lkjhost,self.lkjport)
         #setdefaulttimeout(500)
         self.lkjsocket= socket(AF_INET,SOCK_DGRAM)#创建数据发送端
@@ -67,9 +78,9 @@ class SockCanData():
         self.rxdataA_put_flag = True #写标志
         #暂未使用，PC调试，只考虑单系
         #self.rxdataB=_RX_CAN_OBJ()
-        #self.rxdataB_put_flag = True #写标志
-        self.lkjsocket.sendto(initdata,self.lkjaddr) # 发送数据
-        self.dmisocket.sendto(initdata,self.dmiaddr) # 发送数据
+        # #self.rxdataB_put_flag = True #写标志
+        # self.lkjsocket.sendto(initdata,self.lkjaddr) # 发送数据
+        # self.dmisocket.sendto(initdata,self.dmiaddr) # 发送数据
 
 
     def port_open(self):
@@ -114,6 +125,7 @@ class SockCanData():
             #必须将数据转换成一个整数列表，并为构造函数解压。一定有更简单的方法！目前使用此办法
             self.rxdataA.Data = (ctypes.c_ubyte*8)(*list(bytearray(tupdata[2])))
             print('接收数据:',bytearray(self.rxdataA).hex())
+            print('测试')
         else:
             print("缓存A队列已满！")
-        self.rxdataA_put_flag = self.Dataqueue.put_canA_recv_data(self.rxdataA)
+        #self.rxdataA_put_flag = self.Dataqueue.put_canA_recv_data(self.rxdataA)

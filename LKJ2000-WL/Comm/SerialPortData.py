@@ -12,8 +12,19 @@ import Mygol
 from DataQueue import *
 
 import DataQueue
+import DataBase
 
-class SerialPortData():
+def singleton(cls, *args, **kwargs):
+    instances = {}
+    
+    def _singleton():
+        if cls not in instances:
+            instances[cls] = cls(*args, **kwargs)
+        return instances[cls]
+    return _singleton
+
+@singleton
+class SerialPortData(DataBase.DataBase):
     def __init__(self):
         self.Dataqueue = DataQueue.DataQueue()
         serialPort = Mygol.get_value('serialPort')
@@ -44,3 +55,4 @@ class SerialPortData():
         if count > 0:
             rec_str = self.port.read(count)
             self.Dataqueue.set_get_data(rec_str)
+            print(rec_str)
