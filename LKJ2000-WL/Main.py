@@ -72,18 +72,19 @@ def delfile():
         os.remove(path)
 
 if __name__ == '__main__':
+    print("V1.2.0.0")
 
     delfile()
     myMain = Main()
 
     #数据接收线程
     datarecvtask = threading.Thread(target=myMain.DataRecvProcessTask)
-    datarecvtask.setDaemon(True)
+    datarecvtask.setDaemon=True
     datarecvtask.start()
 
     #数据发送线程
     datasendtask = threading.Thread(target=myMain.DataSendProcessTask)
-    datasendtask.setDaemon(True)
+    datasendtask.setDaemon=True
     datasendtask.start()
 
 

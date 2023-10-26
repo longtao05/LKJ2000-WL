@@ -92,23 +92,38 @@ def SN_VersionInfoPackage(data_Effbytes):
     byteOffset = byteOffset + byteNum
     byteNum = 1
     item.LocoType = struct.unpack('<B',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
-    byteOffset = byteOffset + byteNum +1  #预留
-    byteNum = 2
-    item.CommProVer = struct.unpack('<H',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
+    byteOffset = byteOffset + byteNum +3  #预留
+    byteNum = 4
+    item.CommProVer = struct.unpack('<I',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
     byteOffset = byteOffset + byteNum
     byteNum = 1
     item.ManCode = struct.unpack('<B',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
     byteOffset = byteOffset + byteNum
     byteNum = 1
     item.DeviceType = struct.unpack('<B',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
-    byteOffset = byteOffset + byteNum
+    byteOffset = byteOffset + byteNum #预留
     byteNum = 2
     item.Crc = struct.unpack('<H',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
-
     #打印解析数据
     if(1 ==Mygol.get_value('LOG')):
         f = open('./log/log.txt', 'ab') # 若是'wb'就表示写二进制文件
-        f.write('LKJVersion:'.encode('utf-8')+int_to_binascii(item.LKJVersion,4)+'DMI1Ver:'.encode('utf-8')+int_to_binascii(item.DMI1Ver,4)+'DMI2Ver:'.encode('utf-8')+int_to_binascii(item.DMI2Ver,4)+'DMI1xlbVer:'.encode('utf-8')+int_to_binascii(item.DMI1xlbVer,4)+'DMI1zmbVer:'.encode('utf-8')+int_to_binascii(item.DMI1zmbVer,4)+'DMI2xlbVer:'.encode('utf-8')+int_to_binascii(item.DMI2xlbVer,4)+'DMI2zmbVer:'.encode('utf-8')+int_to_binascii(item.DMI2zmbVer,4)+'BureauNum:'.encode('utf-8')+int_to_binascii(item.BureauNum,2)+'ALocoModel:'.encode('utf-8')+ int_to_binascii(item.ALocoModel,2) +'ATrainNum:'.encode('utf-8')+int_to_binascii(item.ATrainNum,4)+'BLocoModel:'.encode('utf-8')+int_to_binascii(item.BLocoModel,2)+'BTrainNum:'.encode('utf-8')+int_to_binascii(item.BTrainNum,4)+'DeviceNum:'.encode('utf-8')+int_to_binascii(item.DeviceNum,2)+'LocoType:'.encode('utf-8')+int_to_binascii(item.LocoType,2)+'CommProVer:'.encode('utf-8')+int_to_binascii(item.CommProVer,2)+'ManCode:'.encode('utf-8')+int_to_binascii(item.ManCode,2)+'DeviceType:'.encode('utf-8')+int_to_binascii(item.DeviceType,2))
+        f.write('LKJVersion:'.encode('utf-8')+int_to_binascii(item.LKJVersion,4)\
+            +'DMI1Ver:'.encode('utf-8')+int_to_binascii(item.DMI1Ver,4)\
+            +'DMI2Ver:'.encode('utf-8')+int_to_binascii(item.DMI2Ver,4)\
+            +'DMI1xlbVer:'.encode('utf-8')+int_to_binascii(item.DMI1xlbVer,4)\
+            +'DMI1zmbVer:'.encode('utf-8')+int_to_binascii(item.DMI1zmbVer,4)\
+            +'DMI2xlbVer:'.encode('utf-8')+int_to_binascii(item.DMI2xlbVer,4)\
+            +'DMI2zmbVer:'.encode('utf-8')+int_to_binascii(item.DMI2zmbVer,4)\
+            +'BureauNum:'.encode('utf-8')+int_to_binascii(item.BureauNum,2)\
+            +'ALocoModel:'.encode('utf-8')+ int_to_binascii(item.ALocoModel,2)\
+             +'ATrainNum:'.encode('utf-8')+int_to_binascii(item.ATrainNum,4)\
+             +'BLocoModel:'.encode('utf-8')+int_to_binascii(item.BLocoModel,2)\
+             +'BTrainNum:'.encode('utf-8')+int_to_binascii(item.BTrainNum,4)\
+             +'DeviceNum:'.encode('utf-8')+int_to_binascii(item.DeviceNum,2)\
+             +'LocoType:'.encode('utf-8')+int_to_binascii(item.LocoType,2)\
+             +'CommProVer:'.encode('utf-8')+int_to_binascii(item.CommProVer,4)\
+             +'ManCode:'.encode('utf-8')+int_to_binascii(item.ManCode,2)\
+             +'DeviceType:'.encode('utf-8')+int_to_binascii(item.DeviceType,2))
         f.write(b'\r\n')
         f.close()
 
@@ -224,6 +239,12 @@ def SN_ActiDetectionInfo(data_Effbytes):
         item.CurTime[i-1] = struct.unpack('<B',data_Effbytes[byteOffset:byteOffset+1])[0]
         i+=1
         byteOffset+=1
+    byteNum = 2
+    item.MainWheelDia = struct.unpack('<H',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
+    byteOffset = byteOffset + byteNum
+    byteNum = 2
+    item.SpareWheelDia = struct.unpack('<H',data_Effbytes[byteOffset:byteOffset+byteNum])[0]
+    byteOffset = byteOffset + byteNum
 
     byteNum = 2
     item.Crc = struct.unpack('<H',data_Effbytes[byteOffset:byteOffset+byteNum])[0]

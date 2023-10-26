@@ -43,11 +43,43 @@ class _SN_VersionInfoPackage(Structure):
               ("DeviceNum",c_ushort),#装置号
               ("LocoType",c_ubyte),#机车类型
               ("Resrve2",c_ubyte),#
-              ("CommProVer",c_ushort),#版本协议
+              ("Resrve3",c_ushort),#
+              ("CommProVer",c_uint),#版本协议
               ("ManCode",c_ubyte),#厂家编号
               ("DeviceType",c_ubyte),#设备类型
               ("Crc",c_ushort)]
 
+
+#版本信息包
+class _SN_VersionInfoPackage_1(Structure):
+  _pack_=1
+  _fields_ = [("TimeStamp",c_uint),#时间戳
+              ("PacketType",c_ushort),#包类型
+              ("InfoLen",c_ushort),#数据域长度
+              ("PacketNum",c_ushort),#包序号
+              ("Resrve",c_ushort),#预留 字节对齐
+              ("LKJVersion",c_uint),
+              ("DMI1Ver",c_uint),
+              ("DMI2Ver",c_uint),
+              ("ParamVer",c_ubyte*16),#16 #V1.2.0 2021-4-30 缺省0x00  [0x01,0x02,0x00,0x15,0x04,0x1e,0x00]
+              ("k2DataVer",c_ubyte*18),#18
+              ("Resrve1",c_ushort),#预留
+              ("DMI1xlbVer",c_uint),
+              ("DMI1zmbVer",c_uint),
+              ("DMI2xlbVer",c_uint),
+              ("DMI2zmbVer",c_uint),
+              ("BureauNum",c_ushort),#局号
+              ("ALocoModel",c_ushort),#机车型号
+              ("ATrainNum",c_uint),
+              ("BLocoModel",c_ushort),#机车型号
+              ("BTrainNum",c_uint),
+              ("DeviceNum",c_ushort),#装置号
+              ("LocoType",c_ubyte),#机车类型
+              ("Resrve2",c_ubyte),#
+              ("CommProVer",c_ushort),#版本协议
+              ("ManCode",c_ubyte),#厂家编号
+              ("DeviceType",c_ubyte),#设备类型
+              ("Crc",c_ushort)]
 
 #版本信息包应答
 class _SN_VersionInfoPackageReply(Structure):
@@ -57,7 +89,14 @@ class _SN_VersionInfoPackageReply(Structure):
               ("InfoLen",c_ushort),#数据域长度
               ("PacketNum",c_ushort),#包序号
               ("Resrve",c_ushort),#预留 字节对齐
-              ("CommProVer",c_ushort),
+              ("CommProVer",c_uint),
+              ("WUPSWCode",c_uint),#特征码
+              ("Resrve1",c_uint),#
+              ("Resrve2",c_uint),#
+              ("Resrve3",c_uint),#
+              ("Resrve4",c_ubyte),#
+              ("Resrve5",c_ubyte),#
+              ("Resrve6",c_ubyte*12),#
               ("Crc",c_ushort)]
 
 
@@ -93,7 +132,9 @@ class _SN_ActiDetectionInfo(Structure):
               ("JHFG2Pressure",c_ushort),#均衡风缸2压力
               ("Resrve1",c_ubyte),#预留 字节对齐
               ("KIMData",c_uint),#里程信息
-              ("CurTime",c_ubyte*6),
+              ("CurTime",c_ubyte*6),#时间
+              ("MainWheelDia",c_ushort),#主轮径
+              ("SpareWheelDia",c_ushort),#备轮径
               ("Crc",c_ushort)]
 #活动性检测应答
 class _SN_ActiDetectionInfoReply(Structure):

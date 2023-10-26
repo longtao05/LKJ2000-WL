@@ -13,6 +13,7 @@ TrainNum = 325 #机车号
 DataType = 1 #升级数据类型 1：LKJ200数据 2：程序 3：LKJ15数据
 OrderID = 1 #命令ID，目前未使用，32字节
 UpgradeCount = 1 #升级换装，0为不换装。
+ProtocolVer = 0 #协议版本0 1
 
 [TKConfig]
 PlanStartTime = 2021-06-04 03:02:00 #计划开始时间

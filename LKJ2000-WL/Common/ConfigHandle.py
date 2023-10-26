@@ -43,6 +43,7 @@ def readConfig():
         Mygol.set_value('OrderID',config['SerialConfig']['OrderID'])
 
         Mygol.set_value('UpgradeCount',int(config['SerialConfig']['UpgradeCount']))
+        Mygol.set_value('ProtocolVer',int(config['SerialConfig']['ProtocolVer']))
 
         Mygol.set_value('CaseNum',int(config['TestCase']['CaseNum']))
         Mygol.set_value('CopeMacTest',int(config['TestCase']['CopeMacTest']))
