@@ -31,8 +31,9 @@ def SN_VersionInfoPackageReply(datatype,m_item):
     item.TimeStamp = datatype.TimeStamp
     item.InfoLen = 14
     item.PacketNum = datatype.PacketNum
-    item.CommProVer = m_item.CommProVer #是否更改
-    item.WUPSWCode = 0x177c9000 #是否更改
+    #item.CommProVer = m_item.CommProVer #是否更改
+    item.CommProVer = Mygol.get_value('ProtocolVer')
+    item.WUPSWCode = Mygol.get_value('WUPSWCode') #
 
     item.Resrve1 = 0
     item.Resrve2 = 0
@@ -335,12 +336,12 @@ def SN_ChangeNotice_ControlInfo(datatype,m_item):
     item.VoucherCode = Mygol.get_value('VoucherCode')
     item.UpdataModeType = Mygol.get_value('UpdataModeType') #1:自动更新 2:确认更新 3:凭证码
     item.DeviceType = 1
-    item.EjectCount = 0 #连续弹出次数
+    item.EjectCount = Mygol.get_value('EjectCount') #连续弹出次数
     #item.WLFileFlag = Mygol.get_value('WLFileFlag')
-    item.ShowTime = 5 #显示弹出时间间隔
+    item.ShowTime = Mygol.get_value('ShowTime') #显示弹出时间间隔
     item.Resrve1 = 0
     item.Resrve2 = 0
-    item.ChangeNoticeReason = "snLKJ-2000(VV测试版本)"
+    item.ChangeNoticeReason = Mygol.get_value('ChangeNoticeReason')#"snLKJ-2000(VV测试版本)"
 
     send_tempdata = struct.pack("<I4HI32s6B6BI4BI32sH", item.TimeStamp,item.PacketType,\
         item.InfoLen,item.PacketNum,item.Resrve,item.TrainNum,item.OrderID.encode('utf-8'),\

@@ -44,6 +44,7 @@ def readConfig():
 
         Mygol.set_value('UpgradeCount',int(config['SerialConfig']['UpgradeCount']))
         Mygol.set_value('ProtocolVer',int(config['SerialConfig']['ProtocolVer']))
+        Mygol.set_value('WUPSWCode',int(config['SerialConfig']['WUPSWCode']))
 
         Mygol.set_value('CaseNum',int(config['TestCase']['CaseNum']))
         Mygol.set_value('CopeMacTest',int(config['TestCase']['CopeMacTest']))
@@ -54,6 +55,9 @@ def readConfig():
 
         Mygol.set_value('VoucherCode',int(config['TKConfig']['VoucherCode']))
         Mygol.set_value('ManCode',int(config['TKConfig']['ManCode']))
+        Mygol.set_value('ChangeNoticeReason',int(config['TKConfig']['ChangeNoticeReason']))
+        Mygol.set_value('EjectCount',int(config['TKConfig']['EjectCount']))
+        Mygol.set_value('ShowTime',int(config['TKConfig']['ShowTime']))
 
 
 
