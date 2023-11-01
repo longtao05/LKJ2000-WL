@@ -13,12 +13,17 @@ TrainNum = 325 #机车号
 DataType = 1 #升级数据类型 1：LKJ200数据 2：程序 3：LKJ15数据
 OrderID = 1 #命令ID，目前未使用，32字节
 UpgradeCount = 1 #升级换装，0为不换装。
+ProtocolVer = 0x01000100 #协议版本
+WUPSWCode = 0x177c9000 #装置特征码
 
 [TKConfig]
 PlanStartTime = 2021-06-04 03:02:00 #计划开始时间
 PlanEffectiveTime = 2021-09-04 03:02:00 #计划生效时间
 VoucherCode = 202106 #凭证码换装 凭证码：6位
 ManCode = 4 #厂家编号 4：SN
+ChangeNoticeReason = xxx #xxx为换装缘由
+EjectCount = 0 #连续弹出次数
+ShowTime = 0 #显示弹出时间间隔
 
 [TestCase]
 CaseNum = 0#正常测试时需修改未0 ；其他：VV异常测试程序 

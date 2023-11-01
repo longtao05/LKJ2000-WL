@@ -13,7 +13,11 @@ import Mygol
 Mygol._init()
 
 def initGol():
-    mygolList=['StopSendActReply','PlanCancelledFlag','serialPort','LOG','PlanCancelled','WLFileFlag','UpdataModeType','UpgradePlanVer','TrainNum','DataType','OrderID','VoucherCode','ManCode','UpgradeInfo','PlanStartTime','CopeMacTest','DelayPerPack']
+    mygolList=['StopSendActReply','PlanCancelledFlag','serialPort','baudRate',\
+    'LOG','PlanCancelled','WLFileFlag','UpdataModeType','UpgradePlanVer',\
+    'TrainNum','DataType','OrderID','VoucherCode','ManCode','UpgradeInfo',\
+    'PlanStartTime','CopeMacTest','DelayPerPack','ProtocolVer','WUPSWCode',\
+    'EjectCount','ShowTime','ChangeNoticeReason','PlanEffectiveTime','UpgradeCount',]
     for i in range(len(mygolList)):
         Mygol.set_value(mygolList[i],0)
 
@@ -43,8 +47,8 @@ def readConfig():
         Mygol.set_value('OrderID',config['SerialConfig']['OrderID'])
 
         Mygol.set_value('UpgradeCount',int(config['SerialConfig']['UpgradeCount']))
-        Mygol.set_value('ProtocolVer',int(config['SerialConfig']['ProtocolVer']))
-        Mygol.set_value('WUPSWCode',int(config['SerialConfig']['WUPSWCode']))
+        Mygol.set_value('ProtocolVer',int(config['SerialConfig']['ProtocolVer'],16))
+        Mygol.set_value('WUPSWCode',int(config['SerialConfig']['WUPSWCode'],16))
 
         Mygol.set_value('CaseNum',int(config['TestCase']['CaseNum']))
         Mygol.set_value('CopeMacTest',int(config['TestCase']['CopeMacTest']))
